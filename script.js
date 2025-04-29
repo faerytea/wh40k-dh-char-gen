@@ -260,10 +260,24 @@ let statNames = {
 
 // region rules
 
+/* Тут перечисляются все способности
+ * Шаблон примерно такой
+ *
+ *     <skillname>: new Skill('<Название>', '<код характеристики>', '<Описание>'),
+ * 
+ * <код характеристики> смотри выше
+ * <skillname> пригодится ниже, набор латинских букв без пробелов
+ * Не забудь запятую в конце!
+ */
+
 let skills = {
     navigation_land: new Skill("Навигация (наземная)", 'int'),
 
-    awareness: new Skill("Блидтельность", 'per'),
+    awareness: new Skill(
+        "Блидтельность", 
+        'per',
+        "Бдительность – это способность предупреждать скрытые опасности и замечать мелкие детали окружающего тебя физического пространства. Она позволяет вовремя замечать засады, ловушки и иные вещи, представляющие опасность для тебя и твоих соратников. Бдительность не привязана к какому-то конкретному чувству – она объединяет их все."
+    ),
     survival: new Skill("Выживание", 'int'),
     track: new Skill("Выслеживание", 'int'),
     swimming: new Skill("Плавание", 'str'),
@@ -279,6 +293,19 @@ let skills = {
     lore_scholastic_occult: new Skill("Учёное знание (оккультизм)", 'int'),
     lore_common_dusk: new Skill("Обыденное знание (фольклор Даска)", 'int'),
 }
+
+/* Тут перечисляются все способности
+ * Шаблон примерно такой
+ *
+ *     <talentname>: new Talent('<Название>', '<Описание>', [<зависимость1>, <зависимость2>]),
+ * 
+ * <talentname> пригодится ниже, набор латинских букв без пробелов
+ * <зависимостьN> — требование для таланта
+ * 
+ *     new Requirement(new Stats().copy({<код характеристики 1>: <мин значение 1>, <код характеристики 2>: <мин значение 2>})),
+ * 
+ * Не забудь запятуе в конце!
+ */
 
 let talents = {
     // wild world talents
@@ -308,19 +335,26 @@ let talents = {
     weapon_main_stub: new Talent("Основное оружие (стаб)"),
 }
 
+/* Профы состоят из
+ *
+ *  - Название
+ *  - Умений (в случае или-или — помести в [список])
+ *  - Талантов (в случае или-или — помести в [список])
+ */
+
 let profs = {
     adept: new Prof('Адепт'),
     judge: new Prof('Арбитр'),
     killer: new Prof(
-        'Убийца',
+        'Убийца', // название
         [
-            skills.awareness,
+            skills.awareness, // умение "Бдительность"
             skills.dodge,
             skills.language_gothic_low,
         ],
         [
-            talents.weapon_cqc_prim,
-            [talents.ambidexter, talents.unremarcable],
+            talents.weapon_cqc_prim, // талант "Оружие ближнего боя (примитив)"
+            [talents.ambidexter, talents.unremarcable], // либо амбидекстр, либо непримечательный
             [talents.weapon_throw, talents.weapon_hand_laz],
             talents.weapon_main_stub,
             talents.weapon_hand_stub,
@@ -345,50 +379,66 @@ let profs = {
     tech: new Prof('Техножрец'),
 }
 
+/* Самая дичь тут — родной мир
+ * Состоит из:
+ * 
+ *  - Названия
+ *  - Базовых статов
+ *  - Доступных профессий
+ *  - Навыков
+ *  - Талантов
+ *  - Дополнительных модификаторов к очкам судьбы, порче, безумию и ранам
+ *  - Базовых ран
+ *  - Таблицы очков судьбы
+ *  - Таблицы телосложения
+ *  - Таблицы возраста
+ *  - Таблицы внешнего вида
+ *  - Таблицы примет
+ */
 let origins = function () {
     let wild = new Origin(
-        "Дикий мир",
-        new Stats(20, 20, 25, 25, 20, 20, 20, 15, 15),
-        [
-            new RollableOption(profs.killer, 1, 30),
-            new RollableOption(profs.guard, 31, 80),
+        "Дикий мир", // Название
+        new Stats(20, 20, 25, 25, 20, 20, 20, 15, 15), // Базовые статы: ББ, Б, Сил и т.д. (см. function Stats чтобы увидеть порядок)
+        [// Доступные профессии (ссылки из объекта profs, он выше):
+            new RollableOption(profs.killer, 1, 30), // Убийца (на 01-30)
+            new RollableOption(profs.guard, 31, 80), // Гвардос (на 31-80)
             new RollableOption(profs.psy, 81, 90),
             new RollableOption(profs.scum, 91, 100),
         ],
-        [
-            [skills.navigation_land, skills.survival, skills.track],
-            [skills.language_tribal],
+        [// Навыки (ссылки из объекта skills, он выше)
+            [skills.navigation_land, skills.survival, skills.track], // Базовые (если их нет, то [])
+            [skills.language_tribal], // Продвинутые
         ],
-        [
+        [// Таланты (ссылки из объекта talents, он выше, ограничения игнорируются)
             talents.iron_guts,
             talents.savage,
             talents.init_rites,
         ],
-        new SecondaryMods(),
-        9, 
-        [
-            new RollableOption(1, 1, 4),
-            new RollableOption(2, 5, 10),
+        new SecondaryMods(), // Обычно дополнительные модификаторы отсутствуют
+        9, // Базовые раны
+        [// Таблица очков судьбы
+            new RollableOption(1, 1, 4),  // Одно на 1-4
+            new RollableOption(2, 5, 10), // Два на 5-10
         ],
-        mkConstVariants(
+        mkConstVariants( // Варианты сложения, по три значения, м/ж, пять вариантов
             "поджарый", 190, 65, "поджарая", 180, 60,
             "тощий", 175, 60, "тощая", 165, 55,
             "мускулистый", 185, 85, "мускулистая", 170, 70,
             "коренастый", 165, 80, "коренастая", 155, 70,
             "здоровенный", 210, 120, "здоровенная", 200, 100
         ),
-        [
-            new RollableOption(new Age("Воин", 15), 1, 70),
-            new RollableOption(new Age("Старейшина", 25), 71, 100),
+        [// Возраст
+            new RollableOption(new Age("Воин", 15), 1, 70), // 15+к10 лет на 1-70
+            new RollableOption(new Age("Старейшина", 25), 71, 100), // 25+к10 лет на 71-100
         ],
-        mkAppearences(
+        mkAppearences( // Варианты раскраски, 5 штук
             "тёмная", "рыжие", "голубые",
             "загорелая", "светлые", "серые",
             "светлая", "русые", "карие",
             "красная", "чёрные", "зелёные",
             "бронзовая", "седые", "жёлтые",
         ),
-        mkMarks(
+        mkMarks( // 16 примет
             'Волосатые Костяшки',
             'Сросшиеся Брови',
             'Боевая Раскраска',
@@ -409,7 +459,7 @@ let origins = function () {
     )
     let wild_dusk = new Origin(
         "Дикий мир (Даск)",
-        wild.stats.copy({'wil': +3, 'per': +3}),
+        wild.stats.copy({'wil': +3, 'per': +3}), // Те же статы, что и в диком мире, но СВ и Вос по +3
         wild.profs,
         [
             [skills.navigation_land, skills.survival, skills.track, skills.lore_forbidden_demonology, skills.lore_scholastic_occult], // base
@@ -420,26 +470,27 @@ let origins = function () {
             talents.nothing_more_to_fear,
         ],
         new SecondaryMods(
-            idf,
-            x => { return x + d5() },
-            x => { return x + d5() },
-            x => { return x - 1 }
+            idf,                      // Раны не меняются (idf)
+            x => { return x + d5() }, // Коррупция +к5
+            x => { return x + d5() }, // Поехавшесть +к5
+            x => { return x - 1 },    // Судьба -1
         ),
-        wild.baseWounds,
+        wild.baseWounds, // Остальное такое же, как в диком мире
         wild.fateChances,
         wild.constitutions,
         wild.ages,
         wild.appearences,
         wild.marks,
     )
-    return {
+    return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
     }
 }()
 
+// Если мир не является вариантом другого, то его можно вписать сюда с соответствующим диапазоном
 let rollableOrigins = [
-    new RollableOption(origins.wild, 1, 15)
+    new RollableOption(origins.wild, 1, 15), // 00-15: Дикий мир
 ]
 
 // endregion
