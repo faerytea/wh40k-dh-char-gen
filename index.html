@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" type="text/css" rel="stylesheet" />
+  <script src="script.js"></script>
+  <title>Генератор бомжей</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>Генератор бомжей</h1>
+    <div class="base">
+      Мир:&nbsp;
+      <select id="world">
+
+      </select>
+      Профессия:&nbsp;
+      <select id="prof">
+
+      </select>
+      Пол:&nbsp;
+      <select id="sex">
+        <option value="male">Бомж</option>
+        <option value="female">Бомжиха</option>
+      </select>
+      <img id="sexRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Раны:&nbsp;</span>
+      <span id="wounds"></span>
+      <img id="woundRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Очко судьбы:&nbsp;</span>
+      <span id="fate"></span>
+      <img id="fateRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Порча:&nbsp;</span>
+      <span id="corrupt"></span>
+      <img id="corruptRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Безумие:&nbsp;</span>
+      <span id="madness"></span>
+      <img id="madnessRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Сложение:&nbsp;</span>
+      <span id="constitution"></span>
+      <span>&nbsp;(</span>
+      <span id="height"></span>
+      <span>&nbsp;см,&nbsp;</span>
+      <span id="weight"></span>
+      <span>&nbsp;кг)&nbsp;</span>
+      <img id="constitutionRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Возраст:&nbsp;</span>
+      <span id="age"></span>
+      <span>&nbsp;лет&nbsp;(</span>
+      <span id="ageDescription"></span>
+      <span>)&nbsp;</span>
+      <img id="ageRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Внешность:&nbsp;кожа&nbsp;</span>
+      <span id="skin"></span>
+      <span>,&nbsp;волосы&nbsp;</span>
+      <span id="hair"></span>
+      <span>,&nbsp;глаза&nbsp;</span>
+      <span id="eyes"></span>
+      <span>.&nbsp;</span>
+      <img id="appearanceRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <span>Приметы:&nbsp;</span>
+      <span id="marks"></span>
+      <span id="addMark">+<img src="d10.svg" class="roll24" width="24px" height="24px" /></span>
+      <span id="clearAllMarks">(очистить)</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="column1" id="stats">
+      <img id="fullStatRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
+      <div class="stat-hdr">ББ</div>
+      <div class="stat-val" id="cqc">42</div>
+      <div class="stat-hdr">Б</div>
+      <div class="stat-val" id="rc">42</div>
+      <div class="stat-hdr">Сил</div>
+      <div class="stat-val" id="str">42</div>
+      <div class="stat-hdr">Вын</div>
+      <div class="stat-val" id="con">42</div>
+      <div class="stat-hdr">Лов</div>
+      <div class="stat-val" id="dex">42</div>
+      <div class="stat-hdr">Инт</div>
+      <div class="stat-val" id="int">42</div>
+      <div class="stat-hdr">Вос</div>
+      <div class="stat-val" id="per">42</div>
+      <div class="stat-hdr">СВ</div>
+      <div class="stat-val" id="wil">42</div>
+      <div class="stat-hdr">Тов</div>
+      <div class="stat-val" id="cha">42</div>
+    </div>
+    <div class="right-columns">
+      <div class="column2">
+        <table>
+          <thead>
+            <tr>
+              <th>Умения</th>
+              <th>есть</th>
+              <th>+10</th>
+              <th>+20</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="skills">
+          </tbody>
+        </table>
+      </div>
+      <div class="column3">
+        <table>
+          <tbody id="talents">
+
+          </tbody>
+        </table>
+      </div>
+      <div class="column4">
+        <ul id="delayed">
+          <li><div>A</div><div>B</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Bottom text
+    <p id="rollLog"></p>
+  </footer>
+
+</body>
+
+</html>

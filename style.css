@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header,
+footer {
+    background: wheat;
+    color: #312;
+    text-align: center;
+    padding: 10px;
+}
+
+header > .base {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.column1 {
+    width: 80px;
+    flex-direction: column;
+    text-align: center;
+    padding: 8px;
+    flex-shrink: 0;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-columns {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.column2 {
+    flex: 1;
+    min-width: 200px;
+}
+
+.column2 table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.column2 th,
+.column2 td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.column2 th:first-child,
+.column2 td:first-child {
+    width: 400px;
+    text-align: left;
+}
+
+.column2 th:not(:first-child),
+.column2 td:not(:first-child) {
+    width: 20px;
+}
+
+.column3 {
+    flex: 1;
+    min-width: 150px;
+}
+
+.column3 ul {
+    padding-left: 20px;
+}
+
+.column4 {
+    flex: 1;
+    min-width: 400px;
+}
+
+.column1 > .stat-hdr {
+    font-size: 12pt;
+}
+
+.column1 > .stat-val {
+    padding: 0%;
+    margin: 0%;
+    width: 64px;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    flex-wrap: nowrap;
+}
+
+.column1 > .stat-val > div {
+    font-size: 32px;
+    font-family: monospace;
+    text-align: right;
+    width: 40px;
+}
+
+.roll24 {
+    padding: 8px 0px;
+}
+
+td {
+    border: #888;
+}
+
+td.clear {
+    background-color: whitesmoke;
+}
+
+td.filled {
+    background-color: #312;
+    text-align: center;
+}
+
+#addMark {
+    display: flex;
+    align-items: center;
+    font-size: larger;
+}
+
+header > span {
+    margin: 8px;
+}
+
+#rollLog {
+    text-align: left;
+    padding: 8px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .right-columns {
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .column1 {
+        width: 50px;
+        font-size: 28px;
+        padding: 10px 0;
+    }
+}
