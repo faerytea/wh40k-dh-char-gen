@@ -1008,7 +1008,7 @@ function render() {
     let renderTalents = vm.renderTalents
     if (renderTalents !== undefined && character.talents !== undefined) {
         renderTalents(character.talents)
-        for (let t of character.talent) {
+        for (let t of character.talents) {
             let o = t.talentOrigin
             if (o.from == 'buy') {
                 usedExp += o.cost
