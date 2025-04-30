@@ -972,7 +972,8 @@ function tFromAdvanced(
 }
 
 let character = {
-    rolledStats: new Stats()
+    rolledStats: new Stats(),
+    statUpgrades: new Stats(),
 }
 // let character = function () {
 //     let origin = origins.wild // todo: roll
@@ -990,17 +991,32 @@ let vm = {}
 function render() {
     if (character.rolledStats !== undefined && character.origin != undefined) {
         Object.keys(vm.stats).forEach(s => {
-            vm.stats[s].innerText = String(character.rolledStats[s] + character.origin.stats[s])
+            vm.stats[s].innerText = String(character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s])
         })
     }
     let renderSkills = vm.renderSkills
+    var usedExp = 0
     if (renderSkills !== undefined && character.skills !== undefined) {
         renderSkills(character.skills)
+        for (let s of character.skills) {
+            let o = s.skillOrigin
+            if (o.from == 'buy') {
+                usedExp += o.cost
+            }
+        }
     }
     let renderTalents = vm.renderTalents
     if (renderTalents !== undefined && character.talents !== undefined) {
         renderTalents(character.talents)
+        for (let t of character.talent) {
+            let o = t.talentOrigin
+            if (o.from == 'buy') {
+                usedExp += o.cost
+            }
+        }
     }
+    // TODO: add exp for stat upgrades
+    vm.usedExpSpan.innerText = String(usedExp)
     delayed.innerHTML = ''
     function renderDelayed(del, norm, mk) {
         if (del !== undefined) {
@@ -1281,6 +1297,8 @@ function bind() {
             render()
         }
     }
+
+    vm.usedExpSpan = document.getElementById('usedExp')
 
     let stats = document.getElementById('stats')
     function bindStatDice(statId) {
