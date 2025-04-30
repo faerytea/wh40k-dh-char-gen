@@ -123,7 +123,7 @@ td.filled {
     text-align: center;
 }
 
-#addMark {
+#addMark, #addName {
     display: flex;
     align-items: center;
     font-size: larger;

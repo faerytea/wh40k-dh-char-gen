@@ -11,7 +11,7 @@ function d10() {
 }
 
 function d5() {
-    let result = Math.floor(d10() / 2)
+    let result = Math.ceil(d10() / 2)
     logRoll('/2=' + result)
     return result
 }
@@ -128,6 +128,7 @@ function Origin(
     ages,
     appearences,
     marks,
+    specialTrait = [ new RollableOption('', 1, 100) ],
 ) {
     this.name = name
     this.stats = stats
@@ -141,6 +142,7 @@ function Origin(
     this.ages = ages
     this.appearences = appearences
     this.marks = marks
+    this.specialTrait = specialTrait
 }
 
 function RollableOption(
@@ -259,6 +261,410 @@ let statNames = {
 // endregion
 
 // region rules
+
+let nameTable = function () {
+    let sample = [
+        new RollableOption('', 1, 3),
+        new RollableOption('', 4, 6),
+        new RollableOption('', 7, 9),
+        new RollableOption('', 10, 13),
+        new RollableOption('', 14, 16),
+        new RollableOption('', 17, 20),
+        new RollableOption('', 21, 23),
+        new RollableOption('', 24, 27),
+        new RollableOption('', 28, 30),
+        new RollableOption('', 31, 33),
+        new RollableOption('', 34, 37),
+        new RollableOption('', 38, 40),
+        new RollableOption('', 41, 44),
+        new RollableOption('', 45, 47),
+        new RollableOption('', 48, 50),
+        new RollableOption('', 51, 54),
+        new RollableOption('', 55, 57),
+        new RollableOption('', 58, 60),
+        new RollableOption('', 61, 63),
+        new RollableOption('', 64, 66),
+        new RollableOption('', 67, 69),
+        new RollableOption('', 70, 72),
+        new RollableOption('', 73, 75),
+        new RollableOption('', 76, 79),
+        new RollableOption('', 80, 82),
+        new RollableOption('', 83, 85),
+        new RollableOption('', 86, 89),
+        new RollableOption('', 90, 93),
+        new RollableOption('', 94, 96),
+        new RollableOption('', 97, 100),
+    ]
+    function mkTable(names) {
+        return names.map((n, i) => new RollableOption(n, sample[i].low, sample[i].high))
+    }
+    return {
+        male: [
+            new RollableOption( // Примитивные
+                mkTable([
+                    'Арл',
+                    'Бруул',
+                    'Дар',
+                    'Фрак',
+                    'Фрал',
+                    'Гарм',
+                    'Грыш',
+                    'Грак',
+                    'Хак',
+                    'Джарр',
+                    'Кар',
+                    'Каарл',
+                    'Крелл',
+                    'Лек',
+                    'Мар',
+                    'Мир',
+                    'Нарл',
+                    'Орл',
+                    'Френц',
+                    'Кварл',
+                    'Рот',
+                    'Рага',
+                    'Стиг',
+                    'Стрэнг',
+                    'Так',
+                    'Ульт',
+                    'Варн',
+                    'Вракс',
+                    'Ярн',
+                    'Зэк',
+                ]),
+                1,
+                1,
+            ),
+            new RollableOption( // Низкие
+                mkTable([
+                    'Барак',
+                    'Каин',
+                    'Дариэль',
+                    'Илай',
+                    'Енох',
+                    'Фраст',
+                    'Гай',
+                    'Гарвель',
+                    'Гаст',
+                    'Игнат',
+                    'Ишмаэль',
+                    'Иерихон',
+                    'Клайт',
+                    'Лазарь',
+                    'Мордехай',
+                    'Митра',
+                    'Никодим',
+                    'Понтий',
+                    'Квинт',
+                    'Рабалий',
+                    'Ристий',
+                    'Сильван',
+                    'Соломон',
+                    'Таддий',
+                    'Тит',
+                    'Уриан',
+                    'Варний',
+                    'Ксеркс',
+                    'Зэддион',
+                    'Зариэль',
+                ]),
+                2,
+                2,
+            ),
+            new RollableOption( // Высокие
+                mkTable([
+                    'Ателлус',
+                    'Брутус',
+                    'Каллидон',
+                    'Кастус',
+                    'Друстос',
+                    'Флавион',
+                    'Галлус',
+                    'Гакстес',
+                    'Интиос',
+                    'Джастилус',
+                    'Кальтос',
+                    'Лицилус',
+                    'Люпус',
+                    'Маллеар',
+                    'Металус',
+                    'Нигилиус',
+                    'Новус',
+                    'Октус',
+                    'Претус',
+                    'Квинтос',
+                    'Ральтус',
+                    'Рэвион',
+                    'Регис',
+                    'Северус',
+                    'Силон',
+                    'Таурон',
+                    'Трэнтор',
+                    'Венрис',
+                    'Виктус',
+                    'Ксантис',
+                ]),
+                3,
+                3,
+            ),
+            new RollableOption( // Архаичные
+                mkTable([
+                    'Аларих',
+                    'Аттила',
+                    'Барбоса',
+                    'Кортез',
+                    'Константин',
+                    'Кромвель',
+                    'Дорн',
+                    'Дрейк',
+                    'Айзен',
+                    'Феррус',
+                    'Грендель',
+                    'Жиллиман',
+                    'Хэвлок',
+                    'Иактон',
+                    'Джагатай',
+                    'Хан',
+                    'Леман',
+                    'Лев',
+                    'Магнус',
+                    'Меркуцио',
+                    'Никсиос',
+                    'Рамирес',
+                    'Сергар',
+                    'Сигизмунд',
+                    'Тибальд',
+                    'Верн',
+                    'Вольф',
+                    'Уолси',
+                    'Зэйн',
+                    'Жарков',
+                ]),
+                4,
+                4,
+            ),
+            new RollableOption( // Кликухи
+                mkTable([
+                    'Эйбл',
+                    'Боунс',
+                    'Кризис',
+                    'Каттер',
+                    'Декко',
+                    'Дакка',
+                    'Фраг',
+                    'Флэйр',
+                    'Финиаль',
+                    'Грим',
+                    'Гоб',
+                    'Ганнер',
+                    'Хакер',
+                    'Джейкс',
+                    'Крак',
+                    'Лаг',
+                    'Монгрель',
+                    'Плекс',
+                    'Рэт',
+                    'Рэд',
+                    'Соуни',
+                    'Скэб',
+                    'Скэммер',
+                    'Скайв',
+                    'Шенк',
+                    'Шив',
+                    'Шэм',
+                    'Штерн',
+                    'Стаббер',
+                    'Вербал',
+                ]),
+                5,
+                5,
+            ),
+        ],
+        female: [
+            new RollableOption( // Примитивные
+                mkTable([
+                    'Арла',
+                    'Брулла',
+                    'Дарл',
+                    'Фрака',
+                    'Фраал',
+                    'Гарма',
+                    'Грыша',
+                    'Граки',
+                    'Хака',
+                    'Джарра',
+                    'Карна',
+                    'Каарли',
+                    'Крелла',
+                    'Лекка',
+                    'Марла',
+                    'Мира',
+                    'Нарла',
+                    'Орла',
+                    'Фрикс',
+                    'Квали',
+                    'Рота',
+                    'Рагана',
+                    'Стигга',
+                    'Стрэнга',
+                    'Такка',
+                    'Ульта',
+                    'Варна',
+                    'Вракса',
+                    'Ярни',
+                    'Зэкка',
+                ]),
+                1,
+                1,
+            ),
+            new RollableOption( // Низкие
+                mkTable([
+                    'Акадия',
+                    'Хальдия',
+                    'Сайрин',
+                    'Диона',
+                    'Деатрис',
+                    'Эфина',
+                    'Эфраэль',
+                    'Фенрия',
+                    'Гайя',
+                    'Галатея',
+                    'Хазаэль',
+                    'Иша',
+                    'Ишта',
+                    'Джедия',
+                    'Юдикка',
+                    'Лира',
+                    'Магдалина',
+                    'Нарция',
+                    'Офелия',
+                    'Фебия',
+                    'Квалия',
+                    'Риа',
+                    'Саломея',
+                    'Солария',
+                    'Тиратия',
+                    'Феба',
+                    'Уриэль',
+                    'Вейда',
+                    'Ксантиппа',
+                    'Зиапатра',
+                ]),
+                2,
+                2,
+            ),
+            new RollableOption( // Высокие
+                mkTable([
+                    'Ателла',
+                    'Брутилла',
+                    'Каллидия',
+                    'Кастилла',
+                    'Друстилла',
+                    'Флавия',
+                    'Галлия',
+                    'Гакста',
+                    'Интиас',
+                    'Джастилла',
+                    'Кальта',
+                    'Лицилла',
+                    'Лупа',
+                    'Маллия',
+                    'Мета',
+                    'Нигилла',
+                    'Новиа',
+                    'Октия',
+                    'Претия',
+                    'Квинтилла',
+                    'Ральтия',
+                    'Рэвия',
+                    'Регия',
+                    'Северина',
+                    'Сила',
+                    'Таура',
+                    'Трэнтия',
+                    'Венрия',
+                    'Виктия',
+                    'Ксантия',
+                ]),
+                3,
+                3,
+            ),
+            new RollableOption( // Архаичные
+                mkTable([
+                    'Энид',
+                    'Альбия',
+                    'Борджиа',
+                    'Кимбрия',
+                    'Деви',
+                    'Эфес',
+                    'Эфрати',
+                    'Инес',
+                    'Императрис',
+                    'Джемдар',
+                    'Джезаиль',
+                    'Джосс',
+                    'Кадис',
+                    'Кали',
+                    'Лета',
+                    'Маэ',
+                    'Милисента',
+                    'Мерика',
+                    'Мидкифф',
+                    'Мегера',
+                    'Одесса',
+                    'Орлеан',
+                    'Плато',
+                    'Скифия',
+                    'Фиопия',
+                    'Трэйс',
+                    'Царина',
+                    'Венера',
+                    'Вальпурга',
+                    'Жеткин',
+                ]),
+                4,
+                4,
+            ),
+            new RollableOption( // Кликухи
+                mkTable([
+                    'Альфа',
+                    'Блэйз',
+                    'Блю',
+                    'Кэт',
+                    'Каламити',
+                    'Дама',
+                    'Дайс',
+                    'Флэйр',
+                    'Голд',
+                    'Ганнер',
+                    'Хак',
+                    'Гало',
+                    'Леди',
+                    'Лак',
+                    'Модести',
+                    'Молл',
+                    'Пистоль',
+                    'Плекс',
+                    'Прис',
+                    'Рэт',
+                    'Рэд',
+                    'Руби',
+                    'Скарлет',
+                    'Спайк',
+                    'Стил',
+                    'Старр',
+                    'Травма',
+                    'Трик',
+                    'Трикси',
+                    'Зи',
+                ]),
+                5,
+                5,
+            ),
+        ],
+    }
+}()
 
 /* Тут перечисляются все способности
  * Шаблон примерно такой
@@ -394,6 +800,7 @@ let profs = {
  *  - Таблицы возраста
  *  - Таблицы внешнего вида
  *  - Таблицы примет
+ *  - Таблицы особенности мира
  */
 let origins = function () {
     let wild = new Origin(
@@ -456,6 +863,18 @@ let origins = function () {
             'Маленькая Голова',
             'Массивная Челюсть',
         ),
+        [// Верования племён (касты улья, родной флот и т.п.)
+            new RollableOption('Печать Грязи: Мытье позволяет враждебным духам учуять тебя. Ты должен поддерживать защитный слой грязи, чтобы отпугнуть несчастье, что несут с собой злые духи.', 1, 10),
+            new RollableOption('Несчастливый Цвет: Оранжевый – цвет несчастья и смерти.', 11, 20),
+            new RollableOption('Клятва Охотника: Никогда не ешь того, что убито не тобой, иначе судьба страшно покарает тебя за твоё отступничество.', 21, 30),
+            new RollableOption('Жаждущий Клинок: Дух твоего оружия – голодный призрак. Он должен испробовать крови каждый раз, как покидает ножны, или расплата не заставит себя ждать.', 31, 40),
+            new RollableOption('Духовные Узы: Если ты возьмешь трофей с тела поверженного врага, ты заберешь саму его душу.', 41, 50),
+            new RollableOption('Смерть Воина: Твой народ почитает славную смерть, в то время как смерть труса позорна. Твои предки смотрят на тебя; не разочаруй их.', 51, 60),
+            new RollableOption('Сила Имен: Никогда не произноси истинных имен твоих друзей и близких, ибо демоны могут услышать их и сотворить зло.', 61, 70),
+            new RollableOption('Одинокая Смерть: Никогда не упоминай имен мёртвых, ибо так ты призовешь их души из тьмы.', 71, 80),
+            new RollableOption('Живое Письмо: Вырезай все победы на своей коже, ибо когда после смерти ты предстанешь перед Императором, именно по твоей шкуре Он прочтет о твоих деяниях.', 81, 90),
+            new RollableOption('Роковая Судьба: Император уже определил, когда и как ты умрешь. Где-то уже бродит та тварь, что убьёт тебя. Твоя судьба – найти эту тварь и встретить её лицом к лицу. Ты знаешь, что до той поры ничто не повредит тебе.', 91, 100),
+        ],
     )
     let wild_dusk = new Origin(
         "Дикий мир (Даск)",
@@ -481,6 +900,7 @@ let origins = function () {
         wild.ages,
         wild.appearences,
         wild.marks,
+        wild.specialTrait,
     )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
@@ -608,6 +1028,8 @@ function render() {
     vm.corruptSpan.innerText = String(character.corrupt)
     vm.madnessSpan.innerText = String(character.madness)
     vm.sexBox.value = character.sex
+    vm.handBox.value = character.hand
+    vm.specialSpan.innerText = String(character.specialTrait)
     if (character.constitution !== undefined) {
         vm.constDescriptionSpan.innerText = String(character.constitution[character.sex].description)
         vm.heightSpan.innerText = String(character.constitution[character.sex].height)
@@ -634,6 +1056,21 @@ function render() {
             vm.marksSpan.append(
                 document.createTextNode(m),
                 ms,
+            )
+        }
+    }
+    if (character.names !== undefined) {
+        vm.namesSpan.innerHTML = ''
+        for (let n of character.names) {
+            let ns = document.createElement('span')
+            ns.innerText = '\x20(X)\x20'
+            ns.onclick = function () {
+                character.names.splice(character.names.indexOf(n), 1)
+                render()
+            }
+            vm.namesSpan.append(
+                document.createTextNode(n),
+                ns,
             )
         }
     }
@@ -750,6 +1187,17 @@ function bind() {
         render()
     }
 
+    vm.handBox = document.getElementById('hand')
+    vm.handBox.onchange = function () {
+        character.hand = vm.handBox.value
+        render()
+    }
+    document.getElementById('handRoll').onclick = function () {
+        let r = d10()
+        character.hand = r == 9 ? 'left' : 'right'
+        render()
+    }
+
     vm.constDescriptionSpan = document.getElementById('constitution')
     vm.heightSpan = document.getElementById('height')
     vm.weightSpan = document.getElementById('weight')
@@ -783,6 +1231,14 @@ function bind() {
         }
     }
 
+    vm.specialSpan = document.getElementById('specialOO')
+    document.getElementById('specialOORoll').onclick = function () {
+        if (character.origin !== undefined) {
+            character.specialTrait = rollOption(character.origin.specialTrait)
+            render()
+        }
+    }
+
     vm.marksSpan = document.getElementById('marks')
     document.getElementById('clearAllMarks').onclick = function () {
         character.marks = []
@@ -800,6 +1256,28 @@ function bind() {
                 ++bcntr
             } while (character.marks.includes(newMark) && bcntr < 100)
             character.marks.push(newMark)
+            render()
+        }
+    }
+
+    vm.namesSpan = document.getElementById('names')
+    document.getElementById('clearAllNames').onclick = function () {
+        character.names = []
+        render()
+    }
+    document.getElementById('addName').onclick = function () {
+        if (character.sex !== undefined) {
+            if (character.names === undefined) {
+                character.names = []
+            }
+            let allNames = nameTable[character.sex]
+            var newName = undefined
+            var bcntr = 0
+            do {
+                newName = rollOption(rollOption(allNames, d5))
+                ++bcntr
+            } while (character.names.includes(newName) && bcntr < 100)
+            character.names.push(newName)
             render()
         }
     }
