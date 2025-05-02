@@ -708,29 +708,74 @@ let nameTable = function () {
  * Не забудь запятую в конце!
  */
 
-let skills = {
-    navigation_land: new Skill("Навигация (наземная)", 'int'),
+let skills = function () {
+    let navigation_land = new Skill("Навигация (наземная)", 'int')
 
-    awareness: new Skill(
+    let awareness = new Skill(
         "Блидтельность", 
         'per',
         "Бдительность – это способность предупреждать скрытые опасности и замечать мелкие детали окружающего тебя физического пространства. Она позволяет вовремя замечать засады, ловушки и иные вещи, представляющие опасность для тебя и твоих соратников. Бдительность не привязана к какому-то конкретному чувству – она объединяет их все."
-    ),
-    survival: new Skill("Выживание", 'int'),
-    track: new Skill("Выслеживание", 'int'),
-    swimming: new Skill("Плавание", 'str'),
-    dodge: new Skill("Уклонение", 'dex'),
+    )
+    let barter = new Skill(
+        "Бартер",
+        'cha',
+        "Ты можешь использовать Бартер для того, чтобы добиваться более выгодных цен на товары и услуги.",
+    )
+    let blather = new Skill(
+        'Трёп',
+        'cha',
+        'Предпринимая Тест на Трёп, ты извергаешь из себя настоящий поток слов (вполне вероятно, бессмысленной чепухи), пытаясь ошеломить, отвлечь, ввергнуть в ступор – иными словами, заболтать слушателя.',
+    )
+    let carouse = new Skill(
+        'Стойкость',
+        'con',
+        'Идёт ли речь о лучшем амасеке, или о мерзком трущобном пойле, Стойкость нужна для того, чтобы сопротивляться воздействию алкоголя и наркотиков. Опытные «потребители» таких субстанций способны выработать определённого рода устойчивость к дурману, и сохранять ясную голову, когда все вокруг уже пали жертвами излишеств. Используй это умение, когда нужно сопротивляться эффектам алкоголя или иных подобных интоксикантов.',
+    )
+    let charm = new Skill(
+        'Обольщение',
+        'cha',
+        'Обольщение используется для того, чтобы заводить друзей. Тест на Обольщение необходим, когда ты пытаешься убедить отдельных личностей или целую группу личностей пересмотреть свое мнение, умоляешь кого-нибудь или пытаешься соблазнить.'
+    )
+    let chemuse = new Skill(
+        'Химия (юз)',
+        'int',
+        'Это умение необходимо для того, чтобы правильно обращаться с различными химикатами – в особенности с ядами и наркотиками.'
+    )
+    let survival = new Skill("Выживание", 'int')
+    let track = new Skill("Выслеживание", 'int')
+    let swimming = new Skill("Плавание", 'str')
+    let dodge = new Skill("Уклонение", 'dex')
 
-    drive_land: new Skill("Вождение (наземный)", 'dex'),
+    let drive_land = new Skill("Вождение (наземный)", 'dex')
     
-    language_gothic_low: new Skill("Язык (Низкий Готик)", 'int'),
-    language_tribal: new Skill("Язык (племенной диалект)", 'int'),
-    language_local_dusk: new Skill("Язык (диалект Даска)", 'int'),
+    let language_gothic_low = new Skill("Язык (Низкий Готик)", 'int')
+    let language_tribal = new Skill("Язык (племенной диалект)", 'int')
+    let language_local_dusk = new Skill("Язык (диалект Даска)", 'int')
 
-    lore_forbidden_demonology: new Skill("Запретное знание (демонология)", 'int'),
-    lore_scholastic_occult: new Skill("Учёное знание (оккультизм)", 'int'),
-    lore_common_dusk: new Skill("Обыденное знание (фольклор Даска)", 'int'),
-}
+    let lore_forbidden_demonology = new Skill("Запретное знание (демонология)", 'int')
+    let lore_scholastic_occult = new Skill("Учёное знание (оккультизм)", 'int')
+    let lore_common_dusk = new Skill("Обыденное знание (фольклор Даска)", 'int')
+    return {
+        'navigation_land': navigation_land,
+        'awareness': awareness,
+        'barter': barter,
+        'blather': blather,
+        'carouse': carouse,
+        'charm': charm,
+        'chemuse': chemuse,
+        'survival': survival,
+        'track': track,
+        'swimming': swimming,
+        'dodge': dodge,
+        'drive_land': drive_land,
+        'language_gothic_low': language_gothic_low,
+        'language_tribal': language_tribal,
+        'language_local_dusk': language_local_dusk,
+        'lore_forbidden_demonology': lore_forbidden_demonology,
+        'lore_scholastic_occult': lore_scholastic_occult,
+        'lore_common_dusk': lore_common_dusk,
+    }
+}()
 
 /* Тут перечисляются все способности
  * Шаблон примерно такой
@@ -773,9 +818,14 @@ let talents = {
     weapon_main_stub: new Talent("Основное оружие (стаб)"),
 }
 
+let baseSkills = [
+
+]
+
 /* Профы состоят из
  *
  *  - Название
+ *  - Схема прокачки статов
  *  - Умений (в случае или-или — помести в [список])
  *  - Талантов (в случае или-или — помести в [список])
  */
