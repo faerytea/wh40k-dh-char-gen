@@ -138,6 +138,19 @@ header > span {
     padding: 8px;
 }
 
+td.taken {
+    background-color: #2a2;
+}
+
+.column4 td:not(:first-child) {
+    border-width: 1px;
+    text-align: end;
+}
+
+tbody > tr:nth-child(even) {
+    background-color: #eee;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     .container {

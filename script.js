@@ -105,12 +105,44 @@ function Talent(
     this.requirements = requirements
 }
 
+let sud = {
+    fast: [100, 250, 500, 750],
+    med: [250, 500, 750, 1000],
+    hard: [500, 750, 1000, 2500],
+    main: [100, 250, 500, 500],
+    no: [+Infinity, +Infinity, +Infinity, +Infinity],
+}
+
+function StatUpgrades(
+    cqc,
+    rc,
+    str,
+    con,
+    dex,
+    int,
+    per,
+    wil,
+    cha,
+) {
+    this.cqc = cqc
+    this.rc = rc
+    this.str = str
+    this.con = con
+    this.dex = dex
+    this.int = int
+    this.per = per
+    this.wil = wil
+    this.cha = cha
+}
+
 function Prof(
     name,
+    statUpgrades,
     skills = [],
     talents = [],
 ) {
     this.name = name
+    this.statUpgrades = statUpgrades
     this.skills = skills
     this.talents = talents
 }
@@ -753,6 +785,17 @@ let profs = {
     judge: new Prof('Арбитр'),
     killer: new Prof(
         'Убийца', // название
+        new StatUpgrades(
+            sud.fast, // cqc
+            sud.fast, // ballistic
+            sud.hard, // str
+            sud.med,  // con
+            sud.main, // dex
+            sud.med,  // int
+            sud.med,  // perception
+            sud.med,  // willpower
+            sud.hard, // fellowship
+        ),
         [
             skills.awareness, // умение "Бдительность"
             skills.dodge,
@@ -769,6 +812,17 @@ let profs = {
     cleric: new Prof('Клирик'),
     guard: new Prof(
         'Гвардеец',
+        new StatUpgrades(
+            sud.fast, // cqc
+            sud.fast, // ballistic
+            sud.main, // str
+            sud.med,  // con
+            sud.med,  // dex
+            sud.hard, // int
+            sud.med,  // perception
+            sud.hard, // willpower
+            sud.hard, // fellowship
+        ),
         [
             skills.language_gothic_low,
             [skills.drive_land, skills.swimming],
@@ -996,6 +1050,42 @@ function render() {
     }
     let renderSkills = vm.renderSkills
     var usedExp = 0
+    if (character.prof !== undefined) {
+        let upTable = character.prof.statUpgrades
+        vm.statUpTable.innerHTML = ''
+        for (let s of Object.keys(upTable)) {
+            let r = document.createElement('tr')
+            let name = document.createElement('td')
+            name.innerText = statNames[s]
+            r.append(name)
+            for (let i = 0; i < 4; ++i) {
+                let cell = document.createElement('td')
+                let curCSU = character.statUpgrades[s]
+                let curTSU = (i + 1) * 5
+                let cost = upTable[s][i]
+                cell.innerText = String(cost)
+                if (curCSU >= curTSU) {
+                    cell.className = 'taken'
+                    usedExp += cost
+                } else {
+                    cell.className = ''
+                }
+                if (curTSU === curCSU) {
+                    cell.onclick = function () {
+                        character.statUpgrades[s] -= 5
+                        render()
+                    }
+                } else if (curCSU + 5 === curTSU) {
+                    cell.onclick = function () {
+                        character.statUpgrades[s] += 5
+                        render()
+                    }
+                }
+                r.append(cell)
+            }
+            vm.statUpTable.append(r)
+        }
+    }
     if (renderSkills !== undefined && character.skills !== undefined) {
         renderSkills(character.skills)
         for (let s of character.skills) {
@@ -1299,6 +1389,8 @@ function bind() {
     }
 
     vm.usedExpSpan = document.getElementById('usedExp')
+
+    vm.statUpTable = document.getElementById('statUpgrades')
 
     let stats = document.getElementById('stats')
     function bindStatDice(statId) {
