@@ -769,10 +769,78 @@ let skills = function () {
         'cha',
         'Командование – это умение заставлять людей выполнять твои приказы. Действие этого умения распространяется только на тех, кто, так или иначе, находится в твоём подчинении.',
     )
+    let concealment = new Skill(
+        'Скрытность',
+        'dex',
+        'Для использования этого Умения совершенно необходимо наличие подходящих элементов обстановки (деревьев, стен, здания и т.п.), или иных маскирующих условий типа тумана или темноты.',
+    )
+    let contortionist = new Skill(
+        'Побег',
+        'dex',
+        'Умение Побег применяется для того, чтобы выбираться из оков, проскальзывать в узкие лазы и изникать из пут и цепей.',
+    )
+    let deceive = new Skill(
+        'Обман',
+        'cha',
+        'Это умение позволяет обманывать и дурачить других. Тест на Обман нужен в том случае, если ты хочешь убедить других в чем-то, что совсем не обязательноявляется правдой, обвести вокруг пальца, обдурить или направить по ложному пути.',
+    )
+    let disguise = new Skill(
+        'Маскировка',
+        'cha',
+        'Маскировка – это умение скрыть свой истинный облик. Подходящая одежда, реквизит, макияж и косметические протезы – вот ключ к успешной маскировке, не исключающей, впрочем, и более радикальных подходов – пластической хирургии, бионической имплантации или инъекций полиморфина.',
+    )
+    let dodge = new Skill(
+        "Уклонение",
+        'dex',
+        'Ты можешь использовать Уклонение один раз за Раунд, чтобы проигнорировать успешную рукопашную или дистанционную атаку. Если Тест успешен, атака не наносит Урона.'
+    )
+    let evaluate = new Skill(
+        'Оценка',
+        'int',
+        'Ты можешь использовать этот навык, чтобы прикинуть примерную стоимость как повседневных предметов, так и настоящих сокровищ вроде археотехнологических артефактов или произведений искусства.',
+    )
+    let gamble = new Skill(
+        'Азартные игры',
+        'int',
+        'С помощью этого умения можно принимать участие в играх на удачу, таких как карточные игры или более простые (и часто сопряженные с насилием) кости, излюбленная игра низших классов.',
+    )
+    let inquiry = new Skill(
+        'Сбор информации',
+        'cha',
+        'Это умение собирать слухи, секреты и тайную информацию, задавая вопросы, угощая напитками и просто приглядываясь и прислушиваясь ко всему, что может всплыть в случайном разговоре.',
+    )
+    let intimidate = new Skill(
+        'Запугивание',
+        'str',
+        'Тест на Запугивание пригодится, когда тебе придет в голову вселить страх в отдельного человека или небольшую группу людей. Тебе не нужно проходить Тест Запугивания каждый раз, когда ты угрожаешь кому-либо.',
+    )
+    let logic = new Skill(
+        'Логика',
+        'int',
+        'Это умение отражает твою способность делать выводы и заключения, а также решать математические задачи.'
+    )
+    let scrutiny = new Skill(
+        'Проницательность',
+        'per',
+        'Это умение используется, чтобы оценивать людей, с которыми ты встречаешься, определять, лжет ли тот или иной человек, чувствовать его мотивы, а также понимать в общих чертах – стоит человек доверия или же нет.',
+    )
+    let search = new Skill(
+        'Поиск',
+        'per',
+        'Используй этот навык каждый раз, когда хочешь изучить то или иное место напредмет спрятанных вещей, улик и вообще всего, что можно спрятать. Поиск отличается от Бдительности тем, что Бдительность работает пассивно, срабатывая, когда имеют место быть скрытые опасности или крохотные детали, которые можно случайно заметить, проходя мимо. Поиск, с другой стороны, это активный процесс, непосредственная и явная попытка тщательного обыска.',
+    )
+    let silent_move = new Skill(
+        'Бесшумный шаг',
+        'dex',
+        'Используй это умение, когда хочешь прошвырнуться по окрестностям, не производя ненужного шума.',
+    )
     let survival = new Skill("Выживание", 'int')
+    let swim = new Skill(
+        'Плавание',
+        'str',
+        'Это умение используется при плавании и нырянии. Плавание в нормальных условиях не требует Тестов. Они, однако, могут потребоваться если водоем неспокоен или если плавание длится достаточно долго.',
+    )
     let track = new Skill("Выслеживание", 'int')
-    let swimming = new Skill("Плавание", 'str')
-    let dodge = new Skill("Уклонение", 'dex')
 
     let drive_land = new Skill("Вождение (наземный)", 'dex')
     
@@ -804,10 +872,22 @@ let skills = function () {
         'ciphers_criminal': ciphers_criminal,
         'climb': climb,
         'command': command,
+        'concealment': concealment,
+        'contortionist': contortionist,
+        'deceive': deceive,
+        'disguise': disguise,
+        'dodge': dodge,
+        'evaluate': evaluate,
+        'gamble': gamble,
+        'inquiry': inquiry,
+        'intimidate': intimidate,
+        'logic': logic,
+        'scrutiny': scrutiny,
+        'search': search,
+        'silent_move': silent_move,
+        'swim': swim,
         'survival': survival,
         'track': track,
-        'swimming': swimming,
-        'dodge': dodge,
         'drive_land': drive_land,
         'language_gothic_low': language_gothic_low,
         'language_tribal': language_tribal,
@@ -860,7 +940,26 @@ let talents = {
 }
 
 let baseSkills = [
-
+    skills.awareness,
+    skills.barter,
+    skills.carouse,
+    skills.charm,
+    skills.climb,
+    skills.command,
+    skills.concealment,
+    skills.contortionist,
+    skills.deceive,
+    skills.disguise,
+    skills.dodge,
+    skills.evaluate,
+    skills.gamble,
+    skills.inquiry,
+    skills.intimidate,
+    skills.logic,
+    skills.scrutiny,
+    skills.search,
+    skills.silent_move,
+    skills.swim,
 ]
 
 /* Профы состоят из
@@ -916,7 +1015,7 @@ let profs = {
         ),
         [
             skills.language_gothic_low,
-            [skills.drive_land, skills.swimming],
+            [skills.drive_land, skills.swim],
         ],
         [
             talents.weapon_cqc_prim,
@@ -1131,6 +1230,8 @@ let character = {
 //     }
 // }()
 
+let rsCompare = (rsa, rsb) => rsa.level - rsb.level
+
 let vm = {}
 
 function render() {
@@ -1179,12 +1280,14 @@ function render() {
     }
     if (renderSkills !== undefined && character.skills !== undefined) {
         renderSkills(character.skills)
-        for (let s of character.skills) {
-            let o = s.skillOrigin
-            if (o.from == 'buy') {
-                usedExp += o.cost
+        character.skills.forEach((v) => {
+            for (let s of v) {
+                let o = s.skillOrigin
+                if (o.from == 'buy') {
+                    usedExp += o.cost
+                }
             }
-        }
+        })
     }
     let renderTalents = vm.renderTalents
     if (renderTalents !== undefined && character.talents !== undefined) {
@@ -1199,7 +1302,7 @@ function render() {
     // TODO: add exp for stat upgrades
     vm.usedExpSpan.innerText = String(usedExp)
     delayed.innerHTML = ''
-    function renderDelayed(del, norm, mk) {
+    function renderDelayed(del, norm, add) {
         if (del !== undefined) {
             for (let i = 0; i < del.length; ++i) {
                 let li = document.createElement('li')
@@ -1208,7 +1311,7 @@ function render() {
                     let opt = document.createElement('div')
                     opt.innerText = s.name
                     opt.onclick = function () {
-                        norm.push(mk(s, ds.from, ds.ix))
+                        add(norm, s, ds.from, ds.ix)
                         del.splice(i, 1)
                         render()
                     }
@@ -1218,8 +1321,16 @@ function render() {
             }
         }
     }
-    renderDelayed(character.delayedSkills, character.skills, (s, from, ix) => new RenderedSkill(s, 1, { from: from, ix: ix }))
-    renderDelayed(character.delayedTalents, character.talents, (s, from, ix) => new RenderedTalent(s, { from: from, ix: ix }))
+    renderDelayed(character.delayedSkills, character.skills, (taken, s, from, ix) => {
+        let newRS = new RenderedSkill(s, 1, { from: from, ix: ix })
+        if (!taken.has(s.name)) {
+            taken.set(s.name, [])
+        }
+        let rsl = taken.get(s.name)
+        rsl.push(newRS)
+        rsl.sort(rsCompare)
+    })
+    renderDelayed(character.delayedTalents, character.talents, (taken, s, from, ix) => taken.push(new RenderedTalent(s, { from: from, ix: ix })))
     vm.woundSpan.innerText = String(character.wounds)
     vm.fateSpan.innerText = String(character.fate)
     vm.corruptSpan.innerText = String(character.corrupt)
@@ -1278,7 +1389,7 @@ function buildCharacter() {
     console.log('build character')
     let o = character.origin
     let p = character.prof
-    character.skills = []
+    character.skills = baseSkills.map(s => new RenderedSkill(s, 0, { from: 'base' }))
     character.talents = []
     character.delayedSkills = []
     character.delayedTalents = []
@@ -1324,6 +1435,17 @@ function buildCharacter() {
             }
         }
     }
+    let res = new Map()
+    for (let rs of character.skills) {
+        var rsl = res.get(rs.skill.name)
+        if (rsl === undefined) {
+            rsl = []
+        }
+        rsl.push(rs)
+        res.set(rs.skill.name, rsl)
+    }
+    res.forEach(v => v.sort(rsCompare))
+    character.skills = res
 }
 
 function bind() {
@@ -1554,7 +1676,7 @@ function bind() {
             character.prof = character.origin.profs.find(x => x.id.name == professions.value).id
             console.log('found prof: ' + character.prof)
             if (oldProf === undefined || (character.prof !== undefined && oldProf.name != character.prof.name)) {
-                character.skills = []
+                character.skills = new Map()
                 character.talents = []
                 buildCharacter()
                 render()
@@ -1565,7 +1687,9 @@ function bind() {
     let skillBox = document.getElementById('skills')
     vm.renderSkills = function (toRender) {
         skillBox.innerHTML = ''
-        for (let r of toRender) {
+        toRender.forEach((v) => {
+            if (v.length == 0) return
+            let r = v[v.length - 1]
             let row = document.createElement('tr')
             let sName = document.createElement('td')
             let s00 = document.createElement('td')
@@ -1585,7 +1709,11 @@ function bind() {
                 if (Array.isArray(s)) {
                     sOrigin.innerText = 'Мир (изм.)'
                     sOrigin.onclick = function () {
-                        character.skills.splice(character.skills.findIndex(x => x.skill.name == r.skill.name && x.level == r.level), 1)
+                        let rsl = character.skills.get(r.skill.name)
+                        rsl.pop()
+                        if (rsl.length == 0) {
+                            character.skills.delete(r.skill.name)
+                        }
                         character.delayedSkills.push({ lst: s, from: 'origin', ix: ix })
                         render()
                     }
@@ -1598,7 +1726,11 @@ function bind() {
                 if (Array.isArray(s)) {
                     sOrigin.innerText = 'Про (изм.)' 
                     sOrigin.onclick = function () {
-                        character.skills.splice(character.skills.findIndex(x => x.skill.name == r.skill.name && x.level == r.level), 1)
+                        let rsl = character.skills.get(r.skill.name)
+                        rsl.pop()
+                        if (rsl.length == 0) {
+                            character.skills.delete(r.skill.name)
+                        }
                         character.delayedSkills.push({ lst: s, from: 'prof', ix: ix })
                         render()
                     }
@@ -1607,10 +1739,12 @@ function bind() {
                 }
             } else if (o.from == 'buy') {
                 sOrigin.innerText = o.cost + ' ОО'
+            } else if (o.from == 'base') {
+                sOrigin.innerText = 'Базовый'
             }
             row.append(sName, s00, s10, s20, sOrigin)
             skillBox.append(row)
-        }
+        })
     }
     vm.talents = document.getElementById('talents')
     vm.renderTalents = function (toRender) {
