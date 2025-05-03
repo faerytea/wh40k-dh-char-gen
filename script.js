@@ -143,16 +143,48 @@ function StatUpgrades(
     this.cha = cha
 }
 
+function UpS(
+    option,
+    level,
+    cost,
+) {
+    this.option = option
+    this.level = level
+    this.cost = cost
+}
+
+function UpT(
+    option,
+    cost,
+) {
+    this.option = option
+    this.cost = cost
+}
+
+function Rank(
+    name,
+    level,
+    skills,
+    talents,
+) {
+    this.name = name
+    this.level = level
+    this.skills = skills
+    this.talents = talents
+}
+
 function Prof(
     name,
     statUpgrades,
     skills = [],
     talents = [],
+    ranks = [],
 ) {
     this.name = name
     this.statUpgrades = statUpgrades
     this.skills = skills
     this.talents = talents
+    this.ranks = ranks
 }
 
 function Origin(
@@ -968,6 +1000,7 @@ let baseSkills = [
  *  - Схема прокачки статов
  *  - Умений (в случае или-или — помести в [список])
  *  - Талантов (в случае или-или — помести в [список])
+ *  - Схема рангов
  */
 
 let profs = {
@@ -997,7 +1030,28 @@ let profs = {
             [talents.weapon_throw, talents.weapon_hand_laz],
             talents.weapon_main_stub,
             talents.weapon_hand_stub,
-        ]
+        ],
+        [
+            new Rank(
+                "Новобранец",
+                0,
+                [
+                    new UpS(skills.awareness, 1, 100),
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.swim, 1, 100), // todo шагатель
+                ],
+                [
+                    new UpT(talents.weapon_main_laz, 100),
+                    new UpT(talents.weapon_main_prim, 100),
+                    new UpT(talents.weapon_main_stub, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.weapon_throw, 100), // todo крепкое телосложение
+                ],
+            )
+        ],
     ),
     cleric: new Prof('Клирик'),
     guard: new Prof(
@@ -1022,7 +1076,7 @@ let profs = {
             [talents.weapon_hand_prim, talents.weapon_hand_laz],
             talents.weapon_main_laz,
             [talents.weapon_main_prim, talents.weapon_main_stub],
-        ]
+        ],
     ),
     psy: new Prof('Псайкер'),
     scum: new Prof('Подонок'),
