@@ -151,6 +151,18 @@ tbody > tr:nth-child(even) {
     background-color: #eee;
 }
 
+tr.bad {
+    color: #888;
+}
+
+tr.useless {
+    font-style: italic;
+}
+
+tr.picked {
+    font-weight: bold;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     .container {

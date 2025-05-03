@@ -874,7 +874,10 @@ let skills = function () {
     )
     let track = new Skill("Выслеживание", 'int')
 
-    let drive_land = new Skill("Вождение (наземный)", 'dex')
+    let drive = new Skill('Вождение', 'dex', 'Простое вождение не требует прохождения Тестов. Тест необходим лишь в случае езды по сложному ландшафту, с предельной скоростью или при совершении опасных маневров. При погоне Состязательные Тесты Вождения проводятся между участвующими в ней водителями.')
+    let drive_land = subSkill(drive, 'Наземный', 'колёсный, гусеничный и прочий приземлённый транспорт.')
+    let drive_hover = subSkill(drive, 'Ховер', 'техника на воздушной подушке, парящая над бренным миром.')
+    let drive_legs = subSkill(drive, 'Шагатель', 'с ногами, для особо сложной местности.')
     
     let language_gothic_low = new Skill("Язык (Низкий Готик)", 'int')
     let language_tribal = new Skill("Язык (племенной диалект)", 'int')
@@ -921,6 +924,8 @@ let skills = function () {
         'survival': survival,
         'track': track,
         'drive_land': drive_land,
+        'drive_hover': drive_hover,
+        'drive_legs': drive_legs,
         'language_gothic_low': language_gothic_low,
         'language_tribal': language_tribal,
         'language_local_dusk': language_local_dusk,
@@ -942,6 +947,7 @@ let skills = function () {
  * 
  * Не забудь запятуе в конце!
  */
+let sound_constitution = new Talent('Крепкое телосложение', 'Ты способен пережить больше повреждений, прежде чем умрёшь. Получаешь дополнительную Рану.')
 
 let talents = {
     // wild world talents
@@ -969,6 +975,7 @@ let talents = {
     weapon_main_prim: new Talent("Основное оружие (прим)"),
     weapon_main_laz: new Talent("Основное оружие (лаз)"),
     weapon_main_stub: new Talent("Основное оружие (стаб)"),
+    'sound_constitution': sound_constitution,
 }
 
 let baseSkills = [
@@ -1031,27 +1038,6 @@ let profs = {
             talents.weapon_main_stub,
             talents.weapon_hand_stub,
         ],
-        [
-            new Rank(
-                "Новобранец",
-                0,
-                [
-                    new UpS(skills.awareness, 1, 100),
-                    new UpS(skills.drive_land, 1, 100),
-                    new UpS(skills.swim, 1, 100), // todo шагатель
-                ],
-                [
-                    new UpT(talents.weapon_main_laz, 100),
-                    new UpT(talents.weapon_main_prim, 100),
-                    new UpT(talents.weapon_main_stub, 100),
-                    new UpT(talents.weapon_hand_laz, 100),
-                    new UpT(talents.weapon_hand_prim, 100),
-                    new UpT(talents.weapon_hand_stub, 100),
-                    new UpT(talents.weapon_cqc_prim, 100),
-                    new UpT(talents.weapon_throw, 100), // todo крепкое телосложение
-                ],
-            )
-        ],
     ),
     cleric: new Prof('Клирик'),
     guard: new Prof(
@@ -1076,6 +1062,31 @@ let profs = {
             [talents.weapon_hand_prim, talents.weapon_hand_laz],
             talents.weapon_main_laz,
             [talents.weapon_main_prim, talents.weapon_main_stub],
+        ],
+        [
+            new Rank(
+                "Новобранец",
+                0,
+                [
+                    new UpS(skills.awareness, 1, 100),
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.swim, 1, 100),
+                    new UpS(skills.drive_legs, 1, 100),
+                ],
+                [
+                    new UpT(talents.weapon_main_laz, 100),
+                    new UpT(talents.weapon_main_prim, 100),
+                    new UpT(talents.weapon_main_stub, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.weapon_throw, 100),
+                    new UpT(talents.sound_constitution, 100),
+                    new UpT(talents.sound_constitution, 100),
+                    new UpT(talents.sound_constitution, 100),
+                ],
+            )
         ],
     ),
     psy: new Prof('Псайкер'),
@@ -1289,9 +1300,12 @@ let rsCompare = (rsa, rsb) => rsa.level - rsb.level
 let vm = {}
 
 function render() {
+    let finalStats = new Stats()
     if (character.rolledStats !== undefined && character.origin != undefined) {
         Object.keys(vm.stats).forEach(s => {
-            vm.stats[s].innerText = String(character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s])
+            let statValue = character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s]
+            finalStats[s] = statValue
+            vm.stats[s].innerText = String(statValue)
         })
     }
     let renderSkills = vm.renderSkills
@@ -1331,6 +1345,86 @@ function render() {
             }
             vm.statUpTable.append(r)
         }
+        // ranks
+        vm.upgrades.innerHTML = ''
+        for (let rank of character.prof.ranks) {
+            let rankName = document.createElement('p')
+            rankName.innerText = rank.name + ' (' + (rank.level * 500) + ' ОО)'
+            vm.upgrades.append(rankName)
+
+            let rankSTable = document.createElement('table')
+            let rankSkills = document.createElement('tbody')
+            rankSTable.append(rankSkills)
+            rankSTable.setAttribute('width', '100%')
+            for (let su of rank.skills) {
+                let row = document.createElement('tr')
+                let sn = document.createElement('td')
+                sn.innerText = su.option.name
+                let sl = document.createElement('td')
+                sl.innerText = su.level
+                let sc = document.createElement('td')
+                sc.innerText = su.cost
+                row.append(sn, sl, sc)
+                if (character.skills !== undefined) {
+                    let cslMaybe = character.skills.get(su.option.name)
+                    let csl = cslMaybe === undefined ? [] : cslMaybe
+                    var isPicked = false
+                    var isUseless = false
+                    var isPickedPrevious = false
+                    var isPickedNext = false
+                    for (let cse of csl) {
+                        if (cse.level == su.level) {
+                            if (cse.skillOrigin.from == 'buy') {
+                                isPicked = true
+                            } else {
+                                isUseless = true
+                            }
+                        }
+                        if (cse.level + 1 == su.level) isPickedPrevious = true
+                        if (cse.level - 1 == su.level) isPickedNext = true
+                    }
+                    if (isPicked) {
+                        row.className = 'picked'
+                        if (!isPickedNext) {
+                            row.onclick = function () {
+                                csl.pop()
+                                render()
+                            }
+                        }
+                    } else if (isUseless) {
+                        row.className = 'useless'
+                    } else if (isPickedPrevious || su.level == 1) {
+                        row.className = ''
+                        row.onclick = function () {
+                            let item = new RenderedSkill(
+                                su.option,
+                                su.level,
+                                {
+                                    from: 'buy',
+                                    cost: su.cost,
+                                },
+                            )
+                            csl.push(item)
+                            if (cslMaybe === undefined) {
+                                character.skills.set(su.option.name, csl)
+                            }
+                            render()
+                        }
+                    } else {
+                        row.className = 'bad'
+                    }
+                }
+                rankSkills.append(row)
+            }
+            vm.upgrades.append(rankSTable)
+
+            let rankTTable = document.createElement('table')
+            let rankTalents = document.createElement('tbody')
+            rankTTable.append(rankTalents)
+            rankTTable.setAttribute('width', '100%')
+            
+            vm.upgrades.append(rankTTable)
+        }
     }
     if (renderSkills !== undefined && character.skills !== undefined) {
         renderSkills(character.skills)
@@ -1343,6 +1437,7 @@ function render() {
             }
         })
     }
+    var soundConstBonus = 0
     let renderTalents = vm.renderTalents
     if (renderTalents !== undefined && character.talents !== undefined) {
         renderTalents(character.talents)
@@ -1351,9 +1446,11 @@ function render() {
             if (o.from == 'buy') {
                 usedExp += o.cost
             }
+            if (t.talent.name == sound_constitution.name) {
+                ++soundConstBonus
+            }
         }
     }
-    // TODO: add exp for stat upgrades
     vm.usedExpSpan.innerText = String(usedExp)
     delayed.innerHTML = ''
     function renderDelayed(del, norm, add) {
@@ -1382,10 +1479,14 @@ function render() {
         }
         let rsl = taken.get(s.name)
         rsl.push(newRS)
+        let frsi = rsl.findIndex(frs => frs.level === newRS.level && frs.skillOrigin.from === 'buy')
+        if (frsi !== -1) {
+            rsl.splice(frsi, 1)
+        }
         rsl.sort(rsCompare)
     })
     renderDelayed(character.delayedTalents, character.talents, (taken, s, from, ix) => taken.push(new RenderedTalent(s, { from: from, ix: ix })))
-    vm.woundSpan.innerText = String(character.wounds)
+    vm.woundSpan.innerText = String(character.wounds + soundConstBonus)
     vm.fateSpan.innerText = String(character.fate)
     vm.corruptSpan.innerText = String(character.corrupt)
     vm.madnessSpan.innerText = String(character.madness)
@@ -1844,6 +1945,7 @@ function bind() {
         }
     }
     vm.delayed = document.getElementById('delayed')
+    vm.upgrades = document.getElementById('upgrades')
 }
 
 function init() {
