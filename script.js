@@ -106,7 +106,7 @@ function Requirement(
 function Talent(
     name,
     description = "",
-    requirements = [],
+    requirements = new Requirement(),
 ) {
     this.name = name
     this.description = description
@@ -156,9 +156,11 @@ function UpS(
 function UpT(
     option,
     cost,
+    repeatable = false,
 ) {
     this.option = option
     this.cost = cost
+    this.repeatable = repeatable
 }
 
 function Rank(
@@ -960,9 +962,7 @@ let talents = {
     ambidexter: new Talent(
         "Амбидекстрия", 
         "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
-        [
-            new Requirement(new Stats().copy({ dex: 30 })),
-        ]
+        new Requirement(new Stats().copy({ dex: 30 })),
     ),
     unremarcable: new Talent("Непримечательный"),
 
@@ -1038,6 +1038,39 @@ let profs = {
             talents.weapon_main_stub,
             talents.weapon_hand_stub,
         ],
+        [
+            new Rank(
+                "Наёмник",
+                0,
+                [
+                    new UpS(skills.awareness, 1, 100),
+                    new UpS(skills.climb, 1, 100),
+                    new UpS(skills.dodge, 1, 100),
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.inquiry, 1, 100),
+                    // todo: Пилотирование (гражд)
+                    new UpS(skills.silent_move, 1, 100),
+                    new UpS(skills.swim, 1, 100),
+                    // todo: Грамотность
+                ],
+                [
+                    new UpT(talents.weapon_main_laz, 100),
+                    new UpT(talents.weapon_main_prim, 100),
+                    new UpT(talents.weapon_main_stub, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.weapon_throw, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                    // todo: Catfall
+                    new UpT(talents.ambidexter, 100),
+                    new UpT(talents.unremarcable, 100),
+                    // todo: Обострённые чувства (зрение)
+                ],
+            )
+        ],
     ),
     cleric: new Prof('Клирик'),
     guard: new Prof(
@@ -1071,7 +1104,7 @@ let profs = {
                     new UpS(skills.awareness, 1, 100),
                     new UpS(skills.drive_land, 1, 100),
                     new UpS(skills.swim, 1, 100),
-                    new UpS(skills.drive_legs, 1, 100),
+                    new UpS(skills.drive_legs, 1, 200),
                 ],
                 [
                     new UpT(talents.weapon_main_laz, 100),
@@ -1082,9 +1115,9 @@ let profs = {
                     new UpT(talents.weapon_hand_stub, 100),
                     new UpT(talents.weapon_cqc_prim, 100),
                     new UpT(talents.weapon_throw, 100),
-                    new UpT(talents.sound_constitution, 100),
-                    new UpT(talents.sound_constitution, 100),
-                    new UpT(talents.sound_constitution, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
                 ],
             )
         ],
@@ -1347,6 +1380,7 @@ function render() {
         }
         // ranks
         vm.upgrades.innerHTML = ''
+        let repCount = {}
         for (let rank of character.prof.ranks) {
             let rankName = document.createElement('p')
             rankName.innerText = rank.name + ' (' + (rank.level * 500) + ' ОО)'
@@ -1422,7 +1456,93 @@ function render() {
             let rankTalents = document.createElement('tbody')
             rankTTable.append(rankTalents)
             rankTTable.setAttribute('width', '100%')
-            
+            for (let tu of rank.talents) {
+                let t = tu.option
+                if (tu.repeatable) {
+                    if (repCount[t.name] === undefined) {
+                        repCount[t.name] = 1
+                    } else {
+                        ++repCount[t.name]
+                    }
+                }
+                let row = document.createElement('tr')
+                let tn = document.createElement('td')
+                if (tu.repeatable) {
+                    tn.innerText = t.name + ' (' + repCount[t.name] + ')'
+                } else {
+                    tn.innerText = t.name
+                }
+                let treq = document.createElement('td')
+                var treqStr = ''
+                for (let s of Object.keys(t.requirements.stats)) {
+                    let sVal = t.requirements.stats[s]
+                    if (sVal > 0) {
+                        treqStr += statNames[s] + ': ' + sVal + '; '
+                    }
+                }
+                for (let rqt of t.requirements.talents) {
+                    treqStr += rqt.name + '; '
+                }
+                treq.innerText = treqStr
+                let tc = document.createElement('td')
+                tc.innerText = tu.cost
+                row.append(tn, treq, tc)
+                var isUseless = false
+                var isPicked = false
+                let pickedReps = {}
+                let reqTalents = [ ...t.requirements.talents ]
+                if (character.talents !== undefined) {
+                    for (let ct of character.talents) {
+                        let rqt = reqTalents.findIndex(q => q.name === ct.name)
+                        if (rqt !== -1) {
+                            reqTalents.splice(rqt, 1)
+                        }
+                        if (ct.talent.name === t.name) {
+                            if (ct.talentOrigin.from === 'buy') {
+                                if (tu.repeatable) {
+                                    if (pickedReps[t.name] === undefined) {
+                                        pickedReps[t.name] = 0
+                                    }
+                                    ++pickedReps[t.name]
+                                    if (pickedReps[t.name] >= repCount[t.name]) {
+                                        isPicked = true
+                                    }
+                                } else {
+                                    isPicked = true
+                                    break
+                                }
+                            } else {
+                                isUseless = true
+                            }
+                        }
+                    }
+                }
+                var enoughStats = true
+                for (let s of Object.keys(finalStats)) {
+                    if (t.requirements.stats[s] > finalStats[s]) {
+                        enoughStats = false
+                        break
+                    }
+                }
+                if (isPicked) {
+                    row.className = 'picked'
+                    row.onclick = function () {
+                        character.talents.splice(character.talents.findIndex(rt => rt.talent.name === t.name), 1)
+                        render()
+                    }
+                } else if (isUseless) {
+                    row.className = 'useless'
+                } else if (reqTalents.length == 0 && enoughStats) {
+                    row.className = ''
+                    row.onclick = function () {
+                        character.talents.push(new RenderedTalent(t, { from: 'buy', cost: tu.cost }))
+                        render()
+                    }
+                } else {
+                    row.className = 'bad'
+                }
+                rankTalents.append(row)
+            }
             vm.upgrades.append(rankTTable)
         }
     }
