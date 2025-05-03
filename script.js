@@ -87,6 +87,14 @@ function Skill(
     this.description = description
 }
 
+function subSkill(skill, specName, specDescr) {
+    return new Skill(
+        skill.name + ' (' + specName + ')',
+        skill.statId,
+        skill.description + '\n' + specDescr,
+    )
+}
+
 function Requirement(
     stats = new Stats(),
     talents = [],
@@ -741,6 +749,26 @@ let skills = function () {
         'int',
         'Это умение необходимо для того, чтобы правильно обращаться с различными химикатами – в особенности с ядами и наркотиками.'
     )
+    let ciphers = new Skill(
+        'Шифры',
+        'int',
+        'Это Умение отражает понимание стенографических кодов, применяемых определёнными группами лиц для передачи основных идей, предупреждений и важной информации, имеющей отношение к сфере их деятельности.',
+    )
+    let ciphers_acolyte = subSkill(ciphers, 'Аколиты', 'Используется для общения между членами одной ячейки Аколитов при помощи особого, заранее условленного набора знаков и сигналов.')
+    let ciphers_battle = subSkill(ciphers, 'Военный арго', 'Используется военными подразделениями для передачи приказов и донесения оперативных тактических сведений при помощи жестов, кодовых фраз или музыкальных сигналов.')
+    let ciphers_secret_society = subSkill(ciphers, 'Тайное общество', 'Используются членами тайных обществ и культов для идентификации себе подобных и передачи простых сообщений.')
+    let ciphers_occult = subSkill(ciphers, 'Оккультные', 'Мистические жесты, используемые для концентрации разума во время ритуалов, идентификации собратьев по знанию, а также для того, чтобы умиротворять или бичевать Демонов.')
+    let ciphers_criminal = subSkill(ciphers, 'Преступный мир', 'Изощренная система жестов, стилей одежды, знаков, татуировок и прочей подобной мишуры, используемой криминальными сообществами для обмена ключевой информацией.')
+    let climb = new Skill(
+        'Лазание',
+        'str',
+        'В данном случае имеются в виду стены без специальных упоров для рук и ног, карнизы, отвесные скалы и т.п.',
+    )
+    let command = new Skill(
+        'Командование',
+        'cha',
+        'Командование – это умение заставлять людей выполнять твои приказы. Действие этого умения распространяется только на тех, кто, так или иначе, находится в твоём подчинении.',
+    )
     let survival = new Skill("Выживание", 'int')
     let track = new Skill("Выслеживание", 'int')
     let swimming = new Skill("Плавание", 'str')
@@ -752,9 +780,15 @@ let skills = function () {
     let language_tribal = new Skill("Язык (племенной диалект)", 'int')
     let language_local_dusk = new Skill("Язык (диалект Даска)", 'int')
 
+    let lore_common = new Skill(
+        'Обыденное знание',
+        'int',
+        'Набор воспоминаний о привычках, структуре, традициях, знаменитых деятелях и суевериях, относящихся к отдельным мирам, культурным группам и организациям.',
+    )
+    let lore_common_dusk = subSkill(lore_common, 'Фольклор Даска')
+
     let lore_forbidden_demonology = new Skill("Запретное знание (демонология)", 'int')
     let lore_scholastic_occult = new Skill("Учёное знание (оккультизм)", 'int')
-    let lore_common_dusk = new Skill("Обыденное знание (фольклор Даска)", 'int')
     return {
         'navigation_land': navigation_land,
         'awareness': awareness,
@@ -763,6 +797,13 @@ let skills = function () {
         'carouse': carouse,
         'charm': charm,
         'chemuse': chemuse,
+        'ciphers_acolyte': ciphers_acolyte,
+        'ciphers_battle': ciphers_battle,
+        'ciphers_secret_society': ciphers_secret_society,
+        'ciphers_occult': ciphers_occult,
+        'ciphers_criminal': ciphers_criminal,
+        'climb': climb,
+        'command': command,
         'survival': survival,
         'track': track,
         'swimming': swimming,
