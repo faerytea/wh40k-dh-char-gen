@@ -1825,6 +1825,150 @@ function buildCharacter() {
     character.skills = res
 }
 
+let rolls = {
+    wound: function () {
+        if (character.origin !== undefined) {
+            let w = character.origin.baseWounds
+            character.wounds = character.origin.secondaryMods.wounds(w + d5())
+        } else {
+            character.wounds = 0
+        }
+    },
+    fate: function () {
+        if (character.origin !== undefined) {
+            let f = rollOption(character.origin.fateChances, d10)
+            character.fate = character.origin.secondaryMods.fate(f)
+        } else {
+            character.fate = 0
+        }
+    },
+    corrupt: function () {
+        if (character.origin !== undefined) {
+            character.corrupt = character.origin.secondaryMods.corrupt(0)
+        } else {
+            character.corrupt = 0
+        }
+    },
+    madness: function () {
+        if (character.origin !== undefined) {
+            character.madness = character.origin.secondaryMods.madness(0)
+        } else {
+            character.madness = 0
+        }
+    },
+    sex: function () {
+        let r = d10()
+        character.sex = r % 2 == 0 ? 'male' : 'female'
+    },
+    hand: function () {
+        let r = d10()
+        character.hand = r == 9 ? 'left' : 'right'
+    },
+    constitution: function () {
+        character.constitution = rollOption(character.origin.constitutions)
+    },
+    age: function () {
+        let ageType = rollOption(character.origin.ages)
+        character.age = {
+            n: ageType.roll(),
+            d: ageType.description,
+        }
+    },
+    appearence: function () {
+        character.appearence = rollOption(character.origin.appearences)
+    },
+    special: function () {
+        character.specialTrait = rollOption(character.origin.specialTrait)
+    },
+    newMark: function () {
+        if (character.marks === undefined) {
+            character.marks = []
+        }
+        var newMark = undefined
+        var bcntr = 0
+        do {
+            newMark = rollOption(character.origin.marks)
+            ++bcntr
+        } while (character.marks.includes(newMark) && bcntr < 100)
+        character.marks.push(newMark)
+    },
+    newName: function () {
+        if (character.names === undefined) {
+            character.names = []
+        }
+        let allNames = nameTable[character.sex]
+        var newName = undefined
+        var bcntr = 0
+        do {
+            newName = rollOption(rollOption(allNames, d5))
+            ++bcntr
+        } while (character.names.includes(newName) && bcntr < 100)
+        character.names.push(newName)
+    },
+    statsFull: function () {
+        let rs = new Stats()
+        for (let k of Object.keys(rs)) {
+            rs[k] = d10() + d10()
+        }
+        character.rolledStats = rs
+    },
+}
+
+function selectOrigin(origin) {
+    let oldOrigin = character.origin
+    character.origin = origin
+    if (oldOrigin === undefined || (character.origin !== undefined && oldOrigin.name !== character.origin.name)) {
+        vm.professions.innerHTML = ''
+        for (let p of character.origin.profs) {
+            let option = document.createElement('option')
+            option.value = p.id.name
+            option.text = p.id.name + ' [' + p.low + '..' + p.high + ']'
+            if (character.prof !== undefined && character.prof.name == p.id.name) option.selected = true
+            vm.professions.append(option)
+        }
+        if (character.prof !== undefined) {
+            character.prof = character.origin.profs.find(p => character.prof.name == p.id.name).id
+        }
+        buildCharacter()
+        // if (np === undefined) {
+        //     character.prof = rollOption(character.origin.profs)
+        // } else {
+        //     character.prof = np
+        // }
+    }
+}
+
+function randomCharacter(origin, prof) {
+    if (origin === undefined) {
+        selectOrigin(origins.wild) // todo: roll
+    } else {
+        selectOrigin(origin)
+    }
+    document.getElementById('world').value = Object.keys(origins).find(k => origins[k].name == character.origin.name)
+    let newProf = (prof === undefined) ? rollOption(character.origin.profs) : prof
+    vm.professions.value = newProf.name
+    vm.professions.onchange()
+    rolls.sex()
+    rolls.hand()
+    rolls.appearence()
+    rolls.constitution()
+    rolls.age()
+    rolls.special()
+    let markCnt = Math.max(d5(), d5())
+    for (let i = 0; i < markCnt; ++i) {
+        rolls.newMark()
+    }
+    let nameCount = d5()
+    for (let i = 0; i < nameCount; ++i) {
+        rolls.newName()
+    }
+    rolls.statsFull()
+    rolls.wound()
+    rolls.corrupt()
+    rolls.madness()
+    rolls.fate()
+}
+
 function bind() {
     vm.rollLog = document.getElementById('rollLog')
     // stats
@@ -1832,43 +1976,25 @@ function bind() {
     vm.woundSpan = document.getElementById('wounds')
     let woundRoll = document.getElementById('woundRoll')
     woundRoll.onclick = function () {
-        if (character.origin !== undefined) {
-            let w = character.origin.baseWounds
-            character.wounds = character.origin.secondaryMods.wounds(w + d5())
-        } else {
-            character.wounds = 0
-        }
+        rolls.wound()
         render()
     }
     vm.fateSpan = document.getElementById('fate')
     let fateRoll = document.getElementById('fateRoll')
     fateRoll.onclick = function () {
-        if (character.origin !== undefined) {
-            let f = rollOption(character.origin.fateChances, d10)
-            character.fate = character.origin.secondaryMods.fate(f)
-        } else {
-            character.fate = 0
-        }
+        rolls.fate()
         render()
     }
     vm.corruptSpan = document.getElementById('corrupt')
     let corruptRoll = document.getElementById('corruptRoll')
     corruptRoll.onclick = function () {
-        if (character.origin !== undefined) {
-            character.corrupt = character.origin.secondaryMods.corrupt(0)
-        } else {
-            character.corrupt = 0
-        }
+        rolls.corrupt()
         render()
     }
     vm.madnessSpan = document.getElementById('madness')
     let madnessRoll = document.getElementById('madnessRoll')
     madnessRoll.onclick = function () {
-        if (character.origin !== undefined) {
-            character.madness = character.origin.secondaryMods.madness(0)
-        } else {
-            character.madness = 0
-        }
+        rolls.madness()
         render()
     }
 
@@ -1878,8 +2004,7 @@ function bind() {
         render()
     }
     document.getElementById('sexRoll').onclick = function () {
-        let r = d10()
-        character.sex = r % 2 == 0 ? 'male' : 'female'
+        rolls.sex()
         render()
     }
 
@@ -1889,8 +2014,7 @@ function bind() {
         render()
     }
     document.getElementById('handRoll').onclick = function () {
-        let r = d10()
-        character.hand = r == 9 ? 'left' : 'right'
+        rolls.hand()
         render()
     }
 
@@ -1899,7 +2023,7 @@ function bind() {
     vm.weightSpan = document.getElementById('weight')
     document.getElementById('constitutionRoll').onclick = function () {
         if (character.sex !== undefined && character.origin !== undefined) {
-            character.constitution = rollOption(character.origin.constitutions)
+            rolls.constitution()
             render()
         }
     }
@@ -1908,11 +2032,7 @@ function bind() {
     vm.ageDescriptionSpan = document.getElementById('ageDescription')
     document.getElementById('ageRoll').onclick = function () {
         if (character.origin !== undefined) {
-            let ageType = rollOption(character.origin.ages)
-            character.age = {
-                n: ageType.roll(),
-                d: ageType.description,
-            }
+            rolls.age()
             render()
         }
     }
@@ -1922,7 +2042,7 @@ function bind() {
     vm.eyes = document.getElementById('eyes')
     document.getElementById('appearanceRoll').onclick = function () {
         if (character.origin !== undefined) {
-            character.appearence = rollOption(character.origin.appearences)
+            rolls.appearence()
             render()
         }
     }
@@ -1930,7 +2050,7 @@ function bind() {
     vm.specialSpan = document.getElementById('specialOO')
     document.getElementById('specialOORoll').onclick = function () {
         if (character.origin !== undefined) {
-            character.specialTrait = rollOption(character.origin.specialTrait)
+            rolls.special()
             render()
         }
     }
@@ -1942,16 +2062,7 @@ function bind() {
     }
     document.getElementById('addMark').onclick = function () {
         if (character.origin !== undefined) {
-            if (character.marks === undefined) {
-                character.marks = []
-            }
-            var newMark = undefined
-            var bcntr = 0
-            do {
-                newMark = rollOption(character.origin.marks)
-                ++bcntr
-            } while (character.marks.includes(newMark) && bcntr < 100)
-            character.marks.push(newMark)
+            rolls.newMark()
             render()
         }
     }
@@ -1963,17 +2074,7 @@ function bind() {
     }
     document.getElementById('addName').onclick = function () {
         if (character.sex !== undefined) {
-            if (character.names === undefined) {
-                character.names = []
-            }
-            let allNames = nameTable[character.sex]
-            var newName = undefined
-            var bcntr = 0
-            do {
-                newName = rollOption(rollOption(allNames, d5))
-                ++bcntr
-            } while (character.names.includes(newName) && bcntr < 100)
-            character.names.push(newName)
+            rolls.newName()
             render()
         }
     }
@@ -2005,11 +2106,7 @@ function bind() {
         s.append(re)
     }
     document.getElementById('fullStatRoll').onclick = function () {
-        let rs = new Stats()
-        for (let k of Object.keys(rs)) {
-            rs[k] = d10() + d10()
-        }
-        character.rolledStats = rs
+        rolls.statsFull()
         render()
     }
     let world = document.getElementById('world')
@@ -2021,37 +2118,16 @@ function bind() {
         world.append(option)
     }
     world.onchange = function () {
-        let oldOrigin = character.origin
-        character.origin = origins[world.value]
-        if (oldOrigin === undefined || (character.origin !== undefined && oldOrigin.name !== character.origin.name)) {
-            professions.innerHTML = ''
-            for (let p of character.origin.profs) {
-                let option = document.createElement('option')
-                option.value = p.id.name
-                option.text = p.id.name + ' [' + p.low + '..' + p.high + ']'
-                if (character.prof !== undefined && character.prof.name == p.id.name) option.selected = true
-                professions.append(option)
-            }
-            if (character.prof !== undefined) {
-                character.prof = character.origin.profs.find(p => character.prof.name == p.id.name).id
-            }
-            buildCharacter()
-            // if (np === undefined) {
-            //     character.prof = rollOption(character.origin.profs)
-            // } else {
-            //     character.prof = np
-            // }
-            render()
-        } else {
-        }
+        selectOrigin(origins[world.value])
+        render()
     }
-    let professions = document.getElementById('prof')
-    professions.onchange = function () {
+    vm.professions = document.getElementById('prof')
+    vm.professions.onchange = function () {
         if (character.origin !== undefined) {
-            console.log('new prof: ' + professions.value)
+            console.log('new prof: ' + vm.professions.value)
             let oldProf = character.prof
-            character.prof = character.origin.profs.find(x => x.id.name == professions.value).id
-            console.log('found prof: ' + character.prof)
+            character.prof = character.origin.profs.find(x => x.id.name == vm.professions.value).id
+            console.log('found prof: ' + character.prof.name)
             if (oldProf === undefined || (character.prof !== undefined && oldProf.name != character.prof.name)) {
                 character.skills = new Map()
                 character.talents = []
@@ -2060,7 +2136,7 @@ function bind() {
             }
         }
     }
-    professions.onchange()
+    vm.professions.onchange()
     let skillBox = document.getElementById('skills')
     vm.renderSkills = function (toRender) {
         skillBox.innerHTML = ''
@@ -2180,10 +2256,21 @@ function bind() {
     }
     vm.delayed = document.getElementById('delayed')
     vm.upgrades = document.getElementById('upgrades')
+    document.getElementById('fullRoll').onclick = function () {
+        randomCharacter(character.origin, character.prof)
+    }
+    document.getElementById('profRoll').onclick = function () {
+        if (character.origin !== undefined) {
+            let newProf = rollOption(character.origin.profs)
+            vm.professions.value = newProf.name
+            vm.professions.onchange()
+        }
+    }
 }
 
 function init() {
     bind()
+    randomCharacter()
     render()
     console.log('init called')
 }
