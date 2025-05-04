@@ -113,6 +113,14 @@ function Talent(
     this.requirements = requirements
 }
 
+function subTalent(talent, specName, specDescr, specReq) {
+    return new Talent(
+        talent.name + ' (' + specName + ')',
+        talent.description.replaceAll('$$', specDescr),
+        specReq === undefined ? talent.specReq : specReq,
+    )
+}
+
 let sud = {
     fast: [100, 250, 500, 750],
     med: [250, 500, 750, 1000],
@@ -848,6 +856,11 @@ let skills = function () {
         'str',
         'Тест на Запугивание пригодится, когда тебе придет в голову вселить страх в отдельного человека или небольшую группу людей. Тебе не нужно проходить Тест Запугивания каждый раз, когда ты угрожаешь кому-либо.',
     )
+    let literacy = new Skill(
+        'Грамотность',
+        'int',
+        'Это умение позволяет тебе читать на любом известном тебе языке. В обычной повседневной ситуации Тест на Грамотность при чтении и письме не нужен, но Мастер может потребовать его прохождения при попытке чтения текста, записанного неразборчиво, слишком сложно или слишком образно, или обильно пересыпанного забытыми фразеологизмами, архаичными словесными конструкциями или редкими идиомами.',
+    )
     let logic = new Skill(
         'Логика',
         'int',
@@ -880,6 +893,11 @@ let skills = function () {
     let drive_land = subSkill(drive, 'Наземный', 'колёсный, гусеничный и прочий приземлённый транспорт.')
     let drive_hover = subSkill(drive, 'Ховер', 'техника на воздушной подушке, парящая над бренным миром.')
     let drive_legs = subSkill(drive, 'Шагатель', 'с ногами, для особо сложной местности.')
+
+    let pilot = new Skill('Пилотирование', 'dex', 'Пилотирование корабля в обычных условиях не требует Прохождения Тестов, но они могут понадобиться при полётах в сложных условиях – при штормовом ветре, на предельной скорости и для выполнения иных опасных маневров.')
+    let pilot_civil = subSkill(pilot, 'Гражданские суда', 'челноки')
+    let pilot_military = subSkill(pilot, 'Гражданские суда', 'авиация Астра Милитарум')
+    let pilot_space = subSkill(pilot, 'Гражданские суда', 'управление космическими кораблями')
     
     let language_gothic_low = new Skill("Язык (Низкий Готик)", 'int')
     let language_tribal = new Skill("Язык (племенной диалект)", 'int')
@@ -890,6 +908,7 @@ let skills = function () {
         'int',
         'Набор воспоминаний о привычках, структуре, традициях, знаменитых деятелях и суевериях, относящихся к отдельным мирам, культурным группам и организациям.',
     )
+    let lore_common_imperium = subSkill(lore_common, 'Империум')
     let lore_common_dusk = subSkill(lore_common, 'Фольклор Даска')
 
     let lore_forbidden_demonology = new Skill("Запретное знание (демонология)", 'int')
@@ -918,6 +937,7 @@ let skills = function () {
         'gamble': gamble,
         'inquiry': inquiry,
         'intimidate': intimidate,
+        'literacy': literacy,
         'logic': logic,
         'scrutiny': scrutiny,
         'search': search,
@@ -928,12 +948,16 @@ let skills = function () {
         'drive_land': drive_land,
         'drive_hover': drive_hover,
         'drive_legs': drive_legs,
+        'pilot_civil': pilot_civil,
+        'pilot_military': pilot_military,
+        'pilot_space': pilot_space,
         'language_gothic_low': language_gothic_low,
         'language_tribal': language_tribal,
         'language_local_dusk': language_local_dusk,
         'lore_forbidden_demonology': lore_forbidden_demonology,
         'lore_scholastic_occult': lore_scholastic_occult,
         'lore_common_dusk': lore_common_dusk,
+        'lore_common_imperium': lore_common_imperium,
     }
 }()
 
@@ -951,32 +975,52 @@ let skills = function () {
  */
 let sound_constitution = new Talent('Крепкое телосложение', 'Ты способен пережить больше повреждений, прежде чем умрёшь. Получаешь дополнительную Рану.')
 
-let talents = {
-    // wild world talents
-    iron_guts: new Talent("Железное нутро"),
-    savage: new Talent("Дикарь"),
-    init_rites: new Talent("Ритуалы инициации"),
-    nothing_more_to_fear: new Talent("Нечего больше бояться"),
+let talents = function () {
+    let heightened_senses = new Talent(
+        'Обострённые чувства',
+        'У тебя $$ значительно лучше среднего. Теперь ты будешь получать бонус +10 к любому Тесту, включающему $$.',
+    )
+    return {
+        // wild world talents
+        iron_guts: new Talent("Железное нутро"),
+        savage: new Talent("Дикарь"),
+        init_rites: new Talent("Ритуалы инициации"),
+        nothing_more_to_fear: new Talent("Нечего больше бояться"),
 
-    // normal
-    ambidexter: new Talent(
-        "Амбидекстрия", 
-        "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
-        new Requirement(new Stats().copy({ dex: 30 })),
-    ),
-    unremarcable: new Talent("Непримечательный"),
+        // normal
+        ambidexter: new Talent(
+            "Амбидекстрия", 
+            "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
+            new Requirement(new Stats().copy({ dex: 30 })),
+        ),
+        catfall: new Talent(
+            'Мягкое падение',
+            'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
+            new Requirement(new Stats().copy({ dex: 30 })),
+        ),
+        unremarcable: new Talent("Непримечательный"),
 
-    // weapon
-    weapon_throw: new Talent("Метательное оружие"),
-    weapon_cqc_prim: new Talent("Оружие ближнего боя (прим)"),
-    weapon_hand_prim: new Talent("Пистолеты (прим)"),
-    weapon_hand_laz: new Talent("Пистолеты (лаз)"),
-    weapon_hand_stub: new Talent("Пистолеты (стаб)"),
-    weapon_main_prim: new Talent("Основное оружие (прим)"),
-    weapon_main_laz: new Talent("Основное оружие (лаз)"),
-    weapon_main_stub: new Talent("Основное оружие (стаб)"),
-    'sound_constitution': sound_constitution,
-}
+        // groups
+        heightened_senses_eyes: subTalent(heightened_senses, 'Зрение', 'зрение'),
+        heightened_senses_hear: subTalent(heightened_senses, 'Слух', 'слух'),
+        heightened_senses_smell: subTalent(heightened_senses, 'Обоняние', 'нюх'),
+        heightened_senses_taste: subTalent(heightened_senses, 'Вкус', 'вкусовые рецепторы'),
+        heightened_senses_skin: subTalent(heightened_senses, 'Осязание', 'осязание'),
+
+        // weapon
+        weapon_throw: new Talent("Метательное оружие"),
+        weapon_cqc_prim: new Talent("Оружие ближнего боя (прим)"),
+        weapon_hand_prim: new Talent("Пистолеты (прим)"),
+        weapon_hand_laz: new Talent("Пистолеты (лаз)"),
+        weapon_hand_stub: new Talent("Пистолеты (стаб)"),
+        weapon_main_prim: new Talent("Основное оружие (прим)"),
+        weapon_main_laz: new Talent("Основное оружие (лаз)"),
+        weapon_main_stub: new Talent("Основное оружие (стаб)"),
+
+        // special
+        'sound_constitution': sound_constitution,
+    }
+}()
 
 let baseSkills = [
     skills.awareness,
@@ -1048,10 +1092,10 @@ let profs = {
                     new UpS(skills.dodge, 1, 100),
                     new UpS(skills.drive_land, 1, 100),
                     new UpS(skills.inquiry, 1, 100),
-                    // todo: Пилотирование (гражд)
+                    new UpS(skills.pilot_civil, 1, 100),
                     new UpS(skills.silent_move, 1, 100),
                     new UpS(skills.swim, 1, 100),
-                    // todo: Грамотность
+                    new UpS(skills.literacy, 1, 200),
                 ],
                 [
                     new UpT(talents.weapon_main_laz, 100),
@@ -1064,10 +1108,10 @@ let profs = {
                     new UpT(talents.weapon_throw, 100),
                     new UpT(talents.sound_constitution, 100, true),
                     new UpT(talents.sound_constitution, 100, true),
-                    // todo: Catfall
+                    new UpT(talents.catfall, 100),
                     new UpT(talents.ambidexter, 100),
                     new UpT(talents.unremarcable, 100),
-                    // todo: Обострённые чувства (зрение)
+                    new UpT(talents.heightened_senses_eyes, 100),
                 ],
             )
         ],
@@ -1123,7 +1167,65 @@ let profs = {
         ],
     ),
     psy: new Prof('Псайкер'),
-    scum: new Prof('Подонок'),
+    scum: new Prof(
+        'Подонок',
+        new StatUpgrades(
+            sud.med,
+            sud.fast,
+            sud.hard,
+            sud.hard,
+            sud.main,
+            sud.med,
+            sud.med,
+            sud.med,
+            sud.fast,
+        ),
+        [
+            skills.language_gothic_low,
+            skills.blather,
+            [skills.charm, skills.dodge],
+            skills.deceive,
+            skills.awareness,
+            skills.lore_common_imperium,
+        ],
+        [
+            [talents.ambidexter, talents.unremarcable],
+            talents.weapon_cqc_prim,
+            talents.weapon_hand_stub,
+            talents.weapon_main_stub,
+        ],
+        [
+            new Rank(
+                'Отребье',
+                0,
+                [
+                    new UpS(skills.awareness, 1, 100),
+                    new UpS(skills.awareness, 2, 100),
+                    new UpS(skills.barter, 1, 100),
+                    new UpS(skills.blather, 1, 100),
+                    new UpS(skills.charm, 1, 100),
+                    new UpS(skills.lore_common_imperium, 1, 100),
+                    new UpS(skills.deceive, 1, 100),
+                    new UpS(skills.dodge, 1, 100),
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.navigation_land, 1, 100),
+                    new UpS(skills.swim, 1, 100),
+                ],
+                [
+                    new UpT(talents.weapon_main_prim, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.ambidexter, 100),
+                    new UpT(talents.unremarcable, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.weapon_throw, 100),
+                ],
+            )
+        ]
+    ),
     tech: new Prof('Техножрец'),
 }
 
@@ -2014,6 +2116,14 @@ function bind() {
                 }
             } else if (o.from == 'buy') {
                 sOrigin.innerText = o.cost + ' ОО'
+                sOrigin.onclick = function () {
+                    let rsl = character.skills.get(r.skill.name)
+                    rsl.pop()
+                    if (rsl.length == 0) {
+                        character.skills.delete(r.skill.name)
+                    }
+                    render()
+                }
             } else if (o.from == 'base') {
                 sOrigin.innerText = 'Базовый'
             }
@@ -2059,6 +2169,10 @@ function bind() {
                 }
             } else if (o.from == 'buy') {
                 sOrigin.innerText = o.cost + ' ОО'
+                sOrigin.onclick = function () {
+                    character.talents.splice(character.talents.findIndex(x => x.talent.name == r.talent.name), 1)
+                    render()
+                }
             }
             row.append(sName, sOrigin)
             vm.talents.append(row)
