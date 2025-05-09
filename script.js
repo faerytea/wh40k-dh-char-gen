@@ -2258,6 +2258,7 @@ function bind() {
     vm.upgrades = document.getElementById('upgrades')
     document.getElementById('fullRoll').onclick = function () {
         randomCharacter(character.origin, character.prof)
+        render()
     }
     document.getElementById('profRoll').onclick = function () {
         if (character.origin !== undefined) {
