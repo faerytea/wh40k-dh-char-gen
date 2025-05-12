@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 2100 2970"
+   version="2"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs>
+  <style>
+    text.normal {
+      font-size:49.389px;
+      font-family:'Sofia Sans Extra Condensed';
+      writing-mode:lr-tb;
+      direction:ltr;
+      text-anchor:start;
+      fill:#000;
+      /* stroke-width:2.64583; */
+    }
+    text.central {
+      font-size:49.389px;
+      font-family:'Sofia Sans Extra Condensed';
+      text-anchor:middle;
+      fill:#000;
+      /* stroke-width:2.64583; */
+    }
+    text.stat {
+      font-size: 94.5px;
+      text-anchor:middle;
+      font-family: monospace;
+    }
+    .bleed {
+        display: none;
+    }
+    @media only screen {
+      .bleed {
+         display: unset;
+      }
+    }
+  </style>
+  </defs>
+  <rect class="bleed" x="0" y="0" width="100%" height="100%" fill="white" stroke="black" />
+  <rect class="bleed" x="100" y="100" width="1900" height="2770" fill="none" stroke="#888" />
+  <!--region Шапка-->
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="100"
+     y="137">Имя: <tspan
+   id="sCharName" />Соуни Зейн</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="100"
+     y="187">Родной мир: <tspan
+   id="sOrigin" />Рождённый в пустоте (линейный флот Каликсис)</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="1000"
+     y="187">Профессия: <tspan
+   id="sProf" />Подонок</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="100"
+     y="237">Пол: <tspan
+   id="sSex" />Секс</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="500"
+     y="237">Сложение: <tspan
+   id="sConst" />Порнозвезда</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="1100"
+     y="237">Рост: <tspan
+   id="sHeight" />185 см</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="1600"
+     y="237">Вес: <tspan
+   id="sWeight" />69 кг</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="100"
+     y="287">Кожа: <tspan
+   id="sSex" />В масле</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="500"
+     y="287">Волосы: <tspan
+   id="sConst" />Уложены</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="1100"
+     y="287">Глаза: <tspan
+   id="sHeight" />Фиолетовые</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="1600"
+     y="287">Возраст: <tspan
+   id="sWeight" />27</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="100"
+     y="337">Предсказание: <tspan
+   id="sDivination" />Потакание слабостям плоти ведёт к разложению</text>
+  <g
+     id="headerLines"
+     stroke="black">
+    <!-- Имя -->
+    <line
+       x1="170"
+       x2="2000"
+       y1="145"
+       y2="145" />
+    <!-- Родина и карьера -->
+    <line
+       x1="275"
+       x2="995"
+       y1="196"
+       y2="196" />
+    <line
+       x1="1170"
+       x2="2000"
+       y1="196"
+       y2="196" />
+    <!-- Секс -->
+    <line
+       x1="170"
+       x2="495"
+       y1="246"
+       y2="246" />
+    <line
+       x1="655"
+       x2="1095"
+       y1="246"
+       y2="246" />
+    <line
+       x1="1185"
+       x2="1595"
+       y1="246"
+       y2="246" />
+    <line
+       x1="1670"
+       x2="2000"
+       y1="246"
+       y2="246" />
+    <!-- Цвет -->
+    <line
+       x1="185"
+       x2="495"
+       y1="296"
+       y2="296" />
+    <line
+       x1="625"
+       x2="1095"
+       y1="296"
+       y2="296" />
+    <line
+       x1="1185"
+       x2="1595"
+       y1="296"
+       y2="296" />
+    <line
+       x1="1740"
+       x2="2000"
+       y1="296"
+       y2="296" />
+    <!-- Предсказание -->
+    <line
+       x1="310"
+       x2="2000"
+       y1="346"
+       y2="346" />
+  </g>
+  <!--endregion-->
+  <!--region Статы-->
+  <text class="central" x="1050" y="396">Ближний бой</text>
+  <rect width="200" height="120" x="950" y="400" fill="none" stroke="#000" />
+  <text   id="sSHtHV" class="stat" x="1050" y="496">40</text>
+  <circle id="sSHtHu1" r="15" cx="975" cy="540" stroke="#000" fill="none" />
+  <circle id="sSHtHu2" r="15" cx="1025" cy="540" stroke="#000" fill="none" />
+  <circle id="sSHtHu3" r="15" cx="1075" cy="540" stroke="#000" fill="none" />
+  <circle id="sSHtHu4" r="15" cx="1125" cy="540" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="596">Баллистика</text>
+  <rect width="200" height="120" x="950" y="600" fill="none" stroke="#000" />
+  <text   id="sSRCV" class="stat" x="1050" y="696">40</text>
+  <circle id="sSRCu1" r="15" cx="975" cy="740" stroke="#000" fill="none" />
+  <circle id="sSRCu2" r="15" cx="1025" cy="740" stroke="#000" fill="none" />
+  <circle id="sSRCu3" r="15" cx="1075" cy="740" stroke="#000" fill="none" />
+  <circle id="sSRCu4" r="15" cx="1125" cy="740" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="796">Сила</text>
+  <rect width="200" height="120" x="950" y="800" fill="none" stroke="#000" />
+  <text   id="sSStrV" class="stat" x="1050" y="896">40</text>
+  <circle id="sSStru1" r="15" cx="975"  cy="940" stroke="#000" fill="none" />
+  <circle id="sSStru2" r="15" cx="1025" cy="940" stroke="#000" fill="none" />
+  <circle id="sSStru3" r="15" cx="1075" cy="940" stroke="#000" fill="none" />
+  <circle id="sSStru4" r="15" cx="1125" cy="940" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="996">Выносливость</text>
+  <rect width="200" height="120" x="950"  y="1000" fill="none" stroke="#000" />
+  <text   id="sSConV" class="stat" x="1050" y="1096">40</text>
+  <circle id="sSConu1" r="15" cx="975"  cy="1140" stroke="#000" fill="none" />
+  <circle id="sSConu2" r="15" cx="1025" cy="1140" stroke="#000" fill="none" />
+  <circle id="sSConu3" r="15" cx="1075" cy="1140" stroke="#000" fill="none" />
+  <circle id="sSConu4" r="15" cx="1125" cy="1140" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1196">Ловкость</text>
+  <rect width="200" height="120" x="950"  y="1200" fill="none" stroke="#000" />
+  <text   id="sSDexV" class="stat" x="1050" y="1296">40</text>
+  <circle id="sSDexu1" r="15" cx="975"  cy="1340" stroke="#000" fill="none" />
+  <circle id="sSDexu2" r="15" cx="1025" cy="1340" stroke="#000" fill="none" />
+  <circle id="sSDexu3" r="15" cx="1075" cy="1340" stroke="#000" fill="none" />
+  <circle id="sSDexu4" r="15" cx="1125" cy="1340" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1396">Интеллект</text>
+  <rect width="200" height="120" x="950"  y="1400" fill="none" stroke="#000" />
+  <text   id="sSIntV" class="stat" x="1050" y="1496">40</text>
+  <circle id="sSIntu1" r="15" cx="975"  cy="1540" stroke="#000" fill="none" />
+  <circle id="sSIntu2" r="15" cx="1025" cy="1540" stroke="#000" fill="none" />
+  <circle id="sSIntu3" r="15" cx="1075" cy="1540" stroke="#000" fill="none" />
+  <circle id="sSIntu4" r="15" cx="1125" cy="1540" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1596">Восприятие</text>
+  <rect width="200" height="120" x="950"  y="1600" fill="none" stroke="#000" />
+  <text   id="sSPerV" class="stat" x="1050" y="1696">40</text>
+  <circle id="sSPeru1" r="15" cx="975"  cy="1740" stroke="#000" fill="none" />
+  <circle id="sSPeru2" r="15" cx="1025" cy="1740" stroke="#000" fill="none" />
+  <circle id="sSPeru3" r="15" cx="1075" cy="1740" stroke="#000" fill="none" />
+  <circle id="sSPeru4" r="15" cx="1125" cy="1740" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1796">Сила воли</text>
+  <rect width="200" height="120" x="950"  y="1800" fill="none" stroke="#000" />
+  <text   id="sSWilV" class="stat" x="1050" y="1896">40</text>
+  <circle id="sSWilu1" r="15" cx="975"  cy="1940" stroke="#000" fill="none" />
+  <circle id="sSWilu2" r="15" cx="1025" cy="1940" stroke="#000" fill="none" />
+  <circle id="sSWilu3" r="15" cx="1075" cy="1940" stroke="#000" fill="none" />
+  <circle id="sSWilu4" r="15" cx="1125" cy="1940" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1996">Товарищество</text>
+  <rect width="200" height="120" x="950"  y="2000" fill="none" stroke="#000" />
+  <text   id="sSFelV" class="stat" x="1050" y="2096">40</text>
+  <circle id="sSFelu1" r="15" cx="975"  cy="2140" stroke="#000" fill="none" />
+  <circle id="sSFelu2" r="15" cx="1025" cy="2140" stroke="#000" fill="none" />
+  <circle id="sSFelu3" r="15" cx="1075" cy="2140" stroke="#000" fill="none" />
+  <circle id="sSFelu4" r="15" cx="1125" cy="2140" stroke="#000" fill="none" />
+  <!--endregion-->
+  <!--region База-->
+  <text class="normal" x="200" y="400">
+    Базовые умения
+  </text>
+  <text class="central" x="900" y="400">+20</text>
+  <text class="central" x="820" y="400">+10</text>
+  <text class="central" x="740" y="400">есть</text>
+  <g id="sBaseSkills">
+    <g>
+      <text x="100" y="450" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <rect x="700" y="410" width="80" height="50" fill="none" stroke="#000" />
+      <rect x="780" y="410" width="80" height="50" fill="none" stroke="#000" />
+      <rect x="860" y="410" width="80" height="50" fill="none" stroke="#000" />
+      <line x1="100" x2="690" y1="460" y2="460" stroke="#000"/>
+    </g>
+    <g>
+      <text x="100" y="500" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <rect x="700" y="460" width="80" height="50" fill="none" stroke="#000" />
+      <rect x="780" y="460" width="80" height="50" fill="none" stroke="#000" />
+      <rect x="860" y="460" width="80" height="50" fill="none" stroke="#000" />
+      <line x1="100" x2="690" y1="510" y2="510" stroke="#000"/>
+    </g>
+    <g>
+      <text x="100" y="550" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <rect x="700" y="510" width="80" height="50" fill="none" stroke="#000" />
+      <rect x="780" y="510" width="80" height="50" fill="none" stroke="#000" />
+      <rect x="860" y="510" width="80" height="50" fill="none" stroke="#000" />
+      <line x1="100" x2="690" y1="560" y2="560" stroke="#000"/>
+    </g>
+  </g>
+  <!--endregion-->
+</svg>
