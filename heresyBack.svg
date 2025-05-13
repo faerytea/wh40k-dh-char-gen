@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 2100 2970"
+   version="2"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      text.normal {
+        font-size:49.389px;
+        font-family:'Sofia Sans Extra Condensed';
+        writing-mode:lr-tb;
+        direction:ltr;
+        text-anchor:start;
+        fill:#000;
+        /* stroke-width:2.64583; */
+      }
+      text.central {
+        font-size:49.389px;
+        font-family:'Sofia Sans Extra Condensed';
+        text-anchor:middle;
+        fill:#000;
+        /* stroke-width:2.64583; */
+      }
+      text.stat {
+        font-size: 94.5px;
+        text-anchor:middle;
+        font-family: monospace;
+      }
+      .bleed {
+          display: none;
+      }
+      @media only screen {
+        .bleed {
+          display: unset;
+        }
+      }
+      .skill0 > rect:nth-child(1) {
+        fill: #000;
+      }
+      .skill1 > rect:nth-child(1) {
+        fill: #000;
+      }
+      .skill1 > rect:nth-child(2) {
+        fill: #000;
+      }
+      .skill2 > rect:nth-child(1) {
+        fill: #000;
+      }
+      .skill2 > rect:nth-child(2) {
+        fill: #000;
+      }
+      .skill2 > rect:nth-child(3) {
+        fill: #000;
+      }
+    </style>
+  </defs>
+  <rect class="bleed" x="0" y="0" width="100%" height="100%" fill="white" stroke="black" />
+  <rect class="bleed" x="100" y="100" width="1900" height="2770" fill="none" stroke="#888" />
+  <!--region Статы-->
+  <text class="central" x="1050" y="446">Ближний бой</text>
+  <rect width="200" height="120" x="950" y="450" fill="none" stroke="#000" />
+  <text   id="sbSHtHV" class="stat" x="1050" y="546">40</text>
+  <circle id="sbSHtHu1" r="15" cx="975"  cy="590" stroke="#000" fill="none" />
+  <circle id="sbSHtHu2" r="15" cx="1025" cy="590" stroke="#000" fill="none" />
+  <circle id="sbSHtHu3" r="15" cx="1075" cy="590" stroke="#000" fill="none" />
+  <circle id="sbSHtHu4" r="15" cx="1125" cy="590" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="646">Баллистика</text>
+  <rect width="200" height="120" x="950" y="650" fill="none" stroke="#000" />
+  <text   id="sbSRCV" class="stat" x="1050" y="746">40</text>
+  <circle id="sbSRCu1" r="15" cx="975"  cy="790" stroke="#000" fill="none" />
+  <circle id="sbSRCu2" r="15" cx="1025" cy="790" stroke="#000" fill="none" />
+  <circle id="sbSRCu3" r="15" cx="1075" cy="790" stroke="#000" fill="none" />
+  <circle id="sbSRCu4" r="15" cx="1125" cy="790" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="846">Сила</text>
+  <rect width="200" height="120" x="950" y="850" fill="none" stroke="#000" />
+  <text   id="sbSStrV" class="stat" x="1050" y="946">40</text>
+  <circle id="sbSStru1" r="15" cx="975"  cy="990" stroke="#000" fill="none" />
+  <circle id="sbSStru2" r="15" cx="1025" cy="990" stroke="#000" fill="none" />
+  <circle id="sbSStru3" r="15" cx="1075" cy="990" stroke="#000" fill="none" />
+  <circle id="sbSStru4" r="15" cx="1125" cy="990" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1046">Выносливость</text>
+  <rect width="200" height="120" x="950"  y="1050" fill="none" stroke="#000" />
+  <text   id="sbSConV" class="stat" x="1050" y="1146">40</text>
+  <circle id="sbSConu1" r="15" cx="975"  cy="1190" stroke="#000" fill="none" />
+  <circle id="sbSConu2" r="15" cx="1025" cy="1190" stroke="#000" fill="none" />
+  <circle id="sbSConu3" r="15" cx="1075" cy="1190" stroke="#000" fill="none" />
+  <circle id="sbSConu4" r="15" cx="1125" cy="1190" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1246">Ловкость</text>
+  <rect width="200" height="120" x="950"  y="1250" fill="none" stroke="#000" />
+  <text   id="sbSDexV" class="stat" x="1050" y="1346">40</text>
+  <circle id="sbSDexu1" r="15" cx="975"  cy="1390" stroke="#000" fill="none" />
+  <circle id="sbSDexu2" r="15" cx="1025" cy="1390" stroke="#000" fill="none" />
+  <circle id="sbSDexu3" r="15" cx="1075" cy="1390" stroke="#000" fill="none" />
+  <circle id="sbSDexu4" r="15" cx="1125" cy="1390" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1446">Интеллект</text>
+  <rect width="200" height="120" x="950"  y="1450" fill="none" stroke="#000" />
+  <text   id="sbSIntV" class="stat" x="1050" y="1546">40</text>
+  <circle id="sbSIntu1" r="15" cx="975"  cy="1590" stroke="#000" fill="none" />
+  <circle id="sbSIntu2" r="15" cx="1025" cy="1590" stroke="#000" fill="none" />
+  <circle id="sbSIntu3" r="15" cx="1075" cy="1590" stroke="#000" fill="none" />
+  <circle id="sbSIntu4" r="15" cx="1125" cy="1590" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1646">Восприятие</text>
+  <rect width="200" height="120" x="950"  y="1650" fill="none" stroke="#000" />
+  <text   id="sbSPerV" class="stat" x="1050" y="1746">40</text>
+  <circle id="sbSPeru1" r="15" cx="975"  cy="1790" stroke="#000" fill="none" />
+  <circle id="sbSPeru2" r="15" cx="1025" cy="1790" stroke="#000" fill="none" />
+  <circle id="sbSPeru3" r="15" cx="1075" cy="1790" stroke="#000" fill="none" />
+  <circle id="sbSPeru4" r="15" cx="1125" cy="1790" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1846">Сила воли</text>
+  <rect width="200" height="120" x="950"  y="1850" fill="none" stroke="#000" />
+  <text   id="sbSWilV" class="stat" x="1050" y="1946">40</text>
+  <circle id="sbSWilu1" r="15" cx="975"  cy="1990" stroke="#000" fill="none" />
+  <circle id="sbSWilu2" r="15" cx="1025" cy="1990" stroke="#000" fill="none" />
+  <circle id="sbSWilu3" r="15" cx="1075" cy="1990" stroke="#000" fill="none" />
+  <circle id="sbSWilu4" r="15" cx="1125" cy="1990" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="2046">Товарищество</text>
+  <rect width="200" height="120" x="950"  y="2050" fill="none" stroke="#000" />
+  <text   id="sbSFelV" class="stat" x="1050" y="2146">40</text>
+  <circle id="sbSFelu1" r="15" cx="975"  cy="2190" stroke="#000" fill="none" />
+  <circle id="sbSFelu2" r="15" cx="1025" cy="2190" stroke="#000" fill="none" />
+  <circle id="sbSFelu3" r="15" cx="1075" cy="2190" stroke="#000" fill="none" />
+  <circle id="sbSFelu4" r="15" cx="1125" cy="2190" stroke="#000" fill="none" />
+  <!--endregion-->
+</svg>
