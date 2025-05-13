@@ -137,7 +137,13 @@
      xml:space="preserve"
      class="normal"
      x="100"
-     y="337">Предсказание: <tspan
+     y="337">Приметы: <tspan
+   id="sMarks" />нервный тик-так</text>
+  <text
+     xml:space="preserve"
+     class="normal"
+     x="100"
+     y="387">Предсказание: <tspan
    id="sDivination" />Потакание слабостям плоти ведёт к разложению</text>
   <g
      id="headerLines"
@@ -201,94 +207,93 @@
        x2="2000"
        y1="296"
        y2="296" />
+    <!-- Приметы -->
+    <line
+       x1="250"
+       x2="2000"
+       y1="346"
+       y2="346" />
     <!-- Предсказание -->
     <line
        x1="310"
        x2="2000"
-       y1="346"
-       y2="346" />
+       y1="396"
+       y2="396" />
   </g>
   <!--endregion-->
   <!--region Статы-->
-  <text class="central" x="1050" y="396">Ближний бой</text>
-  <rect width="200" height="120" x="950" y="400" fill="none" stroke="#000" />
-  <text   id="sSHtHV" class="stat" x="1050" y="496">40</text>
-  <circle id="sSHtHu1" r="15" cx="975" cy="540" stroke="#000" fill="none" />
-  <circle id="sSHtHu2" r="15" cx="1025" cy="540" stroke="#000" fill="none" />
-  <circle id="sSHtHu3" r="15" cx="1075" cy="540" stroke="#000" fill="none" />
-  <circle id="sSHtHu4" r="15" cx="1125" cy="540" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="596">Баллистика</text>
-  <rect width="200" height="120" x="950" y="600" fill="none" stroke="#000" />
-  <text   id="sSRCV" class="stat" x="1050" y="696">40</text>
-  <circle id="sSRCu1" r="15" cx="975" cy="740" stroke="#000" fill="none" />
-  <circle id="sSRCu2" r="15" cx="1025" cy="740" stroke="#000" fill="none" />
-  <circle id="sSRCu3" r="15" cx="1075" cy="740" stroke="#000" fill="none" />
-  <circle id="sSRCu4" r="15" cx="1125" cy="740" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="796">Сила</text>
-  <rect width="200" height="120" x="950" y="800" fill="none" stroke="#000" />
-  <text   id="sSStrV" class="stat" x="1050" y="896">40</text>
-  <circle id="sSStru1" r="15" cx="975"  cy="940" stroke="#000" fill="none" />
-  <circle id="sSStru2" r="15" cx="1025" cy="940" stroke="#000" fill="none" />
-  <circle id="sSStru3" r="15" cx="1075" cy="940" stroke="#000" fill="none" />
-  <circle id="sSStru4" r="15" cx="1125" cy="940" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="996">Выносливость</text>
-  <rect width="200" height="120" x="950"  y="1000" fill="none" stroke="#000" />
-  <text   id="sSConV" class="stat" x="1050" y="1096">40</text>
-  <circle id="sSConu1" r="15" cx="975"  cy="1140" stroke="#000" fill="none" />
-  <circle id="sSConu2" r="15" cx="1025" cy="1140" stroke="#000" fill="none" />
-  <circle id="sSConu3" r="15" cx="1075" cy="1140" stroke="#000" fill="none" />
-  <circle id="sSConu4" r="15" cx="1125" cy="1140" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="1196">Ловкость</text>
-  <rect width="200" height="120" x="950"  y="1200" fill="none" stroke="#000" />
-  <text   id="sSDexV" class="stat" x="1050" y="1296">40</text>
-  <circle id="sSDexu1" r="15" cx="975"  cy="1340" stroke="#000" fill="none" />
-  <circle id="sSDexu2" r="15" cx="1025" cy="1340" stroke="#000" fill="none" />
-  <circle id="sSDexu3" r="15" cx="1075" cy="1340" stroke="#000" fill="none" />
-  <circle id="sSDexu4" r="15" cx="1125" cy="1340" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="1396">Интеллект</text>
-  <rect width="200" height="120" x="950"  y="1400" fill="none" stroke="#000" />
-  <text   id="sSIntV" class="stat" x="1050" y="1496">40</text>
-  <circle id="sSIntu1" r="15" cx="975"  cy="1540" stroke="#000" fill="none" />
-  <circle id="sSIntu2" r="15" cx="1025" cy="1540" stroke="#000" fill="none" />
-  <circle id="sSIntu3" r="15" cx="1075" cy="1540" stroke="#000" fill="none" />
-  <circle id="sSIntu4" r="15" cx="1125" cy="1540" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="1596">Восприятие</text>
-  <rect width="200" height="120" x="950"  y="1600" fill="none" stroke="#000" />
-  <text   id="sSPerV" class="stat" x="1050" y="1696">40</text>
-  <circle id="sSPeru1" r="15" cx="975"  cy="1740" stroke="#000" fill="none" />
-  <circle id="sSPeru2" r="15" cx="1025" cy="1740" stroke="#000" fill="none" />
-  <circle id="sSPeru3" r="15" cx="1075" cy="1740" stroke="#000" fill="none" />
-  <circle id="sSPeru4" r="15" cx="1125" cy="1740" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="1796">Сила воли</text>
-  <rect width="200" height="120" x="950"  y="1800" fill="none" stroke="#000" />
-  <text   id="sSWilV" class="stat" x="1050" y="1896">40</text>
-  <circle id="sSWilu1" r="15" cx="975"  cy="1940" stroke="#000" fill="none" />
-  <circle id="sSWilu2" r="15" cx="1025" cy="1940" stroke="#000" fill="none" />
-  <circle id="sSWilu3" r="15" cx="1075" cy="1940" stroke="#000" fill="none" />
-  <circle id="sSWilu4" r="15" cx="1125" cy="1940" stroke="#000" fill="none" />
-  <text class="central" x="1050" y="1996">Товарищество</text>
-  <rect width="200" height="120" x="950"  y="2000" fill="none" stroke="#000" />
-  <text   id="sSFelV" class="stat" x="1050" y="2096">40</text>
-  <circle id="sSFelu1" r="15" cx="975"  cy="2140" stroke="#000" fill="none" />
-  <circle id="sSFelu2" r="15" cx="1025" cy="2140" stroke="#000" fill="none" />
-  <circle id="sSFelu3" r="15" cx="1075" cy="2140" stroke="#000" fill="none" />
-  <circle id="sSFelu4" r="15" cx="1125" cy="2140" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="446">Ближний бой</text>
+  <rect width="200" height="120" x="950" y="450" fill="none" stroke="#000" />
+  <text   id="sSHtHV" class="stat" x="1050" y="546">40</text>
+  <circle id="sSHtHu1" r="15" cx="975"  cy="590" stroke="#000" fill="none" />
+  <circle id="sSHtHu2" r="15" cx="1025" cy="590" stroke="#000" fill="none" />
+  <circle id="sSHtHu3" r="15" cx="1075" cy="590" stroke="#000" fill="none" />
+  <circle id="sSHtHu4" r="15" cx="1125" cy="590" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="646">Баллистика</text>
+  <rect width="200" height="120" x="950" y="650" fill="none" stroke="#000" />
+  <text   id="sSRCV" class="stat" x="1050" y="746">40</text>
+  <circle id="sSRCu1" r="15" cx="975"  cy="790" stroke="#000" fill="none" />
+  <circle id="sSRCu2" r="15" cx="1025" cy="790" stroke="#000" fill="none" />
+  <circle id="sSRCu3" r="15" cx="1075" cy="790" stroke="#000" fill="none" />
+  <circle id="sSRCu4" r="15" cx="1125" cy="790" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="846">Сила</text>
+  <rect width="200" height="120" x="950" y="850" fill="none" stroke="#000" />
+  <text   id="sSStrV" class="stat" x="1050" y="946">40</text>
+  <circle id="sSStru1" r="15" cx="975"  cy="990" stroke="#000" fill="none" />
+  <circle id="sSStru2" r="15" cx="1025" cy="990" stroke="#000" fill="none" />
+  <circle id="sSStru3" r="15" cx="1075" cy="990" stroke="#000" fill="none" />
+  <circle id="sSStru4" r="15" cx="1125" cy="990" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1046">Выносливость</text>
+  <rect width="200" height="120" x="950"  y="1050" fill="none" stroke="#000" />
+  <text   id="sSConV" class="stat" x="1050" y="1146">40</text>
+  <circle id="sSConu1" r="15" cx="975"  cy="1190" stroke="#000" fill="none" />
+  <circle id="sSConu2" r="15" cx="1025" cy="1190" stroke="#000" fill="none" />
+  <circle id="sSConu3" r="15" cx="1075" cy="1190" stroke="#000" fill="none" />
+  <circle id="sSConu4" r="15" cx="1125" cy="1190" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1246">Ловкость</text>
+  <rect width="200" height="120" x="950"  y="1250" fill="none" stroke="#000" />
+  <text   id="sSDexV" class="stat" x="1050" y="1346">40</text>
+  <circle id="sSDexu1" r="15" cx="975"  cy="1390" stroke="#000" fill="none" />
+  <circle id="sSDexu2" r="15" cx="1025" cy="1390" stroke="#000" fill="none" />
+  <circle id="sSDexu3" r="15" cx="1075" cy="1390" stroke="#000" fill="none" />
+  <circle id="sSDexu4" r="15" cx="1125" cy="1390" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1446">Интеллект</text>
+  <rect width="200" height="120" x="950"  y="1450" fill="none" stroke="#000" />
+  <text   id="sSIntV" class="stat" x="1050" y="1546">40</text>
+  <circle id="sSIntu1" r="15" cx="975"  cy="1590" stroke="#000" fill="none" />
+  <circle id="sSIntu2" r="15" cx="1025" cy="1590" stroke="#000" fill="none" />
+  <circle id="sSIntu3" r="15" cx="1075" cy="1590" stroke="#000" fill="none" />
+  <circle id="sSIntu4" r="15" cx="1125" cy="1590" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1646">Восприятие</text>
+  <rect width="200" height="120" x="950"  y="1650" fill="none" stroke="#000" />
+  <text   id="sSPerV" class="stat" x="1050" y="1746">40</text>
+  <circle id="sSPeru1" r="15" cx="975"  cy="1790" stroke="#000" fill="none" />
+  <circle id="sSPeru2" r="15" cx="1025" cy="1790" stroke="#000" fill="none" />
+  <circle id="sSPeru3" r="15" cx="1075" cy="1790" stroke="#000" fill="none" />
+  <circle id="sSPeru4" r="15" cx="1125" cy="1790" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="1846">Сила воли</text>
+  <rect width="200" height="120" x="950"  y="1850" fill="none" stroke="#000" />
+  <text   id="sSWilV" class="stat" x="1050" y="1946">40</text>
+  <circle id="sSWilu1" r="15" cx="975"  cy="1990" stroke="#000" fill="none" />
+  <circle id="sSWilu2" r="15" cx="1025" cy="1990" stroke="#000" fill="none" />
+  <circle id="sSWilu3" r="15" cx="1075" cy="1990" stroke="#000" fill="none" />
+  <circle id="sSWilu4" r="15" cx="1125" cy="1990" stroke="#000" fill="none" />
+  <text class="central" x="1050" y="2046">Товарищество</text>
+  <rect width="200" height="120" x="950"  y="2050" fill="none" stroke="#000" />
+  <text   id="sSFelV" class="stat" x="1050" y="2146">40</text>
+  <circle id="sSFelu1" r="15" cx="975"  cy="2190" stroke="#000" fill="none" />
+  <circle id="sSFelu2" r="15" cx="1025" cy="2190" stroke="#000" fill="none" />
+  <circle id="sSFelu3" r="15" cx="1075" cy="2190" stroke="#000" fill="none" />
+  <circle id="sSFelu4" r="15" cx="1125" cy="2190" stroke="#000" fill="none" />
   <!--endregion-->
   <!--region База-->
-  <text class="normal" x="200" y="400">
+  <text class="normal" x="200" y="450">
     Базовые умения
   </text>
-  <text class="central" x="900" y="400">+20</text>
-  <text class="central" x="820" y="400">+10</text>
-  <text class="central" x="740" y="400">есть</text>
+  <text class="central" x="900" y="450">+20</text>
+  <text class="central" x="820" y="450">+10</text>
+  <text class="central" x="740" y="450">есть</text>
   <g id="sBaseSkills">
-    <g>
-      <text x="100" y="450" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="410" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="410" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="410" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="460" y2="460" stroke="#000"/>
-    </g>
     <g>
       <text x="100" y="500" xml:space="preserve" class="normal">Какая-то хуйня</text>
       <rect x="700" y="460" width="80" height="50" fill="none" stroke="#000" />
@@ -457,86 +462,16 @@
       <rect x="860" y="1610" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1660" y2="1660" stroke="#000"/>
     </g>
-    <g>
-      <text x="100" y="1700" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="1660" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="1660" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="1660" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="1710" y2="1710" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="1750" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="1710" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="1710" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="1710" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="1760" y2="1760" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="1800" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="1760" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="1760" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="1760" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="1810" y2="1810" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="1850" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="1810" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="1810" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="1810" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="1860" y2="1860" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="1900" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="1860" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="1860" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="1860" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="1910" y2="1910" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="1950" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="1910" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="1910" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="1910" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="1960" y2="1960" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="2000" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="1960" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="1960" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="1960" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="2010" y2="2010" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="2050" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="2010" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="2010" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="2010" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="2060" y2="2060" stroke="#000"/>
-    </g>
-    <g>
-      <text x="100" y="2100" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="700" y="2060" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="780" y="2060" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="860" y="2060" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="100" x2="690" y1="2110" y2="2110" stroke="#000"/>
-    </g>
   </g>
   <!--endregion-->
   <!--region Кринж-->
-  <text class="normal" x="1260" y="400">
+  <text class="normal" x="1260" y="450">
     Продвинутые умения
   </text>
-  <text class="central" x="1960" y="400">+20</text>
-  <text class="central" x="1880" y="400">+10</text>
-  <text class="central" x="1800" y="400">есть</text>
-  <g id="sBaseSkills">
-    <g>
-      <text x="1160" y="450" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="410" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="410" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="410" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="460" y2="460" stroke="#000"/>
-    </g>
+  <text class="central" x="1960" y="450">+20</text>
+  <text class="central" x="1880" y="450">+10</text>
+  <text class="central" x="1800" y="450">есть</text>
+  <g id="sAdvancedSkills">
     <g>
       <text x="1160" y="500" xml:space="preserve" class="normal">Какая-то хуйня</text>
       <rect x="1760" y="460" width="80" height="50" fill="none" stroke="#000" />
@@ -705,69 +640,116 @@
       <rect x="1920" y="1610" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1660" y2="1660" stroke="#000"/>
     </g>
-    <g>
-      <text x="1160" y="1700" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="1660" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="1660" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="1660" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="1710" y2="1710" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="1750" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="1710" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="1710" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="1710" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="1760" y2="1760" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="1800" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="1760" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="1760" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="1760" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="1810" y2="1810" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="1850" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="1810" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="1810" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="1810" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="1860" y2="1860" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="1900" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="1860" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="1860" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="1860" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="1910" y2="1910" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="1950" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="1910" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="1910" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="1910" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="1960" y2="1960" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="2000" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="1960" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="1960" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="1960" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="2010" y2="2010" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="2050" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="2010" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="2010" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="2010" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="2060" y2="2060" stroke="#000"/>
-    </g>
-    <g>
-      <text x="1160" y="2100" xml:space="preserve" class="normal">Какая-то хуйня</text>
-      <rect x="1760" y="2060" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1840" y="2060" width="80" height="50" fill="none" stroke="#000" />
-      <rect x="1920" y="2060" width="80" height="50" fill="none" stroke="#000" />
-      <line x1="1160" x2="1750" y1="2110" y2="2110" stroke="#000"/>
-    </g>
   </g>
+  <!--endregion-->
+  <!--region Таланты-->
+  <text class="normal" x="200" y="1730">
+    Таланты и особенности
+  </text>
+  <g id="sTalents">
+    <text x="100" y="1780" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="1790" y2="1790" stroke="#000" />
+    <text x="100" y="1830" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="1840" y2="1840" stroke="#000" />
+    <text x="100" y="1880" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="1890" y2="1890" stroke="#000" />
+    <text x="100" y="1930" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="1940" y2="1940" stroke="#000" />
+    <text x="100" y="1980" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="1990" y2="1990" stroke="#000" />
+    <text x="100" y="2030" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2040" y2="2040" stroke="#000" />
+    <text x="100" y="2080" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2090" y2="2090" stroke="#000" />
+    <text x="100" y="2130" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2140" y2="2140" stroke="#000" />
+    <text x="100" y="2180" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2190" y2="2190" stroke="#000" />
+    <text x="100" y="2230" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2240" y2="2240" stroke="#000" />
+    <text x="100" y="2280" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2290" y2="2290" stroke="#000" />
+    <text x="100" y="2330" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2340" y2="2340" stroke="#000" />
+    <text x="100" y="2380" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2390" y2="2390" stroke="#000" />
+    <text x="100" y="2430" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2440" y2="2440" stroke="#000" />
+    <text x="100" y="2480" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2490" y2="2490" stroke="#000" />
+    <text x="100" y="2530" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2540" y2="2540" stroke="#000" />
+    <text x="100" y="2580" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2590" y2="2590" stroke="#000" />
+    <text x="100" y="2630" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2640" y2="2640" stroke="#000" />
+    <text x="100" y="2680" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2690" y2="2690" stroke="#000" />
+    <text x="100" y="2730" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2740" y2="2740" stroke="#000" />
+    <text x="100" y="2780" class="normal">Быстрое выхватывание</text>
+    <line x1="100" x2="940" y1="2790" y2="2790" stroke="#000" />
+    <text x="100" y="2830" class="normal">Две руки (хуй)</text>
+    <line x1="100" x2="940" y1="2840" y2="2840" stroke="#000" />
+  </g>
+  <!--endregion-->
+  <!--region Шмот-->
+  <text class="normal" x="1260" y="1730">
+    Вещи
+  </text>
+  <g id="sTalents">
+    <text x="1160" y="1780" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="1790" y2="1790" stroke="#000" />
+    <text x="1160" y="1830" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="1840" y2="1840" stroke="#000" />
+    <text x="1160" y="1880" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="1890" y2="1890" stroke="#000" />
+    <text x="1160" y="1930" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="1940" y2="1940" stroke="#000" />
+    <text x="1160" y="1980" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="1990" y2="1990" stroke="#000" />
+    <text x="1160" y="2030" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2040" y2="2040" stroke="#000" />
+    <text x="1160" y="2080" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2090" y2="2090" stroke="#000" />
+    <text x="1160" y="2130" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2140" y2="2140" stroke="#000" />
+    <text x="1160" y="2180" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2190" y2="2190" stroke="#000" />
+    <text x="1160" y="2230" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2240" y2="2240" stroke="#000" />
+    <text x="1160" y="2280" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2290" y2="2290" stroke="#000" />
+    <text x="1160" y="2330" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2340" y2="2340" stroke="#000" />
+    <text x="1160" y="2380" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2390" y2="2390" stroke="#000" />
+    <text x="1160" y="2430" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2440" y2="2440" stroke="#000" />
+    <text x="1160" y="2480" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2490" y2="2490" stroke="#000" />
+    <text x="1160" y="2530" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2540" y2="2540" stroke="#000" />
+    <text x="1160" y="2580" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2590" y2="2590" stroke="#000" />
+    <text x="1160" y="2630" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2640" y2="2640" stroke="#000" />
+    <text x="1160" y="2680" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2690" y2="2690" stroke="#000" />
+    <text x="1160" y="2730" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2740" y2="2740" stroke="#000" />
+    <text x="1160" y="2780" class="normal">Дилдак</text>
+    <line x1="1160" x2="2000" y1="2790" y2="2790" stroke="#000" />
+    <text x="1160" y="2830" class="normal">Прокалятая смазка</text>
+    <line x1="1160" x2="2000" y1="2840" y2="2840" stroke="#000" />
+  </g>
+  <text class="central" x="1050" y="2246">Состояние</text>
+  <rect width="200" height="120" x="950"  y="2250" fill="none" stroke="#000" />
+  <text id="sWealth" x="1050" y="2310" class="central">6969</text>
+  <text x="1050" y="2360" class="central">тронов</text>
+  <text class="central" x="1050" y="2446">Доход</text>
+  <rect width="200" height="120" x="950"  y="2450" fill="none" stroke="#000" />
+  <text id="sIncome" x="1050" y="2510" class="central">6969</text>
+  <text x="1050" y="2560" class="central">тронов</text>
   <!--endregion-->
 </svg>
