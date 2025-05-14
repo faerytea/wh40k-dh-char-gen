@@ -114,25 +114,25 @@
      class="normal"
      x="100"
      y="287">Кожа: <tspan
-   id="sSex" /></text>
+   id="sSkin" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="500"
      y="287">Волосы: <tspan
-   id="sConst" /></text>
+   id="sHair" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="1100"
      y="287">Глаза: <tspan
-   id="sHeight" /></text>
+   id="sEyes" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="1600"
      y="287">Возраст: <tspan
-   id="sWeight" /></text>
+   id="sAge" /></text>
   <text
      xml:space="preserve"
      class="normal"
@@ -697,7 +697,7 @@
   <text class="normal" x="1260" y="1730">
     Вещи
   </text>
-  <g id="sTalents">
+  <g id="sItems">
     <text x="1160" y="1780" class="normal"></text>
     <line x1="1160" x2="2000" y1="1790" y2="1790" stroke="#000" />
     <text x="1160" y="1830" class="normal"></text>
