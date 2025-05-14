@@ -72,79 +72,79 @@
      class="normal"
      x="100"
      y="137">Имя: <tspan
-   id="sCharName" />Соуни Зейн</text>
+   id="sCharName" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="100"
      y="187">Родной мир: <tspan
-   id="sOrigin" />Рождённый в пустоте (линейный флот Каликсис)</text>
+   id="sOrigin" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="1000"
      y="187">Профессия: <tspan
-   id="sProf" />Подонок</text>
+   id="sProf" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="100"
      y="237">Пол: <tspan
-   id="sSex" />Секс</text>
+   id="sSex" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="500"
      y="237">Сложение: <tspan
-   id="sConst" />Порнозвезда</text>
+   id="sConst" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="1100"
      y="237">Рост: <tspan
-   id="sHeight" />185 см</text>
+   id="sHeight" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="1600"
      y="237">Вес: <tspan
-   id="sWeight" />69 кг</text>
+   id="sWeight" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="100"
      y="287">Кожа: <tspan
-   id="sSex" />В масле</text>
+   id="sSex" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="500"
      y="287">Волосы: <tspan
-   id="sConst" />Уложены</text>
+   id="sConst" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="1100"
      y="287">Глаза: <tspan
-   id="sHeight" />Фиолетовые</text>
+   id="sHeight" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="1600"
      y="287">Возраст: <tspan
-   id="sWeight" />27</text>
+   id="sWeight" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="100"
      y="337">Приметы: <tspan
-   id="sMarks" />нервный тик-так</text>
+   id="sMarks" /></text>
   <text
      xml:space="preserve"
      class="normal"
      x="100"
      y="387">Предсказание: <tspan
-   id="sDivination" />Потакание слабостям плоти ведёт к разложению</text>
+   id="sDivination" /></text>
   <g
      id="headerLines"
      stroke="black">
@@ -224,63 +224,63 @@
   <!--region Статы-->
   <text class="central" x="1050" y="446">Ближний бой</text>
   <rect width="200" height="120" x="950" y="450" fill="none" stroke="#000" />
-  <text   id="sSHtHV" class="stat" x="1050" y="546">40</text>
+  <text   id="sSHtHV" class="stat" x="1050" y="546"></text>
   <circle id="sSHtHu1" r="15" cx="975"  cy="590" stroke="#000" fill="none" />
   <circle id="sSHtHu2" r="15" cx="1025" cy="590" stroke="#000" fill="none" />
   <circle id="sSHtHu3" r="15" cx="1075" cy="590" stroke="#000" fill="none" />
   <circle id="sSHtHu4" r="15" cx="1125" cy="590" stroke="#000" fill="none" />
   <text class="central" x="1050" y="646">Баллистика</text>
   <rect width="200" height="120" x="950" y="650" fill="none" stroke="#000" />
-  <text   id="sSRCV" class="stat" x="1050" y="746">40</text>
+  <text   id="sSRCV" class="stat" x="1050" y="746"></text>
   <circle id="sSRCu1" r="15" cx="975"  cy="790" stroke="#000" fill="none" />
   <circle id="sSRCu2" r="15" cx="1025" cy="790" stroke="#000" fill="none" />
   <circle id="sSRCu3" r="15" cx="1075" cy="790" stroke="#000" fill="none" />
   <circle id="sSRCu4" r="15" cx="1125" cy="790" stroke="#000" fill="none" />
   <text class="central" x="1050" y="846">Сила</text>
   <rect width="200" height="120" x="950" y="850" fill="none" stroke="#000" />
-  <text   id="sSStrV" class="stat" x="1050" y="946">40</text>
+  <text   id="sSStrV" class="stat" x="1050" y="946"></text>
   <circle id="sSStru1" r="15" cx="975"  cy="990" stroke="#000" fill="none" />
   <circle id="sSStru2" r="15" cx="1025" cy="990" stroke="#000" fill="none" />
   <circle id="sSStru3" r="15" cx="1075" cy="990" stroke="#000" fill="none" />
   <circle id="sSStru4" r="15" cx="1125" cy="990" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1046">Выносливость</text>
   <rect width="200" height="120" x="950"  y="1050" fill="none" stroke="#000" />
-  <text   id="sSConV" class="stat" x="1050" y="1146">40</text>
+  <text   id="sSConV" class="stat" x="1050" y="1146"></text>
   <circle id="sSConu1" r="15" cx="975"  cy="1190" stroke="#000" fill="none" />
   <circle id="sSConu2" r="15" cx="1025" cy="1190" stroke="#000" fill="none" />
   <circle id="sSConu3" r="15" cx="1075" cy="1190" stroke="#000" fill="none" />
   <circle id="sSConu4" r="15" cx="1125" cy="1190" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1246">Ловкость</text>
   <rect width="200" height="120" x="950"  y="1250" fill="none" stroke="#000" />
-  <text   id="sSDexV" class="stat" x="1050" y="1346">40</text>
+  <text   id="sSDexV" class="stat" x="1050" y="1346"></text>
   <circle id="sSDexu1" r="15" cx="975"  cy="1390" stroke="#000" fill="none" />
   <circle id="sSDexu2" r="15" cx="1025" cy="1390" stroke="#000" fill="none" />
   <circle id="sSDexu3" r="15" cx="1075" cy="1390" stroke="#000" fill="none" />
   <circle id="sSDexu4" r="15" cx="1125" cy="1390" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1446">Интеллект</text>
   <rect width="200" height="120" x="950"  y="1450" fill="none" stroke="#000" />
-  <text   id="sSIntV" class="stat" x="1050" y="1546">40</text>
+  <text   id="sSIntV" class="stat" x="1050" y="1546"></text>
   <circle id="sSIntu1" r="15" cx="975"  cy="1590" stroke="#000" fill="none" />
   <circle id="sSIntu2" r="15" cx="1025" cy="1590" stroke="#000" fill="none" />
   <circle id="sSIntu3" r="15" cx="1075" cy="1590" stroke="#000" fill="none" />
   <circle id="sSIntu4" r="15" cx="1125" cy="1590" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1646">Восприятие</text>
   <rect width="200" height="120" x="950"  y="1650" fill="none" stroke="#000" />
-  <text   id="sSPerV" class="stat" x="1050" y="1746">40</text>
+  <text   id="sSPerV" class="stat" x="1050" y="1746"></text>
   <circle id="sSPeru1" r="15" cx="975"  cy="1790" stroke="#000" fill="none" />
   <circle id="sSPeru2" r="15" cx="1025" cy="1790" stroke="#000" fill="none" />
   <circle id="sSPeru3" r="15" cx="1075" cy="1790" stroke="#000" fill="none" />
   <circle id="sSPeru4" r="15" cx="1125" cy="1790" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1846">Сила воли</text>
   <rect width="200" height="120" x="950"  y="1850" fill="none" stroke="#000" />
-  <text   id="sSWilV" class="stat" x="1050" y="1946">40</text>
+  <text   id="sSWilV" class="stat" x="1050" y="1946"></text>
   <circle id="sSWilu1" r="15" cx="975"  cy="1990" stroke="#000" fill="none" />
   <circle id="sSWilu2" r="15" cx="1025" cy="1990" stroke="#000" fill="none" />
   <circle id="sSWilu3" r="15" cx="1075" cy="1990" stroke="#000" fill="none" />
   <circle id="sSWilu4" r="15" cx="1125" cy="1990" stroke="#000" fill="none" />
   <text class="central" x="1050" y="2046">Товарищество</text>
   <rect width="200" height="120" x="950"  y="2050" fill="none" stroke="#000" />
-  <text   id="sSFelV" class="stat" x="1050" y="2146">40</text>
+  <text   id="sSFelV" class="stat" x="1050" y="2146"></text>
   <circle id="sSFelu1" r="15" cx="975"  cy="2190" stroke="#000" fill="none" />
   <circle id="sSFelu2" r="15" cx="1025" cy="2190" stroke="#000" fill="none" />
   <circle id="sSFelu3" r="15" cx="1075" cy="2190" stroke="#000" fill="none" />
@@ -295,168 +295,168 @@
   <text class="central" x="740" y="450">есть</text>
   <g id="sBaseSkills">
     <g>
-      <text x="100" y="500" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="500" xml:space="preserve" class="normal"></text>
       <rect x="700" y="460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="460" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="510" y2="510" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="550" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="550" xml:space="preserve" class="normal"></text>
       <rect x="700" y="510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="510" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="560" y2="560" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="600" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="600" xml:space="preserve" class="normal"></text>
       <rect x="700" y="560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="560" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="610" y2="610" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="650" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="650" xml:space="preserve" class="normal"></text>
       <rect x="700" y="610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="610" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="660" y2="660" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="700" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="700" xml:space="preserve" class="normal"></text>
       <rect x="700" y="660" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="660" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="660" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="710" y2="710" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="750" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="750" xml:space="preserve" class="normal"></text>
       <rect x="700" y="710" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="710" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="710" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="760" y2="760" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="800" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="800" xml:space="preserve" class="normal"></text>
       <rect x="700" y="760" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="760" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="760" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="810" y2="810" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="850" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="850" xml:space="preserve" class="normal"></text>
       <rect x="700" y="810" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="810" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="810" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="860" y2="860" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="900" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="900" xml:space="preserve" class="normal"></text>
       <rect x="700" y="860" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="860" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="860" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="910" y2="910" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="950" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="950" xml:space="preserve" class="normal"></text>
       <rect x="700" y="910" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="910" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="910" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="960" y2="960" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1000" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1000" xml:space="preserve" class="normal"></text>
       <rect x="700" y="960" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="960" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="960" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1010" y2="1010" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1050" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1050" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1010" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1010" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1010" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1060" y2="1060" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1100" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1100" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1060" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1060" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1060" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1110" y2="1110" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1150" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1150" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1110" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1110" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1110" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1160" y2="1160" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1200" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1200" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1160" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1160" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1160" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1210" y2="1210" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1250" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1250" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1210" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1210" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1210" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1260" y2="1260" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1300" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1300" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1260" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1260" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1260" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1310" y2="1310" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1350" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1350" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1310" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1310" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1310" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1360" y2="1360" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1400" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1400" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1360" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1360" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1360" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1410" y2="1410" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1450" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1450" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1410" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1410" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1410" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1460" y2="1460" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1500" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1500" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1460" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1510" y2="1510" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1550" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1550" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1510" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1560" y2="1560" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1600" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1600" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1560" width="80" height="50" fill="none" stroke="#000" />
       <line x1="100" x2="690" y1="1610" y2="1610" stroke="#000"/>
     </g>
     <g>
-      <text x="100" y="1650" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="100" y="1650" xml:space="preserve" class="normal"></text>
       <rect x="700" y="1610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="780" y="1610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="860" y="1610" width="80" height="50" fill="none" stroke="#000" />
@@ -473,168 +473,168 @@
   <text class="central" x="1800" y="450">есть</text>
   <g id="sAdvancedSkills">
     <g>
-      <text x="1160" y="500" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="500" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="460" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="510" y2="510" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="550" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="550" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="510" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="560" y2="560" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="600" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="600" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="560" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="610" y2="610" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="650" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="650" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="610" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="660" y2="660" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="700" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="700" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="660" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="660" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="660" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="710" y2="710" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="750" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="750" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="710" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="710" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="710" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="760" y2="760" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="800" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="800" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="760" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="760" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="760" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="810" y2="810" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="850" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="850" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="810" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="810" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="810" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="860" y2="860" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="900" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="900" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="860" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="860" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="860" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="910" y2="910" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="950" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="950" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="910" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="910" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="910" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="960" y2="960" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1000" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1000" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="960" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="960" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="960" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1010" y2="1010" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1050" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1050" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1010" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1010" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1010" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1060" y2="1060" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1100" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1100" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1060" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1060" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1060" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1110" y2="1110" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1150" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1150" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1110" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1110" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1110" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1160" y2="1160" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1200" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1200" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1160" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1160" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1160" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1210" y2="1210" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1250" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1250" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1210" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1210" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1210" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1260" y2="1260" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1300" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1300" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1260" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1260" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1260" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1310" y2="1310" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1350" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1350" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1310" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1310" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1310" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1360" y2="1360" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1400" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1400" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1360" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1360" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1360" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1410" y2="1410" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1450" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1450" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1410" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1410" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1410" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1460" y2="1460" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1500" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1500" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1460" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1460" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1510" y2="1510" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1550" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1550" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1510" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1510" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1560" y2="1560" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1600" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1600" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1560" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1560" width="80" height="50" fill="none" stroke="#000" />
       <line x1="1160" x2="1750" y1="1610" y2="1610" stroke="#000"/>
     </g>
     <g>
-      <text x="1160" y="1650" xml:space="preserve" class="normal">Какая-то хуйня</text>
+      <text x="1160" y="1650" xml:space="preserve" class="normal"></text>
       <rect x="1760" y="1610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1840" y="1610" width="80" height="50" fill="none" stroke="#000" />
       <rect x="1920" y="1610" width="80" height="50" fill="none" stroke="#000" />
@@ -647,49 +647,49 @@
     Таланты и особенности
   </text>
   <g id="sTalents">
-    <text x="100" y="1780" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="1780" class="normal"></text>
     <line x1="100" x2="940" y1="1790" y2="1790" stroke="#000" />
-    <text x="100" y="1830" class="normal">Две руки (хуй)</text>
+    <text x="100" y="1830" class="normal"></text>
     <line x1="100" x2="940" y1="1840" y2="1840" stroke="#000" />
-    <text x="100" y="1880" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="1880" class="normal"></text>
     <line x1="100" x2="940" y1="1890" y2="1890" stroke="#000" />
-    <text x="100" y="1930" class="normal">Две руки (хуй)</text>
+    <text x="100" y="1930" class="normal"></text>
     <line x1="100" x2="940" y1="1940" y2="1940" stroke="#000" />
-    <text x="100" y="1980" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="1980" class="normal"></text>
     <line x1="100" x2="940" y1="1990" y2="1990" stroke="#000" />
-    <text x="100" y="2030" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2030" class="normal"></text>
     <line x1="100" x2="940" y1="2040" y2="2040" stroke="#000" />
-    <text x="100" y="2080" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2080" class="normal"></text>
     <line x1="100" x2="940" y1="2090" y2="2090" stroke="#000" />
-    <text x="100" y="2130" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2130" class="normal"></text>
     <line x1="100" x2="940" y1="2140" y2="2140" stroke="#000" />
-    <text x="100" y="2180" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2180" class="normal"></text>
     <line x1="100" x2="940" y1="2190" y2="2190" stroke="#000" />
-    <text x="100" y="2230" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2230" class="normal"></text>
     <line x1="100" x2="940" y1="2240" y2="2240" stroke="#000" />
-    <text x="100" y="2280" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2280" class="normal"></text>
     <line x1="100" x2="940" y1="2290" y2="2290" stroke="#000" />
-    <text x="100" y="2330" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2330" class="normal"></text>
     <line x1="100" x2="940" y1="2340" y2="2340" stroke="#000" />
-    <text x="100" y="2380" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2380" class="normal"></text>
     <line x1="100" x2="940" y1="2390" y2="2390" stroke="#000" />
-    <text x="100" y="2430" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2430" class="normal"></text>
     <line x1="100" x2="940" y1="2440" y2="2440" stroke="#000" />
-    <text x="100" y="2480" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2480" class="normal"></text>
     <line x1="100" x2="940" y1="2490" y2="2490" stroke="#000" />
-    <text x="100" y="2530" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2530" class="normal"></text>
     <line x1="100" x2="940" y1="2540" y2="2540" stroke="#000" />
-    <text x="100" y="2580" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2580" class="normal"></text>
     <line x1="100" x2="940" y1="2590" y2="2590" stroke="#000" />
-    <text x="100" y="2630" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2630" class="normal"></text>
     <line x1="100" x2="940" y1="2640" y2="2640" stroke="#000" />
-    <text x="100" y="2680" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2680" class="normal"></text>
     <line x1="100" x2="940" y1="2690" y2="2690" stroke="#000" />
-    <text x="100" y="2730" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2730" class="normal"></text>
     <line x1="100" x2="940" y1="2740" y2="2740" stroke="#000" />
-    <text x="100" y="2780" class="normal">Быстрое выхватывание</text>
+    <text x="100" y="2780" class="normal"></text>
     <line x1="100" x2="940" y1="2790" y2="2790" stroke="#000" />
-    <text x="100" y="2830" class="normal">Две руки (хуй)</text>
+    <text x="100" y="2830" class="normal"></text>
     <line x1="100" x2="940" y1="2840" y2="2840" stroke="#000" />
   </g>
   <!--endregion-->
@@ -698,58 +698,58 @@
     Вещи
   </text>
   <g id="sTalents">
-    <text x="1160" y="1780" class="normal">Дилдак</text>
+    <text x="1160" y="1780" class="normal"></text>
     <line x1="1160" x2="2000" y1="1790" y2="1790" stroke="#000" />
-    <text x="1160" y="1830" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="1830" class="normal"></text>
     <line x1="1160" x2="2000" y1="1840" y2="1840" stroke="#000" />
-    <text x="1160" y="1880" class="normal">Дилдак</text>
+    <text x="1160" y="1880" class="normal"></text>
     <line x1="1160" x2="2000" y1="1890" y2="1890" stroke="#000" />
-    <text x="1160" y="1930" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="1930" class="normal"></text>
     <line x1="1160" x2="2000" y1="1940" y2="1940" stroke="#000" />
-    <text x="1160" y="1980" class="normal">Дилдак</text>
+    <text x="1160" y="1980" class="normal"></text>
     <line x1="1160" x2="2000" y1="1990" y2="1990" stroke="#000" />
-    <text x="1160" y="2030" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2030" class="normal"></text>
     <line x1="1160" x2="2000" y1="2040" y2="2040" stroke="#000" />
-    <text x="1160" y="2080" class="normal">Дилдак</text>
+    <text x="1160" y="2080" class="normal"></text>
     <line x1="1160" x2="2000" y1="2090" y2="2090" stroke="#000" />
-    <text x="1160" y="2130" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2130" class="normal"></text>
     <line x1="1160" x2="2000" y1="2140" y2="2140" stroke="#000" />
-    <text x="1160" y="2180" class="normal">Дилдак</text>
+    <text x="1160" y="2180" class="normal"></text>
     <line x1="1160" x2="2000" y1="2190" y2="2190" stroke="#000" />
-    <text x="1160" y="2230" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2230" class="normal"></text>
     <line x1="1160" x2="2000" y1="2240" y2="2240" stroke="#000" />
-    <text x="1160" y="2280" class="normal">Дилдак</text>
+    <text x="1160" y="2280" class="normal"></text>
     <line x1="1160" x2="2000" y1="2290" y2="2290" stroke="#000" />
-    <text x="1160" y="2330" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2330" class="normal"></text>
     <line x1="1160" x2="2000" y1="2340" y2="2340" stroke="#000" />
-    <text x="1160" y="2380" class="normal">Дилдак</text>
+    <text x="1160" y="2380" class="normal"></text>
     <line x1="1160" x2="2000" y1="2390" y2="2390" stroke="#000" />
-    <text x="1160" y="2430" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2430" class="normal"></text>
     <line x1="1160" x2="2000" y1="2440" y2="2440" stroke="#000" />
-    <text x="1160" y="2480" class="normal">Дилдак</text>
+    <text x="1160" y="2480" class="normal"></text>
     <line x1="1160" x2="2000" y1="2490" y2="2490" stroke="#000" />
-    <text x="1160" y="2530" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2530" class="normal"></text>
     <line x1="1160" x2="2000" y1="2540" y2="2540" stroke="#000" />
-    <text x="1160" y="2580" class="normal">Дилдак</text>
+    <text x="1160" y="2580" class="normal"></text>
     <line x1="1160" x2="2000" y1="2590" y2="2590" stroke="#000" />
-    <text x="1160" y="2630" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2630" class="normal"></text>
     <line x1="1160" x2="2000" y1="2640" y2="2640" stroke="#000" />
-    <text x="1160" y="2680" class="normal">Дилдак</text>
+    <text x="1160" y="2680" class="normal"></text>
     <line x1="1160" x2="2000" y1="2690" y2="2690" stroke="#000" />
-    <text x="1160" y="2730" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2730" class="normal"></text>
     <line x1="1160" x2="2000" y1="2740" y2="2740" stroke="#000" />
-    <text x="1160" y="2780" class="normal">Дилдак</text>
+    <text x="1160" y="2780" class="normal"></text>
     <line x1="1160" x2="2000" y1="2790" y2="2790" stroke="#000" />
-    <text x="1160" y="2830" class="normal">Прокалятая смазка</text>
+    <text x="1160" y="2830" class="normal"></text>
     <line x1="1160" x2="2000" y1="2840" y2="2840" stroke="#000" />
   </g>
   <text class="central" x="1050" y="2246">Состояние</text>
   <rect width="200" height="120" x="950"  y="2250" fill="none" stroke="#000" />
-  <text id="sWealth" x="1050" y="2310" class="central">6969</text>
+  <text id="sWealth" x="1050" y="2310" class="central"></text>
   <text x="1050" y="2360" class="central">тронов</text>
   <text class="central" x="1050" y="2446">Доход</text>
   <rect width="200" height="120" x="950"  y="2450" fill="none" stroke="#000" />
-  <text id="sIncome" x="1050" y="2510" class="central">6969</text>
+  <text id="sIncome" x="1050" y="2510" class="central"></text>
   <text x="1050" y="2560" class="central">тронов</text>
   <!--endregion-->
 </svg>

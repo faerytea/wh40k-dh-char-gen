@@ -69,63 +69,63 @@
   <!--region Статы-->
   <text class="central" x="1050" y="446">Ближний бой</text>
   <rect width="200" height="120" x="950" y="450" fill="none" stroke="#000" />
-  <text   id="sbSHtHV" class="stat" x="1050" y="546">40</text>
+  <text   id="sbSHtHV" class="stat" x="1050" y="546"></text>
   <circle id="sbSHtHu1" r="15" cx="975"  cy="590" stroke="#000" fill="none" />
   <circle id="sbSHtHu2" r="15" cx="1025" cy="590" stroke="#000" fill="none" />
   <circle id="sbSHtHu3" r="15" cx="1075" cy="590" stroke="#000" fill="none" />
   <circle id="sbSHtHu4" r="15" cx="1125" cy="590" stroke="#000" fill="none" />
   <text class="central" x="1050" y="646">Баллистика</text>
   <rect width="200" height="120" x="950" y="650" fill="none" stroke="#000" />
-  <text   id="sbSRCV" class="stat" x="1050" y="746">40</text>
+  <text   id="sbSRCV" class="stat" x="1050" y="746"></text>
   <circle id="sbSRCu1" r="15" cx="975"  cy="790" stroke="#000" fill="none" />
   <circle id="sbSRCu2" r="15" cx="1025" cy="790" stroke="#000" fill="none" />
   <circle id="sbSRCu3" r="15" cx="1075" cy="790" stroke="#000" fill="none" />
   <circle id="sbSRCu4" r="15" cx="1125" cy="790" stroke="#000" fill="none" />
   <text class="central" x="1050" y="846">Сила</text>
   <rect width="200" height="120" x="950" y="850" fill="none" stroke="#000" />
-  <text   id="sbSStrV" class="stat" x="1050" y="946">40</text>
+  <text   id="sbSStrV" class="stat" x="1050" y="946"></text>
   <circle id="sbSStru1" r="15" cx="975"  cy="990" stroke="#000" fill="none" />
   <circle id="sbSStru2" r="15" cx="1025" cy="990" stroke="#000" fill="none" />
   <circle id="sbSStru3" r="15" cx="1075" cy="990" stroke="#000" fill="none" />
   <circle id="sbSStru4" r="15" cx="1125" cy="990" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1046">Выносливость</text>
   <rect width="200" height="120" x="950"  y="1050" fill="none" stroke="#000" />
-  <text   id="sbSConV" class="stat" x="1050" y="1146">40</text>
+  <text   id="sbSConV" class="stat" x="1050" y="1146"></text>
   <circle id="sbSConu1" r="15" cx="975"  cy="1190" stroke="#000" fill="none" />
   <circle id="sbSConu2" r="15" cx="1025" cy="1190" stroke="#000" fill="none" />
   <circle id="sbSConu3" r="15" cx="1075" cy="1190" stroke="#000" fill="none" />
   <circle id="sbSConu4" r="15" cx="1125" cy="1190" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1246">Ловкость</text>
   <rect width="200" height="120" x="950"  y="1250" fill="none" stroke="#000" />
-  <text   id="sbSDexV" class="stat" x="1050" y="1346">40</text>
+  <text   id="sbSDexV" class="stat" x="1050" y="1346"></text>
   <circle id="sbSDexu1" r="15" cx="975"  cy="1390" stroke="#000" fill="none" />
   <circle id="sbSDexu2" r="15" cx="1025" cy="1390" stroke="#000" fill="none" />
   <circle id="sbSDexu3" r="15" cx="1075" cy="1390" stroke="#000" fill="none" />
   <circle id="sbSDexu4" r="15" cx="1125" cy="1390" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1446">Интеллект</text>
   <rect width="200" height="120" x="950"  y="1450" fill="none" stroke="#000" />
-  <text   id="sbSIntV" class="stat" x="1050" y="1546">40</text>
+  <text   id="sbSIntV" class="stat" x="1050" y="1546"></text>
   <circle id="sbSIntu1" r="15" cx="975"  cy="1590" stroke="#000" fill="none" />
   <circle id="sbSIntu2" r="15" cx="1025" cy="1590" stroke="#000" fill="none" />
   <circle id="sbSIntu3" r="15" cx="1075" cy="1590" stroke="#000" fill="none" />
   <circle id="sbSIntu4" r="15" cx="1125" cy="1590" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1646">Восприятие</text>
   <rect width="200" height="120" x="950"  y="1650" fill="none" stroke="#000" />
-  <text   id="sbSPerV" class="stat" x="1050" y="1746">40</text>
+  <text   id="sbSPerV" class="stat" x="1050" y="1746"></text>
   <circle id="sbSPeru1" r="15" cx="975"  cy="1790" stroke="#000" fill="none" />
   <circle id="sbSPeru2" r="15" cx="1025" cy="1790" stroke="#000" fill="none" />
   <circle id="sbSPeru3" r="15" cx="1075" cy="1790" stroke="#000" fill="none" />
   <circle id="sbSPeru4" r="15" cx="1125" cy="1790" stroke="#000" fill="none" />
   <text class="central" x="1050" y="1846">Сила воли</text>
   <rect width="200" height="120" x="950"  y="1850" fill="none" stroke="#000" />
-  <text   id="sbSWilV" class="stat" x="1050" y="1946">40</text>
+  <text   id="sbSWilV" class="stat" x="1050" y="1946"></text>
   <circle id="sbSWilu1" r="15" cx="975"  cy="1990" stroke="#000" fill="none" />
   <circle id="sbSWilu2" r="15" cx="1025" cy="1990" stroke="#000" fill="none" />
   <circle id="sbSWilu3" r="15" cx="1075" cy="1990" stroke="#000" fill="none" />
   <circle id="sbSWilu4" r="15" cx="1125" cy="1990" stroke="#000" fill="none" />
   <text class="central" x="1050" y="2046">Товарищество</text>
   <rect width="200" height="120" x="950"  y="2050" fill="none" stroke="#000" />
-  <text   id="sbSFelV" class="stat" x="1050" y="2146">40</text>
+  <text   id="sbSFelV" class="stat" x="1050" y="2146"></text>
   <circle id="sbSFelu1" r="15" cx="975"  cy="2190" stroke="#000" fill="none" />
   <circle id="sbSFelu2" r="15" cx="1025" cy="2190" stroke="#000" fill="none" />
   <circle id="sbSFelu3" r="15" cx="1075" cy="2190" stroke="#000" fill="none" />
@@ -141,22 +141,26 @@
   <text x="515" y="546" class="central smol">Обойма</text>
   <text x="930" y="546" class="right smol">Перезарядка</text>
   <!-- Пример чоппы -->
-  <text x="100" y="896" class="normal">Залупа</text>
-  <text x="930" y="896" class="right">Оружие ближнего боя (прим)</text>
-  <text x="100" y="946" class="normal">1к10+Сил</text>
-  <text x="515" y="946" class="central">0</text>
-  <text x="930" y="946" class="right">1м</text>
-  <text x="100" y="996" class="normal">Ненадёжное</text>
+  <g id="sbChopp">
+    <text x="100" y="896" class="normal"></text>
+    <text x="930" y="896" class="right"></text>
+    <text x="100" y="946" class="normal"></text>
+    <text x="515" y="946" class="central"></text>
+    <text x="930" y="946" class="right"></text>
+    <text x="100" y="996" class="normal"></text>
+  </g>
   <!-- Пример шотты -->
-  <text x="100" y="596" class="normal">Конча</text>
-  <text x="930" y="596" class="right">Пистолеты (прим)</text>
-  <text x="100" y="646" class="normal">1к10</text>
-  <text x="515" y="646" class="central">2</text>
-  <text x="930" y="646" class="right">5м</text>
-  <text x="100" y="696" class="normal">О/-/-</text>
-  <text x="515" y="696" class="central">1</text>
-  <text x="930" y="696" class="right">5ПОЛ</text>
-  <text x="100" y="746" class="normal">Ненадёжное, Разброс</text>
+  <g id="sbShot">
+    <text x="100" y="596" class="normal"></text>
+    <text x="930" y="596" class="right"></text>
+    <text x="100" y="646" class="normal"></text>
+    <text x="515" y="646" class="central"></text>
+    <text x="930" y="646" class="right"></text>
+    <text x="100" y="696" class="normal"></text>
+    <text x="515" y="696" class="central"></text>
+    <text x="930" y="696" class="right"></text>
+    <text x="100" y="746" class="normal"></text>
+  </g>
   <g id="sbWeaponLines" stroke="#000">
     <line x1="100" x2="940" y1="600" y2="600" />
     <line x1="100" x2="940" y1="650" y2="650" />
@@ -281,12 +285,12 @@
   <!--endregion-->
   <!--region Жинзь-->
   <text x="800" y="2250" class="normal">Раны</text>
-  <text x="1000" y="2350" id="sbWounds" class="normal big">/ 18</text>
+  <text x="1000" y="2350" class="normal big">/ <tspan id="sbWounds"></tspan></text>
   <line x1="760" x2="1000" y1="2354" y2="2354" stroke="black" />
   <text x="800" y="2400" class="normal">Критический урон</text>
   <line x1="760" x2="1100" y1="2454" y2="2454" stroke="black" />
   <text x="800" y="2500" class="normal">Очки судьбы</text>
-  <text x="1000" y="2600" id="sbFate" class="normal big">/ 3</text>
+  <text x="1000" y="2600" class="normal big">/ <tspan id="sbFate"></tspan></text>
   <line x1="760" x2="1000" y1="2604" y2="2604" stroke="black" />
   <text x="800" y="2650" class="normal">Усталость</text>
   <line x1="760" x2="1100" y1="2700" y2="2700" stroke="black" />
@@ -310,7 +314,7 @@
   <!--endregion-->
   <!--region Безумие-->
   <text x="100" y="137" class="normal">Безумие</text>
-  <text x="500" y="137" class="normal right" id="sbMadness">69</text>
+  <text x="500" y="137" class="normal right" id="sbMadness"></text>
   <text x="100" y="187" class="normal smol">Расстройства</text>
   <text x="1040" y="187" class="right smol">Степень</text>
   <g stroke="#000">
@@ -323,7 +327,7 @@
   <!--endregion-->
   <!--region Порча-->
   <text x="1060" y="137" class="normal">Порча</text>
-  <text x="1440" y="137" class="normal right" id="sbCorrupt">146</text>
+  <text x="1440" y="137" class="normal right" id="sbCorrupt"></text>
   <text x="1060" y="187" class="normal smol">Осквернения</text>
   <g stroke="#000">
     <line x1="1500" x2="2000" y1="145" y2="145" />
