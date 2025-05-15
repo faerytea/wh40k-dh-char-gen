@@ -75,6 +75,12 @@
    id="sCharName" /></text>
   <text
      xml:space="preserve"
+     class="right"
+     x="2000"
+     y="137"
+     id="sBio" />
+  <text
+     xml:space="preserve"
      class="normal"
      x="100"
      y="187">Родной мир: <tspan
