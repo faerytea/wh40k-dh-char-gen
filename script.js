@@ -977,6 +977,11 @@ let skills = function () {
  * Не забудь запятуе в конце!
  */
 let sound_constitution = new Talent('Крепкое телосложение', 'Ты способен пережить больше повреждений, прежде чем умрёшь. Получаешь дополнительную Рану.')
+let ambidexter = new Talent(
+    "Амбидекстрия", 
+    "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
+    new Requirement(new Stats().copy({ dex: 30 })),
+)
 
 let talents = function () {
     let heightened_senses = new Talent(
@@ -1003,11 +1008,6 @@ let talents = function () {
         nothing_more_to_fear: new Talent("Нечего больше бояться"),
 
         // normal
-        ambidexter: new Talent(
-            "Амбидекстрия", 
-            "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
-            new Requirement(new Stats().copy({ dex: 30 })),
-        ),
         catfall: new Talent(
             'Мягкое падение',
             'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
@@ -1034,6 +1034,7 @@ let talents = function () {
 
         // special
         'sound_constitution': sound_constitution,
+        'ambidexter': ambidexter,
     }
 }()
 
@@ -2307,6 +2308,7 @@ function bind() {
                 corrupt: character.corrupt,
                 wounds: character.wounds,
                 fate: character.fate,
+                hand: character.hand,
             }
             Object.keys(vm.stats).forEach(s => {
                 let su = character.statUpgrades[s]
@@ -2329,7 +2331,11 @@ function bind() {
             for (let rt of character.talents) {
                 let t = rt.talent
                 if (t.parent === undefined) {
-                    sts.push(t.name)
+                    let tName = t.name
+                    sts.push(tName)
+                    if (tName == ambidexter.name) {
+                        charData.hand = 'both'
+                    }
                 } else {
                     let tpn = t.parent.name
                     var subs = tgs.get(tpn)

@@ -344,4 +344,8 @@
     <line x1="1540" x2="2000" y1="396" y2="396" />
   </g>
   <!--endregion-->
+  <!--region Рабочие руки-->
+  <text x="200" y="2460" id="sbRightHand" class="central" visibility="hidden">Рабочая</text>
+  <text x="640" y="2460" id="sbLeftHand" class="central" visibility="hidden">Рабочая</text>
+  <!--endregion-->
 </svg>

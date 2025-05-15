@@ -80,6 +80,14 @@ function bindSvg(frontRoot, backRoot) {
         fate: backRoot.getElementById('sbFate'),
         madness: backRoot.getElementById('sbMadness'),
         corrupt: backRoot.getElementById('sbCorrupt'),
+        hands: {
+            left: backRoot.getElementById('sbLeftHand'),
+            right: backRoot.getElementById('sbRightHand'),
+            set: function (h) {
+                this.left.setAttribute('visibility', (h == 'left' || h == 'both') ? 'visible' : 'hidden')
+                this.right.setAttribute('visibility', (h == 'right' || h == 'both') ? 'visible' : 'hidden')
+            },
+        },
         setStat: function(stat, value, upgradeCount = 0) {
             this.stats[stat].innerHTML = value
             this.statsBack[stat].innerHTML = value
@@ -129,6 +137,8 @@ function exportToSvg(bound, charData) {
     bound.corrupt.innerHTML = (charData.corrupt === 0) ? '' : mks(charData.corrupt)
     bound.wounds.innerHTML = mks(charData.wounds)
     bound.fate.innerHTML = mks(charData.fate)
+
+    bound.hands.set(charData.hand)
 
     if (charData.stats !== undefined && charData.statUps !== undefined) {
         for (let s of Object.keys(charData.stats)) {
