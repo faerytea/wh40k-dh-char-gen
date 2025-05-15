@@ -84,7 +84,7 @@ function bindSvg(frontRoot, backRoot) {
             this.stats[stat].innerHTML = value
             this.statsBack[stat].innerHTML = value
             for (let i = 0; i < 4; ++i) {
-                let c = i < upgradeCount ? '#000' : 'none'
+                let c = i < upgradeCount ? '#666' : 'none'
                 this.statUpgrades[stat][i].setAttribute('fill', c)
                 this.statUpgradesBack[stat][i].setAttribute('fill', c)
             }
@@ -96,7 +96,7 @@ function fillSkill(onLine, name, level = 0) {
     let sl = onLine
     sl.name.innerHTML = name
     for (let l = 0; l < 3; ++l) {
-        sl.levels[l].setAttribute('fill', l < level ? '#000' : 'none')
+        sl.levels[l].setAttribute('fill', l < level ? '#666' : 'none')
     }
 }
 
