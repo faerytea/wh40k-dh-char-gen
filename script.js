@@ -2287,7 +2287,6 @@ function bind() {
     }
     document.getElementById('exportButton').onclick = function () {
         let handle = window.open('preview.html', '_blank')
-        console.log(handle)
         if (handle != null) {
             let cns = character.constitution[character.sex]
             let col = character.appearence
@@ -2331,11 +2330,16 @@ function bind() {
             charData.advancedSkills.sort((a, b) => a.name.localeCompare(b.name))
             let tgs = new Map()
             let sts = []
+            var soundConstCount = 0
             for (let rt of character.talents) {
                 let t = rt.talent
                 if (t.parent === undefined) {
                     let tName = t.name
-                    sts.push(tName)
+                    if (tName == sound_constitution.name) {
+                        ++soundConstCount
+                    } else {
+                        sts.push(tName)
+                    }
                     if (tName == ambidexter.name) {
                         charData.hand = 'both'
                     }
@@ -2349,14 +2353,15 @@ function bind() {
                     subs.push(t.specName)
                 }
             }
-            console.log(tgs)
+            if (soundConstCount > 0) {
+                sts.push(sound_constitution.name + ' (' + soundConstCount + ')')
+            }
             if (character.specialTrait !== undefined) {
                 charData.talents.push(character.specialTrait)
             }
             charData.talents.push(...(Array.from(tgs.keys()).sort().map((tg) => tg + ' (' + tgs.get(tg).sort().join(', ') + ')').sort()))
             charData.talents.push(...(sts.sort()))
             let cd = JSON.stringify(charData, null, 2)
-            console.log(cd)
             handle.addEventListener('load', () => {
                 setTimeout(() => handle.postMessage(cd), 1000)
             })
