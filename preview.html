@@ -8,15 +8,31 @@
         <script src="export.js"></script>
         <script>
             var svg;
-            window.onload = function () {
+            window.addEventListener('load', function () {
+                let cd = document.getElementById('charDataP')
+                window.addEventListener('message', e => {
+                    cd.value = e.data
+                    console.log(e.data)
+                }, false)
                 Promise.all([fetch(new Request('heresy.svg')), fetch(new Request('heresyBack.svg'))].map(x => x.then(z => z.text())))
                     .then(([front, back]) => {
-                        document.body.innerHTML = front + back
-                        let f = document.body.children[0]
-                        let b = document.body.children[1]
+                        let r = document.getElementById('svgRoot')
+                        r.innerHTML = front + back
+                        let f = r.children[0]
+                        let b = r.children[1]
                         svg = bindSvg(f, b)
                     })
-            }
+                document.getElementById('refresh').onclick = function () {
+                    try {
+                        let charData = JSON.parse(cd.value)
+                        if (svg !== undefined) {
+                            exportToSvg(svg, charData)
+                        }
+                    } catch (err) {
+                        alert('Bad data!\n' + err)
+                    }
+                }
+            })
         </script>
         <style>
             body {
@@ -26,7 +42,31 @@
             svg {
                 display: block;
             }
+            #charDataP {
+                font-family: monospace;
+                font-size: 14px;
+            }
+            body *:not(#svgRoot, #svgRoot *) {
+                display: none;
+            }
+            .but {
+                padding: 8px;
+                width: fit-content;
+                background-color: #888;
+                border-radius: 4px;
+            }
+            @media only screen {
+                body *:not(#svgRoot, #svgRoot *) {
+                    display: block;
+                    margin: 8px;
+                }
+            }
         </style>
     </head>
-    <body></body>
+    <body>
+        <p>Данные персонажа:</p>
+        <textarea id="charDataP" value="{}"></textarea>
+        <span id="refresh" class="but">Обновить</span>
+        <div id="svgRoot"></div>
+    </body>
 </html>

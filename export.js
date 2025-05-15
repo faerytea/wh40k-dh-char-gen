@@ -19,7 +19,7 @@ function bindSvg(frontRoot, backRoot) {
             str: frontRoot.getElementById('sSStrV'),
             con: frontRoot.getElementById('sSConV'),
             dex: frontRoot.getElementById('sSDexV'),
-            int: frontRoot.getElementById('sSStrV'),
+            int: frontRoot.getElementById('sSIntV'),
             per: frontRoot.getElementById('sSPerV'),
             wil: frontRoot.getElementById('sSWilV'),
             cha: frontRoot.getElementById('sSFelV'),
@@ -30,7 +30,7 @@ function bindSvg(frontRoot, backRoot) {
             str: [1,2,3,4].map(x => frontRoot.getElementById('sSStru' + x)),
             con: [1,2,3,4].map(x => frontRoot.getElementById('sSConu' + x)),
             dex: [1,2,3,4].map(x => frontRoot.getElementById('sSDexu' + x)),
-            int: [1,2,3,4].map(x => frontRoot.getElementById('sSStru' + x)),
+            int: [1,2,3,4].map(x => frontRoot.getElementById('sSIntu' + x)),
             per: [1,2,3,4].map(x => frontRoot.getElementById('sSPeru' + x)),
             wil: [1,2,3,4].map(x => frontRoot.getElementById('sSWilu' + x)),
             cha: [1,2,3,4].map(x => frontRoot.getElementById('sSFelu' + x)),
@@ -60,7 +60,7 @@ function bindSvg(frontRoot, backRoot) {
             str: backRoot.getElementById('sbSStrV'),
             con: backRoot.getElementById('sbSConV'),
             dex: backRoot.getElementById('sbSDexV'),
-            int: backRoot.getElementById('sbSStrV'),
+            int: backRoot.getElementById('sbSIntV'),
             per: backRoot.getElementById('sbSPerV'),
             wil: backRoot.getElementById('sbSWilV'),
             cha: backRoot.getElementById('sbSFelV'),
@@ -71,7 +71,7 @@ function bindSvg(frontRoot, backRoot) {
             str: [1,2,3,4].map(x => backRoot.getElementById('sbSStru' + x)),
             con: [1,2,3,4].map(x => backRoot.getElementById('sbSConu' + x)),
             dex: [1,2,3,4].map(x => backRoot.getElementById('sbSDexu' + x)),
-            int: [1,2,3,4].map(x => backRoot.getElementById('sbSStru' + x)),
+            int: [1,2,3,4].map(x => backRoot.getElementById('sbSIntu' + x)),
             per: [1,2,3,4].map(x => backRoot.getElementById('sbSPeru' + x)),
             wil: [1,2,3,4].map(x => backRoot.getElementById('sbSWilu' + x)),
             cha: [1,2,3,4].map(x => backRoot.getElementById('sbSFelu' + x)),
@@ -92,6 +92,74 @@ function bindSvg(frontRoot, backRoot) {
     }
 }
 
-function exportToSvg(bound, charData) {
+function fillSkill(onLine, name, level = 0) {
+    let sl = onLine
+    sl.name.innerHTML = name
+    for (let l = 0; l < 3; ++l) {
+        sl.levels[l].setAttribute('fill', l < level ? '#000' : 'none')
+    }
+}
 
+function fillSkillColumn(lines, skills) {
+    for (let i = 0; i < skills.length; ++i) {
+        fillSkill(lines[i], skills[i].name, skills[i].level)
+    }
+}
+
+function exportToSvg(bound, charData) {
+    let mks = s => s === undefined ? '' : String(s)
+    bound.name.innerHTML = mks(charData.name)
+    bound.origin.innerHTML = mks(charData.origin)
+    bound.prof.innerHTML = mks(charData.prof)
+    bound.sex.innerHTML = (charData.sex == 'male') ? 'Муж' : (charData.sex == 'female') ? 'Жен' : ''
+    bound.constitution.innerHTML = mks(charData.constitution)
+    bound.height.innerHTML = mks(charData.height)
+    bound.weight.innerHTML = mks(charData.weight)
+    bound.hair.innerHTML = mks(charData.hair)
+    bound.skin.innerHTML = mks(charData.skin)
+    bound.eyes.innerHTML = mks(charData.eyes)
+    bound.age.innerHTML = mks(charData.age)
+    bound.marks.innerHTML = mks(charData.marks)
+    bound.divination.innerHTML = mks(charData.divination)
+
+    bound.madness.innerHTML = mks(charData.madness)
+    bound.corrupt.innerHTML = mks(charData.corrupt)
+    bound.wounds.innerHTML = mks(charData.wounds)
+    bound.fate.innerHTML = mks(charData.fate)
+
+    if (charData.stats !== undefined && charData.statUps !== undefined) {
+        for (let s of Object.keys(charData.stats)) {
+            let sv = charData.stats[s]
+            let su = charData.statUps[s]
+            bound.setStat(s, sv, su)
+        }
+    }
+
+    if (charData.baseSkills !== undefined) {
+        fillSkillColumn(bound.baseSkills, charData.baseSkills)
+    }
+    if (charData.advancedSkills !== undefined) {
+        fillSkillColumn(bound.advancedSkills, charData.advancedSkills)
+    }
+    var tli = 0
+    let revTalents = charData.talents.toReversed()
+    let maxW = bound.talents[0].parentElement.getClientRects()[0].width
+    console.log('maxW: ' + maxW)
+    while (revTalents.length > 0) {
+        let t = revTalents.pop()
+        let tl = bound.talents[tli]
+        tl.innerHTML = t
+        console.log(tli + ': ' + tl.getClientRects()[0].width)
+        if (tl.getClientRects()[0].width > maxW) {
+            var unfeed = ''
+            do {
+                let txt = tl.innerHTML
+                let splitPoint = txt.lastIndexOf(' ')
+                unfeed = txt.substring(splitPoint + 1) + ' ' + unfeed
+                tl.innerHTML = txt.substring(0, splitPoint)
+            } while (tl.getClientRects()[0].width > maxW)
+            revTalents.push(unfeed.trimEnd())
+        }
+        ++tli
+    }
 }

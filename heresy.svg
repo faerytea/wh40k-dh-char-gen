@@ -106,13 +106,13 @@
   <text
      xml:space="preserve"
      class="normal"
-     x="1100"
+     x="1000"
      y="237">Рост: <tspan
    id="sHeight" /></text>
   <text
      xml:space="preserve"
      class="normal"
-     x="1600"
+     x="1500"
      y="237">Вес: <tspan
    id="sWeight" /></text>
   <text
@@ -130,13 +130,13 @@
   <text
      xml:space="preserve"
      class="normal"
-     x="1100"
+     x="1000"
      y="287">Глаза: <tspan
    id="sEyes" /></text>
   <text
      xml:space="preserve"
      class="normal"
-     x="1600"
+     x="1500"
      y="287">Возраст: <tspan
    id="sAge" /></text>
   <text
@@ -179,16 +179,16 @@
        y2="246" />
     <line
        x1="655"
-       x2="1095"
+       x2="995"
        y1="246"
        y2="246" />
     <line
-       x1="1185"
-       x2="1595"
+       x1="1085"
+       x2="1495"
        y1="246"
        y2="246" />
     <line
-       x1="1670"
+       x1="1570"
        x2="2000"
        y1="246"
        y2="246" />
@@ -200,16 +200,16 @@
        y2="296" />
     <line
        x1="625"
-       x2="1095"
+       x2="995"
        y1="296"
        y2="296" />
     <line
-       x1="1185"
-       x2="1595"
+       x1="1085"
+       x2="1495"
        y1="296"
        y2="296" />
     <line
-       x1="1740"
+       x1="1640"
        x2="2000"
        y1="296"
        y2="296" />

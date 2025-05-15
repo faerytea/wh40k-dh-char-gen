@@ -114,11 +114,14 @@ function Talent(
 }
 
 function subTalent(talent, specName, specDescr, specReq) {
-    return new Talent(
+    let res = new Talent(
         talent.name + ' (' + specName + ')',
         talent.description.replaceAll('$$', specDescr),
         specReq === undefined ? talent.specReq : specReq,
     )
+    res.parent = talent
+    res.specName = specName
+    return res
 }
 
 let sud = {
@@ -980,6 +983,18 @@ let talents = function () {
         'Обострённые чувства',
         'У тебя $$ значительно лучше среднего. Теперь ты будешь получать бонус +10 к любому Тесту, включающему $$.',
     )
+    let weapon_hand = new Talent(
+        'Пистолеты',
+        'Ты прошел курс подготовки в обращении с $$пистолетами и теперь можешь пользоваться ими без штрафов.',
+    )
+    let weapon_main = new Talent(
+        'Основное оружие',
+        'Ты прошел курс подготовки в обращении с оружием ($$) и теперь можешь пользоваться ими без штрафов.',
+    )
+    let weapon_melee = new Talent(
+        'Рукопашное оружие',
+        'Ты прошел курс подготовки в обращении с рукопашным оружием ($$) и теперь можешь пользоваться ими без штрафов.',
+    )
     return {
         // wild world talents
         iron_guts: new Talent("Железное нутро"),
@@ -1009,13 +1024,13 @@ let talents = function () {
 
         // weapon
         weapon_throw: new Talent("Метательное оружие"),
-        weapon_cqc_prim: new Talent("Оружие ближнего боя (прим)"),
-        weapon_hand_prim: new Talent("Пистолеты (прим)"),
-        weapon_hand_laz: new Talent("Пистолеты (лаз)"),
-        weapon_hand_stub: new Talent("Пистолеты (стаб)"),
-        weapon_main_prim: new Talent("Основное оружие (прим)"),
-        weapon_main_laz: new Talent("Основное оружие (лаз)"),
-        weapon_main_stub: new Talent("Основное оружие (стаб)"),
+        weapon_cqc_prim: subTalent(weapon_melee, 'прим'),
+        weapon_hand_prim: subTalent(weapon_hand, 'прим'),
+        weapon_hand_laz: subTalent(weapon_hand, 'лаз'),
+        weapon_hand_stub: subTalent(weapon_hand, 'стаб'),
+        weapon_main_prim: subTalent(weapon_main, 'прим'),
+        weapon_main_laz: subTalent(weapon_main, 'лаз'),
+        weapon_main_stub: subTalent(weapon_main, 'стаб'),
 
         // special
         'sound_constitution': sound_constitution,
@@ -2264,6 +2279,78 @@ function bind() {
             let newProf = rollOption(character.origin.profs)
             vm.professions.value = newProf.name
             vm.professions.onchange()
+        }
+    }
+    document.getElementById('exportButton').onclick = function () {
+        let handle = window.open('preview.html', '_blank')
+        console.log(handle)
+        if (handle != null) {
+            let cns = character.constitution[character.sex]
+            let col = character.appearence
+            let charData = {
+                stats: new Stats(), // see below
+                statUps: new Stats(), // see below
+                name: character.names.join(' '),
+                origin: character.origin.name,
+                prof: character.prof.name,
+                sex: character.sex,
+                constitution: cns.description,
+                height: cns.height,
+                weight: cns.weight,
+                ...col,
+                age: character.age.n + ' (' + character.age.d + ')',
+                marks: character.marks.map(s => s.toLocaleLowerCase()).join(', '),
+                baseSkills: [], // see below
+                advancedSkills: [], // see below
+                talents: [], // see below
+                madness: character.madness,
+                corrupt: character.corrupt,
+                wounds: character.wounds,
+                fate: character.fate,
+            }
+            Object.keys(vm.stats).forEach(s => {
+                let su = character.statUpgrades[s]
+                let statValue = character.rolledStats[s] + character.origin.stats[s] + su
+                charData.stats[s] = statValue
+                charData.statUps[s] = su / 5
+            })
+            for (let sl of character.skills.values()) {
+                let s = sl[sl.length - 1]
+                if (s.level == 0 || baseSkills.includes(s.skill)) {
+                    charData.baseSkills.push({ name: s.skill.name, level: s.level })
+                } else {
+                    charData.advancedSkills.push({ name: s.skill.name, level: s.level })
+                }
+            }
+            charData.baseSkills.sort((a, b) => a.name.localeCompare(b.name))
+            charData.advancedSkills.sort((a, b) => a.name.localeCompare(b.name))
+            let tgs = new Map()
+            let sts = []
+            for (let rt of character.talents) {
+                let t = rt.talent
+                if (t.parent === undefined) {
+                    sts.push(t.name)
+                } else {
+                    let tpn = t.parent.name
+                    var subs = tgs.get(tpn)
+                    if (subs === undefined) {
+                        subs = []
+                        tgs.set(tpn, subs)
+                    }
+                    subs.push(t.specName)
+                }
+            }
+            console.log(tgs)
+            if (character.specialTrait !== undefined) {
+                charData.talents.push(character.specialTrait)
+            }
+            charData.talents.push(...(Array.from(tgs.keys()).sort().map((tg) => tg + ' (' + tgs.get(tg).sort().join(', ') + ')').sort()))
+            charData.talents.push(...(sts.sort()))
+            let cd = JSON.stringify(charData, null, 2)
+            console.log(cd)
+            handle.addEventListener('load', () => {
+                setTimeout(() => handle.postMessage(cd), 1000)
+            })
         }
     }
 }

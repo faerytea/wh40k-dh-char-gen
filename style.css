@@ -18,7 +18,7 @@ header > .base {
     align-items: center;
 }
 
-.container {
+#container {
     display: flex;
     padding: 20px;
     gap: 20px;
@@ -163,9 +163,24 @@ tr.picked {
     font-weight: bold;
 }
 
+#container.off,
+.off {
+    display: none;
+}
+
+.but {
+    padding: 16px;
+    margin: 8px;
+    border-radius: 4px;
+    border-color: black;
+    border: 1px;
+    background-color: #8888;
+    width: fit-content;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
-    .container {
+    #container {
         flex-direction: row;
         align-items: flex-start;
     }
