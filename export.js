@@ -120,6 +120,7 @@ function fillSkillColumn(lines, skills) {
 function exportToSvg(bound, charData) {
     let mks = s => s === undefined ? '' : String(s)
     bound.name.innerHTML = mks(charData.name)
+    bound.bio.innerHTML = mks(charData.bio)
     bound.origin.innerHTML = mks(charData.origin)
     bound.prof.innerHTML = mks(charData.prof)
     bound.sex.innerHTML = (charData.sex == 'male') ? 'Муж' : (charData.sex == 'female') ? 'Жен' : ''

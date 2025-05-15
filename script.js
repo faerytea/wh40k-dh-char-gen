@@ -2407,6 +2407,7 @@ function bind() {
                 stats: new Stats(), // see below
                 statUps: new Stats(), // see below
                 name: character.names.join(' '),
+                bio: character?.bio?.name,
                 origin: character.origin.name,
                 prof: character.prof.name,
                 sex: character.sex,
