@@ -1970,10 +1970,12 @@ function randomCharacter(origin, prof) {
     rolls.constitution()
     rolls.age()
     rolls.special()
+    character.marks = []
     let markCnt = Math.max(d5(), d5())
     for (let i = 0; i < markCnt; ++i) {
         rolls.newMark()
     }
+    character.names = []
     let nameCount = d5()
     for (let i = 0; i < nameCount; ++i) {
         rolls.newName()
@@ -2274,6 +2276,7 @@ function bind() {
     vm.upgrades = document.getElementById('upgrades')
     document.getElementById('fullRoll').onclick = function () {
         randomCharacter(character.origin, character.prof)
+        render()
     }
     document.getElementById('profRoll').onclick = function () {
         if (character.origin !== undefined) {
