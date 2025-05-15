@@ -189,12 +189,14 @@ function Prof(
     skills = [],
     talents = [],
     ranks = [],
+    backgrounds = [],
 ) {
     this.name = name
     this.statUpgrades = statUpgrades
     this.skills = skills
     this.talents = talents
     this.ranks = ranks
+    this.backgrounds = backgrounds
 }
 
 function Origin(
@@ -326,6 +328,26 @@ function mkMarks(
         new RollableOption(g, 89, 95),
         new RollableOption(h, 96, 100),
     ]
+}
+
+function Background(
+    name,
+    cost,
+    specialNote,
+    allowedOrigin,
+    skills = [],
+    talents = [],
+    statMod = new Stats(),
+    secondaryMod = new SecondaryMods(),
+) {
+    this.name = name
+    this.cost = cost
+    this.specialNote = specialNote
+    this.allowedOrigin = allowedOrigin
+    this.skills = skills
+    this.talents = talents
+    this.statMod = statMod
+    this.secondaryMod = secondaryMod
 }
 
 let statNames = {
@@ -866,6 +888,11 @@ let skills = function () {
         'int',
         'Это умение отражает твою способность делать выводы и заключения, а также решать математические задачи.'
     )
+    let security = new Skill(
+        'Безопасность',
+        'dex',
+        'При помощи этого умения можно обходить замки и прочие системы безопасности.',
+    )
     let scrutiny = new Skill(
         'Проницательность',
         'per',
@@ -909,6 +936,7 @@ let skills = function () {
         'Набор воспоминаний о привычках, структуре, традициях, знаменитых деятелях и суевериях, относящихся к отдельным мирам, культурным группам и организациям.',
     )
     let lore_common_imperium = subSkill(lore_common, 'Империум')
+    let lore_common_crime = subSkill(lore_common, 'Преступность')
     let lore_common_dusk = subSkill(lore_common, 'Фольклор Даска')
 
     let lore_forbidden_demonology = new Skill("Запретное знание (демонология)", 'int')
@@ -939,6 +967,7 @@ let skills = function () {
         'intimidate': intimidate,
         'literacy': literacy,
         'logic': logic,
+        'security': security,
         'scrutiny': scrutiny,
         'search': search,
         'silent_move': silent_move,
@@ -958,6 +987,7 @@ let skills = function () {
         'lore_scholastic_occult': lore_scholastic_occult,
         'lore_common_dusk': lore_common_dusk,
         'lore_common_imperium': lore_common_imperium,
+        'lore_common_crime': lore_common_crime,
     }
 }()
 
@@ -1357,6 +1387,29 @@ let rollableOrigins = [
     new RollableOption(origins.wild, 1, 15), // 00-15: Дикий мир
 ]
 
+/**
+ * Добавление предысторий к профессиям
+ */
+;(function () {
+    let anyOrigin = new Set(Object.keys(origins).map(o => origins[o]))
+    profs.killer.backgrounds = [
+        new Background(
+            "Сыны Диспатера",
+            100,
+            'Любой из Сынов Диспатера, нарушивший контракт – даже во благо Инквизиции – и давший информации об этом утечь, получает чёрную метку, обладатель которой становится желанной добычей для каждого из его бывших коллег.',
+            anyOrigin,
+            [
+                [], // Нет базовых умений
+                [   // +0
+                    skills.lore_common_crime,
+                    skills.intimidate,
+                    skills.security,
+                ],
+            ],
+        )
+    ]
+})()
+
 // endregion
 
 // region machinery
@@ -1437,8 +1490,9 @@ let vm = {}
 function render() {
     let finalStats = new Stats()
     if (character.rolledStats !== undefined && character.origin != undefined) {
+        let bioSM = character.bio === undefined ? new Stats() : character.bio.statMod
         Object.keys(vm.stats).forEach(s => {
-            let statValue = character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s]
+            let statValue = character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s] + bioSM[s]
             finalStats[s] = statValue
             vm.stats[s].innerText = String(statValue)
         })
@@ -1673,6 +1727,12 @@ function render() {
             }
         }
     }
+    if (character.bio !== undefined) {
+        vm.bioNote.innerText = character.bio.specialNote
+        usedExp += character.bio.cost
+    } else {
+        vm.bioNote.innerText = ''
+    }
     vm.usedExpSpan.innerText = String(usedExp)
     delayed.innerHTML = ''
     function renderDelayed(del, norm, add) {
@@ -1825,11 +1885,15 @@ function buildCharacter() {
     character.skills = res
 }
 
+function combine() {
+    return (x) => Array.from(arguments).filter(f => typeof f === 'function').reduce((acc, f) => f(acc), x)
+}
+
 let rolls = {
     wound: function () {
         if (character.origin !== undefined) {
             let w = character.origin.baseWounds
-            character.wounds = character.origin.secondaryMods.wounds(w + d5())
+            character.wounds = combine(character.origin?.secondaryMods?.wounds, character.bio?.secondaryMods?.wounds)(w + d5())
         } else {
             character.wounds = 0
         }
@@ -1837,24 +1901,16 @@ let rolls = {
     fate: function () {
         if (character.origin !== undefined) {
             let f = rollOption(character.origin.fateChances, d10)
-            character.fate = character.origin.secondaryMods.fate(f)
+            character.fate = combine(character.origin?.secondaryMods?.fate, character.bio?.secondaryMods?.fate)(f)
         } else {
             character.fate = 0
         }
     },
-    corrupt: function () {
-        if (character.origin !== undefined) {
-            character.corrupt = character.origin.secondaryMods.corrupt(0)
-        } else {
-            character.corrupt = 0
-        }
+    corrupt: function () { // todo character.bio.secondaryMods
+        character.corrupt = combine(character.origin?.secondaryMods?.corrupt, character.bio?.secondaryMods?.corrupt)(0)
     },
     madness: function () {
-        if (character.origin !== undefined) {
-            character.madness = character.origin.secondaryMods.madness(0)
-        } else {
-            character.madness = 0
-        }
+        character.madness = combine(character.origin?.secondaryMods?.madness, character.bio?.secondaryMods?.madness)(0)
     },
     sex: function () {
         let r = d10()
@@ -2129,6 +2185,20 @@ function bind() {
             character.prof = character.origin.profs.find(x => x.id.name == vm.professions.value).id
             console.log('found prof: ' + character.prof.name)
             if (oldProf === undefined || (character.prof !== undefined && oldProf.name != character.prof.name)) {
+                vm.bioSelect.innerHTML = ''
+                let noBio = document.createElement('option')
+                noBio.value = 'none'
+                noBio.text = '-= НЕТ =-'
+                vm.bioSelect.append(noBio)
+                vm.bioSelect.value = 'none'
+                for (let b of character.prof.backgrounds) {
+                    if (b.allowedOrigin.values().find(ao => character.origin.name.substring(0, ao.name.length) == ao.name) === undefined) continue
+                    let bo = document.createElement('option')
+                    bo.value = b.name
+                    bo.text = b.name
+                    vm.bioSelect.append(bo)
+                }
+                vm.bioSelect.onchange()
                 character.skills = new Map()
                 character.talents = []
                 buildCharacter()
@@ -2202,6 +2272,8 @@ function bind() {
                 }
             } else if (o.from == 'base') {
                 sOrigin.innerText = 'Базовый'
+            } else if (o.from == 'bio') {
+                sOrigin.innerText = 'Прошлое'
             }
             row.append(sName, s00, s10, s20, sOrigin)
             skillBox.append(row)
@@ -2249,6 +2321,8 @@ function bind() {
                     character.talents.splice(character.talents.findIndex(x => x.talent.name == r.talent.name), 1)
                     render()
                 }
+            } else if (o.from == 'bio') {
+                sOrigin.innerText = 'Прошлое'
             }
             row.append(sName, sOrigin)
             vm.talents.append(row)
@@ -2267,6 +2341,45 @@ function bind() {
             vm.professions.onchange()
         }
     }
+    vm.bioSelect = document.getElementById('bio')
+    vm.bioSelect.onchange = function () {
+        if (character.prof !== undefined) {
+            let b = character.prof.backgrounds.find(b => b.name == vm.bioSelect.value)
+            for (let sl of character.skills.values()) {
+                for (let i = 0; i < sl.length; ++i) {
+                    while (sl[i].skillOrigin.from == 'bio') {
+                        sl.splice(i, 1)
+                        if (i >= sl.length) break
+                    }
+                }
+            }
+            for (let i = 0; i < character.talents.length; ++i) {
+                while (character.talents[i].talentOrigin.from == 'bio') {
+                    character.talents.splice(i, 1)
+                    if (i >= character.talents.length) break
+                }
+            }
+            if (b !== undefined) {
+                for (let lvl = 0; lvl < b.skills.length; ++lvl) {
+                    for (let s of b.skills[lvl]) {
+                        var sl = character.skills.get(s.name)
+                        if (sl === undefined) {
+                            sl = []
+                            character.skills.set(s.name, sl)
+                        }
+                        sl.push(new RenderedSkill(s, lvl, { from: 'bio' }))
+                        sl.sort(rsCompare)
+                    }
+                }
+                for (let t of b.talents) {
+                    character.talents.push(new RenderedTalent(t, { from: 'bio' }))
+                }
+            }
+            character.bio = b
+            render()
+        }
+    }
+    vm.bioNote = document.getElementById('bioNote')
 }
 
 function init() {
