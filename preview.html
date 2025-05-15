@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@1..1000&display=swap" rel="stylesheet">
+        <script src="export.js"></script>
+        <script>
+            var svg;
+            window.addEventListener('load', function () {
+                let cd = document.getElementById('charDataP')
+                let refreshF = function () {
+                    try {
+                        let charData = JSON.parse(cd.value)
+                        if (svg !== undefined) {
+                            exportToSvg(svg, charData)
+                        }
+                    } catch (err) {
+                        alert('Bad data!\n' + err)
+                    }
+                }
+                document.getElementById('refresh').onclick = refreshF
+                window.addEventListener('message', e => {
+                    cd.value = e.data
+                    refreshF()
+                }, false)
+                Promise.all([fetch(new Request('heresy.svg')), fetch(new Request('heresyBack.svg'))].map(x => x.then(z => z.text())))
+                    .then(([front, back]) => {
+                        let r = document.getElementById('svgRoot')
+                        r.innerHTML = front + back
+                        let f = r.children[0]
+                        let b = r.children[1]
+                        svg = bindSvg(f, b)
+                    })
+            })
+        </script>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            svg {
+                display: block;
+            }
+            #charDataP {
+                font-family: monospace;
+                font-size: 14px;
+            }
+            body *:not(#svgRoot, #svgRoot *) {
+                display: none;
+            }
+            .but {
+                padding: 8px;
+                width: fit-content;
+                background-color: #888;
+                border-radius: 4px;
+            }
+            @media only screen {
+                body *:not(#svgRoot, #svgRoot *) {
+                    display: block;
+                    margin: 8px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <p>Данные персонажа:</p>
+        <textarea id="charDataP" value="{}"></textarea>
+        <span id="refresh" class="but">Обновить</span>
+        <div id="svgRoot"></div>
+    </body>
+</html>

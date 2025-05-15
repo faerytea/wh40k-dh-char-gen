@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sofia+Sans+Extra+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style.css" type="text/css" rel="stylesheet" />
   <script src="script.js"></script>
@@ -101,7 +104,10 @@
     </div>
   </header>
 
-  <div class="container">
+  <div id="overlay">
+    <p>Загрузка…</p>
+  </div>
+  <div id="container">
     <div class="column1" id="stats">
       <img id="fullStatRoll" src="d10.svg" class="roll24" width="24px" height="24px" />
       <div class="stat-hdr">ББ</div>
@@ -175,6 +181,7 @@
 
   <footer>
     Bottom text
+    <div id="exportButton" class="but">Экспорт</div>
     <p id="rollLog"></p>
   </footer>
 

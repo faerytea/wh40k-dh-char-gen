@@ -114,11 +114,14 @@ function Talent(
 }
 
 function subTalent(talent, specName, specDescr, specReq) {
-    return new Talent(
+    let res = new Talent(
         talent.name + ' (' + specName + ')',
         talent.description.replaceAll('$$', specDescr),
         specReq === undefined ? talent.specReq : specReq,
     )
+    res.parent = talent
+    res.specName = specName
+    return res
 }
 
 let sud = {
@@ -1004,11 +1007,28 @@ let skills = function () {
  * Не забудь запятуе в конце!
  */
 let sound_constitution = new Talent('Крепкое телосложение', 'Ты способен пережить больше повреждений, прежде чем умрёшь. Получаешь дополнительную Рану.')
+let ambidexter = new Talent(
+    "Амбидекстрия", 
+    "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
+    new Requirement(new Stats().copy({ dex: 30 })),
+)
 
 let talents = function () {
     let heightened_senses = new Talent(
         'Обострённые чувства',
         'У тебя $$ значительно лучше среднего. Теперь ты будешь получать бонус +10 к любому Тесту, включающему $$.',
+    )
+    let weapon_hand = new Talent(
+        'Пистолеты',
+        'Ты прошел курс подготовки в обращении с $$пистолетами и теперь можешь пользоваться ими без штрафов.',
+    )
+    let weapon_main = new Talent(
+        'Основное оружие',
+        'Ты прошел курс подготовки в обращении с оружием ($$) и теперь можешь пользоваться ими без штрафов.',
+    )
+    let weapon_melee = new Talent(
+        'Рукопашное оружие',
+        'Ты прошел курс подготовки в обращении с рукопашным оружием ($$) и теперь можешь пользоваться ими без штрафов.',
     )
     return {
         // wild world talents
@@ -1018,11 +1038,6 @@ let talents = function () {
         nothing_more_to_fear: new Talent("Нечего больше бояться"),
 
         // normal
-        ambidexter: new Talent(
-            "Амбидекстрия", 
-            "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
-            new Requirement(new Stats().copy({ dex: 30 })),
-        ),
         catfall: new Talent(
             'Мягкое падение',
             'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
@@ -1039,16 +1054,17 @@ let talents = function () {
 
         // weapon
         weapon_throw: new Talent("Метательное оружие"),
-        weapon_cqc_prim: new Talent("Оружие ближнего боя (прим)"),
-        weapon_hand_prim: new Talent("Пистолеты (прим)"),
-        weapon_hand_laz: new Talent("Пистолеты (лаз)"),
-        weapon_hand_stub: new Talent("Пистолеты (стаб)"),
-        weapon_main_prim: new Talent("Основное оружие (прим)"),
-        weapon_main_laz: new Talent("Основное оружие (лаз)"),
-        weapon_main_stub: new Talent("Основное оружие (стаб)"),
+        weapon_cqc_prim: subTalent(weapon_melee, 'прим'),
+        weapon_hand_prim: subTalent(weapon_hand, 'прим'),
+        weapon_hand_laz: subTalent(weapon_hand, 'лаз'),
+        weapon_hand_stub: subTalent(weapon_hand, 'стаб'),
+        weapon_main_prim: subTalent(weapon_main, 'прим'),
+        weapon_main_laz: subTalent(weapon_main, 'лаз'),
+        weapon_main_stub: subTalent(weapon_main, 'стаб'),
 
         // special
         'sound_constitution': sound_constitution,
+        'ambidexter': ambidexter,
     }
 }()
 
@@ -2010,10 +2026,12 @@ function randomCharacter(origin, prof) {
     rolls.constitution()
     rolls.age()
     rolls.special()
+    character.marks = []
     let markCnt = Math.max(d5(), d5())
     for (let i = 0; i < markCnt; ++i) {
         rolls.newMark()
     }
+    character.names = []
     let nameCount = d5()
     for (let i = 0; i < nameCount; ++i) {
         rolls.newName()
@@ -2380,12 +2398,95 @@ function bind() {
         }
     }
     vm.bioNote = document.getElementById('bioNote')
+    document.getElementById('exportButton').onclick = function () {
+        let handle = window.open('preview.html', '_blank')
+        if (handle != null) {
+            let cns = character.constitution[character.sex]
+            let col = character.appearence
+            let charData = {
+                stats: new Stats(), // see below
+                statUps: new Stats(), // see below
+                name: character.names.join(' '),
+                origin: character.origin.name,
+                prof: character.prof.name,
+                sex: character.sex,
+                constitution: cns.description,
+                height: cns.height,
+                weight: cns.weight,
+                ...col,
+                age: character.age.n + ' (' + character.age.d + ')',
+                marks: character.marks.map(s => s.toLocaleLowerCase()).join(', '),
+                baseSkills: [], // see below
+                advancedSkills: [], // see below
+                talents: [], // see below
+                madness: character.madness,
+                corrupt: character.corrupt,
+                wounds: character.wounds,
+                fate: character.fate,
+                hand: character.hand,
+            }
+            Object.keys(vm.stats).forEach(s => {
+                let su = character.statUpgrades[s]
+                let statValue = character.rolledStats[s] + character.origin.stats[s] + su
+                charData.stats[s] = statValue
+                charData.statUps[s] = su / 5
+            })
+            for (let sl of character.skills.values()) {
+                let s = sl[sl.length - 1]
+                if (s.level == 0 || baseSkills.includes(s.skill)) {
+                    charData.baseSkills.push({ name: s.skill.name, level: s.level })
+                } else {
+                    charData.advancedSkills.push({ name: s.skill.name, level: s.level })
+                }
+            }
+            charData.baseSkills.sort((a, b) => a.name.localeCompare(b.name))
+            charData.advancedSkills.sort((a, b) => a.name.localeCompare(b.name))
+            let tgs = new Map()
+            let sts = []
+            var soundConstCount = 0
+            for (let rt of character.talents) {
+                let t = rt.talent
+                if (t.parent === undefined) {
+                    let tName = t.name
+                    if (tName == sound_constitution.name) {
+                        ++soundConstCount
+                    } else {
+                        sts.push(tName)
+                    }
+                    if (tName == ambidexter.name) {
+                        charData.hand = 'both'
+                    }
+                } else {
+                    let tpn = t.parent.name
+                    var subs = tgs.get(tpn)
+                    if (subs === undefined) {
+                        subs = []
+                        tgs.set(tpn, subs)
+                    }
+                    subs.push(t.specName)
+                }
+            }
+            if (soundConstCount > 0) {
+                sts.push(sound_constitution.name + ' (' + soundConstCount + ')')
+            }
+            if (character.specialTrait !== undefined) {
+                charData.talents.push(character.specialTrait)
+            }
+            charData.talents.push(...(Array.from(tgs.keys()).sort().map((tg) => tg + ' (' + tgs.get(tg).sort().join(', ') + ')').sort()))
+            charData.talents.push(...(sts.sort()))
+            let cd = JSON.stringify(charData, null, 2)
+            handle.addEventListener('load', () => {
+                setTimeout(() => handle.postMessage(cd), 1000)
+            })
+        }
+    }
 }
 
 function init() {
     bind()
     randomCharacter()
     render()
+    document.getElementById('overlay').style.display = 'none'
     console.log('init called')
 }
 
