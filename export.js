@@ -25,32 +25,32 @@ function bindSvg(frontRoot, backRoot) {
             cha: frontRoot.getElementById('sSFelV'),
         },
         statUpgrades: {
-            cqc: [1,2,3,4].map(x => frontRoot.getElementById('sSHtHVu' + x)),
-            rc:  [1,2,3,4].map(x => frontRoot.getElementById('sSRCVu' + x)),
-            str: [1,2,3,4].map(x => frontRoot.getElementById('sSStrVu' + x)),
-            con: [1,2,3,4].map(x => frontRoot.getElementById('sSConVu' + x)),
-            dex: [1,2,3,4].map(x => frontRoot.getElementById('sSDexVu' + x)),
-            int: [1,2,3,4].map(x => frontRoot.getElementById('sSStrVu' + x)),
-            per: [1,2,3,4].map(x => frontRoot.getElementById('sSPerVu' + x)),
-            wil: [1,2,3,4].map(x => frontRoot.getElementById('sSWilVu' + x)),
-            cha: [1,2,3,4].map(x => frontRoot.getElementById('sSFelVu' + x)),
+            cqc: [1,2,3,4].map(x => frontRoot.getElementById('sSHtHu' + x)),
+            rc:  [1,2,3,4].map(x => frontRoot.getElementById('sSRCu' + x)),
+            str: [1,2,3,4].map(x => frontRoot.getElementById('sSStru' + x)),
+            con: [1,2,3,4].map(x => frontRoot.getElementById('sSConu' + x)),
+            dex: [1,2,3,4].map(x => frontRoot.getElementById('sSDexu' + x)),
+            int: [1,2,3,4].map(x => frontRoot.getElementById('sSStru' + x)),
+            per: [1,2,3,4].map(x => frontRoot.getElementById('sSPeru' + x)),
+            wil: [1,2,3,4].map(x => frontRoot.getElementById('sSWilu' + x)),
+            cha: [1,2,3,4].map(x => frontRoot.getElementById('sSFelu' + x)),
         },
-        baseSkills: frontRoot.getElementById('sBaseSkills').map(l => {
+        baseSkills: [...frontRoot.getElementById('sBaseSkills').children].map(l => {
             let ch = l.children
             return {
                 name: ch[0],
-                levels: [ch[1], ch[2], ch[3], ch[4]],
+                levels: [ch[1], ch[2], ch[3]],
             }
         }),
-        advancedSkills: frontRoot.getElementById('sAdvancedSkills').map(l => {
+        advancedSkills: [...frontRoot.getElementById('sAdvancedSkills').children].map(l => {
             let ch = l.children
             return {
                 name: ch[0],
-                levels: [ch[1], ch[2], ch[3], ch[4]],
+                levels: [ch[1], ch[2], ch[3]],
             }
         }),
-        talents: [...frontRoot.getElementById('sTalents').children()].filter(x => x.tagName == 'text'),
-        items: [...frontRoot.getElementById('sItems').children()].filter(x => x.tagName == 'text'),
+        talents: [...frontRoot.getElementById('sTalents').children].filter(x => x.tagName == 'text'),
+        items: [...frontRoot.getElementById('sItems').children].filter(x => x.tagName == 'text'),
         wealth: frontRoot.getElementById('sWealth'),
         income: frontRoot.getElementById('sIncome'),
         bio: frontRoot.getElementById('sBio'),
@@ -66,15 +66,15 @@ function bindSvg(frontRoot, backRoot) {
             cha: backRoot.getElementById('sbSFelV'),
         },
         statUpgradesBack: {
-            cqc: [1,2,3,4].map(x => backRoot.getElementById('sbSHtHVu' + x)),
-            rc:  [1,2,3,4].map(x => backRoot.getElementById('sbSRCVu' + x)),
-            str: [1,2,3,4].map(x => backRoot.getElementById('sbSStrVu' + x)),
-            con: [1,2,3,4].map(x => backRoot.getElementById('sbSConVu' + x)),
-            dex: [1,2,3,4].map(x => backRoot.getElementById('sbSDexVu' + x)),
-            int: [1,2,3,4].map(x => backRoot.getElementById('sbSStrVu' + x)),
-            per: [1,2,3,4].map(x => backRoot.getElementById('sbSPerVu' + x)),
-            wil: [1,2,3,4].map(x => backRoot.getElementById('sbSWilVu' + x)),
-            cha: [1,2,3,4].map(x => backRoot.getElementById('sbSFelVu' + x)),
+            cqc: [1,2,3,4].map(x => backRoot.getElementById('sbSHtHu' + x)),
+            rc:  [1,2,3,4].map(x => backRoot.getElementById('sbSRCu' + x)),
+            str: [1,2,3,4].map(x => backRoot.getElementById('sbSStru' + x)),
+            con: [1,2,3,4].map(x => backRoot.getElementById('sbSConu' + x)),
+            dex: [1,2,3,4].map(x => backRoot.getElementById('sbSDexu' + x)),
+            int: [1,2,3,4].map(x => backRoot.getElementById('sbSStru' + x)),
+            per: [1,2,3,4].map(x => backRoot.getElementById('sbSPeru' + x)),
+            wil: [1,2,3,4].map(x => backRoot.getElementById('sbSWilu' + x)),
+            cha: [1,2,3,4].map(x => backRoot.getElementById('sbSFelu' + x)),
         },
         wounds: backRoot.getElementById('sbWounds'),
         fate: backRoot.getElementById('sbFate'),

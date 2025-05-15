@@ -7,24 +7,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@1..1000&display=swap" rel="stylesheet">
         <script src="export.js"></script>
         <script>
-            var data = undefined
+            var svg;
             window.onload = function () {
-                let s = new XMLHttpRequest()
-                s.open('GET', 'heresy.svg')
-                s.responseType = 'text'
-                s.onload = function () {
-                    if (data === undefined) data = s.response
-                    else document.body.innerHTML = s.response + data
-                }
-                s.send()
-                let s2 = new XMLHttpRequest()
-                s2.open('GET', 'heresyBack.svg')
-                s2.responseType = 'text'
-                s2.onload = function () {
-                    if (data === undefined) data = s2.response
-                    else document.body.innerHTML = data + s2.response
-                }
-                s2.send()
+                Promise.all([fetch(new Request('heresy.svg')), fetch(new Request('heresyBack.svg'))].map(x => x.then(z => z.text())))
+                    .then(([front, back]) => {
+                        document.body.innerHTML = front + back
+                        let f = document.body.children[0]
+                        let b = document.body.children[1]
+                        svg = bindSvg(f, b)
+                    })
             }
         </script>
         <style>
