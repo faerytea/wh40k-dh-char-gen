@@ -2359,6 +2359,7 @@ function init() {
     bind()
     randomCharacter()
     render()
+    document.getElementById('overlay').style.display = 'none'
     console.log('init called')
 }
 

@@ -125,8 +125,8 @@ function exportToSvg(bound, charData) {
     bound.marks.innerHTML = mks(charData.marks)
     bound.divination.innerHTML = mks(charData.divination)
 
-    bound.madness.innerHTML = mks(charData.madness)
-    bound.corrupt.innerHTML = mks(charData.corrupt)
+    bound.madness.innerHTML = (charData.madness === 0) ? '' : mks(charData.madness)
+    bound.corrupt.innerHTML = (charData.corrupt === 0) ? '' : mks(charData.corrupt)
     bound.wounds.innerHTML = mks(charData.wounds)
     bound.fate.innerHTML = mks(charData.fate)
 
