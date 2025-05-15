@@ -10,19 +10,7 @@
             var svg;
             window.addEventListener('load', function () {
                 let cd = document.getElementById('charDataP')
-                window.addEventListener('message', e => {
-                    cd.value = e.data
-                    console.log(e.data)
-                }, false)
-                Promise.all([fetch(new Request('heresy.svg')), fetch(new Request('heresyBack.svg'))].map(x => x.then(z => z.text())))
-                    .then(([front, back]) => {
-                        let r = document.getElementById('svgRoot')
-                        r.innerHTML = front + back
-                        let f = r.children[0]
-                        let b = r.children[1]
-                        svg = bindSvg(f, b)
-                    })
-                document.getElementById('refresh').onclick = function () {
+                let refreshF = function () {
                     try {
                         let charData = JSON.parse(cd.value)
                         if (svg !== undefined) {
@@ -32,6 +20,19 @@
                         alert('Bad data!\n' + err)
                     }
                 }
+                document.getElementById('refresh').onclick = refreshF
+                window.addEventListener('message', e => {
+                    cd.value = e.data
+                    refreshF()
+                }, false)
+                Promise.all([fetch(new Request('heresy.svg')), fetch(new Request('heresyBack.svg'))].map(x => x.then(z => z.text())))
+                    .then(([front, back]) => {
+                        let r = document.getElementById('svgRoot')
+                        r.innerHTML = front + back
+                        let f = r.children[0]
+                        let b = r.children[1]
+                        svg = bindSvg(f, b)
+                    })
             })
         </script>
         <style>
