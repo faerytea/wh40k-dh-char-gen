@@ -101,9 +101,12 @@ function fillSkill(onLine, name, level = 0) {
 }
 
 function fillSkillColumn(lines, skills) {
-    for (let i = 0; i < skills.length; ++i) {
+    var i
+    for (i = 0; i < skills.length && i < lines.length; ++i) {
+        console.log(i + ': ' + JSON.stringify(skills[i]))
         fillSkill(lines[i], skills[i].name, skills[i].level)
     }
+    return (i == lines.length) ? skills.slice(i) : []
 }
 
 function exportToSvg(bound, charData) {
@@ -136,7 +139,11 @@ function exportToSvg(bound, charData) {
     }
 
     if (charData.baseSkills !== undefined) {
-        fillSkillColumn(bound.baseSkills, charData.baseSkills)
+        let overflowSkills = fillSkillColumn(bound.baseSkills, charData.baseSkills)
+        if (overflowSkills.length > 0) {
+            charData.advancedSkills.push(...overflowSkills)
+            alert(JSON.stringify(overflowSkills) + ' перенесены из "Базовых" в "Продвинутые", ибо не влезли')
+        }
     }
     if (charData.advancedSkills !== undefined) {
         fillSkillColumn(bound.advancedSkills, charData.advancedSkills)
