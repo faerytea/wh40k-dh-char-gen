@@ -941,6 +941,8 @@ let skills = function () {
     let lore_common_imperium = subSkill(lore_common, 'Империум')
     let lore_common_crime = subSkill(lore_common, 'Преступность')
     let lore_common_dusk = subSkill(lore_common, 'Фольклор Даска')
+    let lore_common_mechanicus = subSkill(lore_common, 'Культ Машины')
+    let lore_common_technology = subSkill(lore_common, 'Технология')
 
     let lore_forbidden_demonology = new Skill("Запретное знание (демонология)", 'int')
     let lore_scholastic_occult = new Skill("Учёное знание (оккультизм)", 'int')
@@ -991,6 +993,8 @@ let skills = function () {
         'lore_common_dusk': lore_common_dusk,
         'lore_common_imperium': lore_common_imperium,
         'lore_common_crime': lore_common_crime,
+        'lore_common_mechanicus': lore_common_mechanicus,
+        'lore_common_technology': lore_common_technology,
     }
 }()
 
@@ -1036,12 +1040,22 @@ let talents = function () {
         savage: new Talent("Дикарь"),
         init_rites: new Talent("Ритуалы инициации"),
         nothing_more_to_fear: new Talent("Нечего больше бояться"),
+        // forge world talent
+        cult_outsider: new Talent(
+            'Чуждый Культу',
+            'Персонаж получает штраф -10 на все Тесты, включающие знание Имперского Кредо и штраф -5 на Тесты Товарищества при взаимодействии с членами Экклезиархии в формальной обстановке.',
+        ),
 
         // normal
         catfall: new Talent(
             'Мягкое падение',
             'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
             new Requirement(new Stats().copy({ dex: 30 })),
+        ),
+        technical_knock: new Talent(
+            'Ритуал Освобождения',
+            'Ты способен снять заклинивание с любого оружия в качестве Частичного Действия. Для совершения ритуала ты должен прикасаться к этому оружию.',
+            new Requirement(new Stats().copy({ int: 30 }))
         ),
         unremarcable: new Talent("Непримечательный"),
 
@@ -1392,9 +1406,73 @@ let origins = function () {
         wild.marks,
         wild.specialTrait,
     )
+    let forge = new Origin(
+        "Мир-кузница",
+        new Stats(15, 20, 20, 20, 20, 25, 20, 20, 20),
+        [
+            new RollableOption(profs.adept, 1, 25),
+            new RollableOption(profs.killer, 26, 35),
+            new RollableOption(profs.guard, 36, 60),
+            new RollableOption(profs.scum, 61, 70),
+            new RollableOption(profs.tech, 71, 100),
+        ],
+        [
+            [skills.lore_common_mechanicus, skills.lore_common_technology],
+        ],
+        [
+            [talents.cult_outsider, talents.technical_knock]
+        ],
+        new SecondaryMods(),
+        7,
+        [
+            new RollableOption(1, 1, 5),
+            new RollableOption(2, 6, 9),
+            new RollableOption(3, 10, 10),
+        ],
+        [ // TODO: mix hive & space
+            new RollableOption({ male: new Constitution('кулачёк', 160, 90), female: new Constitution('кулачёк', 155, 80) }, 1, 20),
+            new RollableOption({ male: new Constitution('шестерня', 175, 80), female: new Constitution('шестерня', 170, 70) }, 21, 50),
+            new RollableOption({ male: new Constitution('поршень', 190, 90), female: new Constitution('поршень', 185, 85) }, 51, 70),
+            new RollableOption({ male: new Constitution('провод', 185, 60), female: new Constitution('провод', 180, 55) }, 71, 90),
+            new RollableOption({ male: new Constitution('машина', 210, 120), female: new Constitution('машина', 200, 100) }, 91, 100),
+        ],
+        [
+            new RollableOption(new Age('Стажёр', 15), 1, 10),
+            new RollableOption(new Age('Специалист', 25), 11, 40),
+            new RollableOption(new Age('Мастер', 35), 41, 70),
+            new RollableOption(new Age('Мастер', 45), 71, 90),
+            new RollableOption(new Age('Дед', 55), 91, 100),
+        ],
+        mkAppearences(
+            'бледная', 'седые', 'серые',
+            'красная', 'чёрные', 'карие',
+            'тёмная', 'серые', 'оливковые',
+            'светлая', 'рыжие', 'голубые',
+            'сероватая', 'медные', 'красные',
+        ),
+        mkMarks(
+            'Бледный',
+            'Лысый',
+            'Отсутствующий палец',
+            'Жёлтые ногти',
+            'Искривлённый позвоночник',
+            'Сутулый',
+            'Гнилые зубы',
+            'Чумазый',
+            'Нервный тик',
+            'Электротатуировка',
+            'Химические ожоги',
+            'Хрипы',
+            'Безволосый',
+            'Пласталевый протез',
+            'Тяжёлая походка',
+            'Крупная голова',
+        ),
+    )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
+        'forge': forge,
     }
 }()
 
@@ -1501,6 +1579,25 @@ let character = {
 
 let rsCompare = (rsa, rsb) => rsa.level - rsb.level
 
+let getSpecialStatUp = (stat) => {
+    var mod = 0
+    if (character.origin !== undefined) {
+        let forge = origins.forge
+        if (character.origin.name.substring(0, forge.name.length) == forge.name) {
+            if (character.prof !== undefined) {
+                switch (character.prof.name) {
+                    case profs.adept.name: if (stat == 'int') mod += 3; break
+                    case profs.killer.name: if (stat == 'dex') mod += 3; break
+                    case profs.guard.name: if (stat == 'rc') mod += 3; break
+                    case profs.scum.name: if (stat == 'per') mod += 3; break
+                    case profs.tech.name: if (stat == 'wil') mod += 3; break
+                }
+            }
+        }
+    }
+    return mod
+}
+
 let vm = {}
 
 function render() {
@@ -1508,7 +1605,7 @@ function render() {
     if (character.rolledStats !== undefined && character.origin != undefined) {
         let bioSM = character.bio === undefined ? new Stats() : character.bio.statMod
         Object.keys(vm.stats).forEach(s => {
-            let statValue = character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s] + bioSM[s]
+            let statValue = character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s] + bioSM[s] + getSpecialStatUp(s)
             finalStats[s] = statValue
             vm.stats[s].innerText = String(statValue)
         })
@@ -1790,7 +1887,7 @@ function render() {
     vm.madnessSpan.innerText = String(character.madness)
     vm.sexBox.value = character.sex
     vm.handBox.value = character.hand
-    vm.specialSpan.innerText = String(character.specialTrait)
+    vm.specialSpan.innerText = character.specialTrait == undefined ? '—/—' : String(character.specialTrait)
     if (character.constitution !== undefined) {
         vm.constDescriptionSpan.innerText = String(character.constitution[character.sex].description)
         vm.heightSpan.innerText = String(character.constitution[character.sex].height)
