@@ -945,7 +945,35 @@ let skills = function () {
     let lore_common_technology = subSkill(lore_common, 'Технология')
 
     let lore_forbidden_demonology = new Skill("Запретное знание (демонология)", 'int')
-    let lore_scholastic_occult = new Skill("Учёное знание (оккультизм)", 'int')
+
+    let lore_scholastic = new Skill(
+        'Учёное знание',
+        'int',
+        'Система знаний в определенной научной сфере. Учёное Знание достаётся ценой самоотверженного изучения предмета, а в вопросах объема и системности находится далеко за пределами сфер, очерченных рамками Обыденного Знания.',
+    )
+    let lore_scholastic_legends = subSkill(lore_scholastic, 'Легенды', 'Знание величайших историй прошлого, таких как жуткая Ересь Хоруса или Тёмная Эра Технологии.')
+    let lore_scholastic_occult = subSkill(lore_scholastic, 'Оккультизм', 'Понимание оккультных ритуалов, теорий и суеверий, а также знание о применении и мистическом значении оккультных атрибутов.')
+
+    let trade_cook = new Skill(
+        'Ремесло (Повар)',
+        'int',
+        'Это умение можно сочетать со Стойкостью, Химией и Ремеслом (Аптекарий), чтобы придавать напиткам и лекарствам более приятный вкус, или чтобы вкус еды или напитка маскировал присутствие посторонних веществ.',
+    )
+    let trade_copyist = new Skill(
+        'Ремесло (Переписчик)',
+        'int',
+        'Переписчик в 41-м Тысячелетии – гораздо больше, нежели бездумный писарь, скребущий электропером по дата пергаменту. Способный, конечно же, выполнять и такую работу, мастерпереписчик может создавать прекрасные иллюстрированные манускрипты на любую тему, от разлапистых генеалогических древ до эпических баллад.',
+    )
+    let trade_scrimshawer = new Skill(
+        'Ремесло (Резчик)',
+        'dex',
+        'Мастера этого ремесла обладают умением наносить изображения и текст на кость при помощи иглы и чернил, способом, напоминающим татуировку. Тем не менее, это Ремесло имеет более широкое применение, позволяющее наносить перманентные изображения почти на любой материал при помощи чернил и кислот, подходящих для выбранных поверхностей.',
+    )
+    let trade_valet = new Skill(
+        'Ремесло (Лакей)',
+        'cha',
+        'Ты обладаешь даром предугадывать хозяйственные и личные потребности других людей, а также умением управлять удовлетворением этих нужд. Людей, изучивших это ремесло, называют мажордомами или камердинерами.',
+    )
     return {
         'navigation_land': navigation_land,
         'awareness': awareness,
@@ -995,6 +1023,11 @@ let skills = function () {
         'lore_common_crime': lore_common_crime,
         'lore_common_mechanicus': lore_common_mechanicus,
         'lore_common_technology': lore_common_technology,
+        'lore_scholastic_legends': lore_scholastic_legends,
+        'trade_cook': trade_cook,
+        'trade_copyist': trade_copyist,
+        'trade_scrimshawer': trade_scrimshawer,
+        'trade_valet': trade_valet,
     }
 }()
 
@@ -1021,6 +1054,10 @@ let talents = function () {
     let heightened_senses = new Talent(
         'Обострённые чувства',
         'У тебя $$ значительно лучше среднего. Теперь ты будешь получать бонус +10 к любому Тесту, включающему $$.',
+    )
+    let resistance = new Talent(
+        'Сопротивляемость',
+        'В силу привычки ли, интенсивных ли методик закаливания, или просто благодаря удачному стечению генетических обстоятельств, но ты легче переносишь $$. Ты получаешь бонус +10 при попытках избежать любых неблагоприятных эффектов',
     )
     let weapon_hand = new Talent(
         'Пистолеты',
@@ -1052,6 +1089,15 @@ let talents = function () {
             'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
             new Requirement(new Stats().copy({ dex: 30 })),
         ),
+        light_sleeper: new Talent(
+            'Чуткий сон',
+            'У тебя очень чуткий сон, и ты остаёшься настороже, даже когда крепко спишь – с точки зрения Внезапности, Тестов Бдительности или при поспешном пробуждении, считается, что ты бодрствуешь.',
+            new Requirement(new Stats().copy({ per: 30 })),
+        ),
+        sprint: new Talent(
+            'Спринт',
+            'При совершении Полного Действия Передвижения, ты можешь дополнительно пройти расстояние, равное твоему Бонусу Ловкости в метрах.',
+        ),
         technical_knock: new Talent(
             'Ритуал Освобождения',
             'Ты способен снять заклинивание с любого оружия в качестве Частичного Действия. Для совершения ритуала ты должен прикасаться к этому оружию.',
@@ -1065,6 +1111,8 @@ let talents = function () {
         heightened_senses_smell: subTalent(heightened_senses, 'Обоняние', 'нюх'),
         heightened_senses_taste: subTalent(heightened_senses, 'Вкус', 'вкусовые рецепторы'),
         heightened_senses_skin: subTalent(heightened_senses, 'Осязание', 'осязание'),
+
+        resistance_cold: subTalent(resistance, 'Холод', 'холод'),
 
         // weapon
         weapon_throw: new Talent("Метательное оружие"),
@@ -1115,7 +1163,63 @@ let baseSkills = [
  */
 
 let profs = {
-    adept: new Prof('Адепт'),
+    adept: new Prof(
+        'Адепт',
+        new StatUpgrades(
+            sud.hard,
+            sud.med,
+            sud.hard,
+            sud.hard,
+            sud.med,
+            sud.main,
+            sud.fast,
+            sud.fast,
+            sud.med,
+        ),
+        [
+            skills.language_gothic_low,
+            skills.literacy,
+            [skills.lore_scholastic_legends, skills.lore_common_technology],
+            skills.lore_common_imperium,
+            [skills.trade_copyist, skills.trade_valet],
+        ],
+        [
+            [talents.weapon_cqc_prim, talents.weapon_hand_stub],
+            [talents.light_sleeper, talents.resistance_cold],
+            [talents.sprint, talents.unremarcable],
+        ],
+        [
+            new Rank(
+                'Архивист',
+                0,
+                [
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.drive_hover, 1, 100),
+                    new UpS(skills.pilot_civil, 1, 100),
+                    new UpS(skills.literacy, 1, 100),
+                    new UpS(skills.lore_common_imperium, 1, 100),
+                    new UpS(skills.lore_common_technology, 1, 100),
+                    new UpS(skills.lore_scholastic_legends, 1, 100),
+                    new UpS(skills.trade_cook, 1, 100),
+                    new UpS(skills.trade_copyist, 1, 100),
+                    new UpS(skills.trade_valet, 1, 100),
+                    new UpS(skills.swim, 1, 200),
+                ],
+                [
+                    new UpT(talents.resistance_cold, 100),
+                    new UpT(talents.light_sleeper, 100),
+                    new UpT(talents.unremarcable, 100),
+                    new UpT(talents.sprint, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.weapon_cqc_prim, 200),
+                    new UpT(talents.weapon_hand_prim, 200),
+                    new UpT(talents.weapon_hand_laz, 200),
+                    new UpT(talents.weapon_hand_stub, 200),
+                    new UpT(talents.weapon_throw, 200),
+                ]
+            ),
+        ]
+    ),
     judge: new Prof('Арбитр'),
     killer: new Prof(
         'Убийца', // название
