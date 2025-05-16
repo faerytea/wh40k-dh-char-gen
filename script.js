@@ -1479,6 +1479,7 @@ let origins = function () {
 // Если мир не является вариантом другого, то его можно вписать сюда с соответствующим диапазоном
 let rollableOrigins = [
     new RollableOption(origins.wild, 1, 15), // 00-15: Дикий мир
+    new RollableOption(origins.forge, 66, 75), // 66-75: Мир-кузница
 ]
 
 /**
