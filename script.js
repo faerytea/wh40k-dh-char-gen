@@ -1071,6 +1071,10 @@ let talents = function () {
         'Рукопашное оружие',
         'Ты прошел курс подготовки в обращении с рукопашным оружием ($$) и теперь можешь пользоваться ими без штрафов.',
     )
+    let weapon_throw = new Talent(
+        'Метательное оружие',
+        'Ты прошел курс подготовки в обращении с метательным оружием ($$) и теперь можешь пользоваться ими без штрафов.'
+    )
     return {
         // wild world talents
         iron_guts: new Talent("Железное нутро"),
@@ -1115,7 +1119,7 @@ let talents = function () {
         resistance_cold: subTalent(resistance, 'Холод', 'холод'),
 
         // weapon
-        weapon_throw: new Talent("Метательное оружие"),
+        weapon_throw_prim: subTalent(weapon_throw, 'прим'),
         weapon_cqc_prim: subTalent(weapon_melee, 'прим'),
         weapon_hand_prim: subTalent(weapon_hand, 'прим'),
         weapon_hand_laz: subTalent(weapon_hand, 'лаз'),
@@ -1215,7 +1219,7 @@ let profs = {
                     new UpT(talents.weapon_hand_prim, 200),
                     new UpT(talents.weapon_hand_laz, 200),
                     new UpT(talents.weapon_hand_stub, 200),
-                    new UpT(talents.weapon_throw, 200),
+                    new UpT(talents.weapon_throw_prim, 200),
                 ]
             ),
         ]
@@ -1242,7 +1246,7 @@ let profs = {
         [
             talents.weapon_cqc_prim, // талант "Оружие ближнего боя (примитив)"
             [talents.ambidexter, talents.unremarcable], // либо амбидекстр, либо непримечательный
-            [talents.weapon_throw, talents.weapon_hand_laz],
+            [talents.weapon_throw_prim, talents.weapon_hand_laz],
             talents.weapon_main_stub,
             talents.weapon_hand_stub,
         ],
@@ -1269,7 +1273,7 @@ let profs = {
                     new UpT(talents.weapon_hand_prim, 100),
                     new UpT(talents.weapon_hand_stub, 100),
                     new UpT(talents.weapon_cqc_prim, 100),
-                    new UpT(talents.weapon_throw, 100),
+                    new UpT(talents.weapon_throw_prim, 100),
                     new UpT(talents.sound_constitution, 100, true),
                     new UpT(talents.sound_constitution, 100, true),
                     new UpT(talents.catfall, 100),
@@ -1322,7 +1326,7 @@ let profs = {
                     new UpT(talents.weapon_hand_prim, 100),
                     new UpT(talents.weapon_hand_stub, 100),
                     new UpT(talents.weapon_cqc_prim, 100),
-                    new UpT(talents.weapon_throw, 100),
+                    new UpT(talents.weapon_throw_prim, 100),
                     new UpT(talents.sound_constitution, 100, true),
                     new UpT(talents.sound_constitution, 100, true),
                     new UpT(talents.sound_constitution, 100, true),
@@ -1385,7 +1389,7 @@ let profs = {
                     new UpT(talents.unremarcable, 100),
                     new UpT(talents.sound_constitution, 100, true),
                     new UpT(talents.sound_constitution, 100, true),
-                    new UpT(talents.weapon_throw, 100),
+                    new UpT(talents.weapon_throw_prim, 100),
                 ],
             )
         ]
