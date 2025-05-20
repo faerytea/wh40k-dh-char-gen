@@ -98,9 +98,11 @@ function subSkill(skill, specName, specDescr) {
 function Requirement(
     stats = new Stats(),
     talents = [],
+    prof = undefined,
 ) {
     this.stats = stats
     this.talents = talents
+    this.prof = prof
 }
 
 function Talent(
@@ -917,6 +919,11 @@ let skills = function () {
         'str',
         'Это умение используется при плавании и нырянии. Плавание в нормальных условиях не требует Тестов. Они, однако, могут потребоваться если водоем неспокоен или если плавание длится достаточно долго.',
     )
+    let techuse = new Skill(
+        'Технология',
+        'int',
+        'При помощи этого умения персонаж может использовать и ремонтировать различные механизмы, а также хотя бы примерно угадывать, как работает тот или иной техноартефакт.',
+    )
     let track = new Skill("Выслеживание", 'int')
 
     let drive = new Skill('Вождение', 'dex', 'Простое вождение не требует прохождения Тестов. Тест необходим лишь в случае езды по сложному ландшафту, с предельной скоростью или при совершении опасных маневров. При погоне Состязательные Тесты Вождения проводятся между участвующими в ней водителями.')
@@ -929,22 +936,55 @@ let skills = function () {
     let pilot_military = subSkill(pilot, 'Гражданские суда', 'авиация Астра Милитарум')
     let pilot_space = subSkill(pilot, 'Гражданские суда', 'управление космическими кораблями')
     
-    let language_gothic_low = new Skill("Язык (Низкий Готик)", 'int')
-    let language_tribal = new Skill("Язык (племенной диалект)", 'int')
-    let language_local_dusk = new Skill("Язык (диалект Даска)", 'int')
+    let language = new Skill(
+        'Язык',
+        'int',
+    )
+    let language_gothic_low = subSkill(language, "Низкий Готик", 'всеобщий язык Империума.')
+    let language_tribal = subSkill(language, "племенной диалект", 'Грубый и простой язык, на котором говорят дикари примитивных миров.')
+    let language_local_dusk = subSkill(language, "диалект Даска", '')
+
+    let language_secret = new Skill(
+        'Тайный язык',
+        'int',
+        'Тайный Язык – особый язык, знают и понимают который лишь люди определённой профессии, представители какой-либо одной организации, рода занятий или общественного класса.',
+    )
+    let language_secret_techno = subSkill(language_secret, 'Техно', 'сплав жаргонизмов, бинарного кода и, в некоторых случаях, высоко- или низкочастотных звуковых каденций.')
 
     let lore_common = new Skill(
         'Обыденное знание',
         'int',
         'Набор воспоминаний о привычках, структуре, традициях, знаменитых деятелях и суевериях, относящихся к отдельным мирам, культурным группам и организациям.',
     )
-    let lore_common_imperium = subSkill(lore_common, 'Империум')
-    let lore_common_crime = subSkill(lore_common, 'Преступность')
+    let lore_common_imperium = subSkill(lore_common, 'Империум', 'Знание о секторах, сегментумах и наиболее известных мирах Империума.')
+    let lore_common_adeptus_arbitres = subSkill(lore_common, 'Адептус Арбитрес', 'Знание о различных орденах и сектах Арбитрес, включая нюансы типа структур субординации и основ прохождения стандартных процедур.')
+    let lore_common_administratum = subSkill(lore_common, 'Администратум', 'Поверхностное знание внутренних дел, правил и порядков Администратума.')
+    let lore_common_crime = subSkill(lore_common, 'Преступность', 'Знание об организованных преступных и диссидентских сообществах Империума.')
     let lore_common_dusk = subSkill(lore_common, 'Фольклор Даска')
-    let lore_common_mechanicus = subSkill(lore_common, 'Культ Машины')
-    let lore_common_technology = subSkill(lore_common, 'Технология')
+    let lore_common_ecclesiarchy = subSkill(lore_common, 'Экклезиархия', 'Понимание иерархии Культа Императора, его системы санов, приветствий и общих практик.')
+    let lore_common_imperial_credo = subSkill(lore_common, 'Имперское Кредо', 'Знание ритуалов и практик Имперского Культа, самых распространённых обрядов почитания Императора и прославленных святых.')
+    let lore_common_imperial_guard = subSkill(lore_common, 'Имперская Гвардия', 'Основная информация, касающаяся системы званий, логистики и структуры Имперской Гвардии, а также их основных тактических и стратегических доктрин.')
+    let lore_common_mechanicus = subSkill(lore_common, 'Культ Машины', 'Общее понимание символики и практик Механикума, включая знание ступеней их иерархии и характерных для них формальных приветствий.')
+    let lore_common_technology = subSkill(lore_common, 'Технология', 'Знание простейших литаний и ритуалов пробуждения и умиротворения духов машин.')
+    let lore_common_war = subSkill(lore_common, 'Война', 'Знания о великих битвах, славных (и бесславных) военачальниках и героях, а также знаменитых стратегмах.')
 
-    let lore_forbidden_demonology = new Skill("Запретное знание (демонология)", 'int')
+    let lore_forbidden = new Skill(
+        'Запретное знание',
+        'int',
+        'К запретному знанию относится опасное и, зачастую, еретическое знание, которое Аколит может почерпнуть из мириадов опасных и непредсказуемых источников, время от времени попадающих к нему в руки.',
+    )
+    let lore_forbidden_archeotech = subSkill(lore_forbidden, 'Археотех', 'Знание о чудесных машинах древности, а также обладание фрагментарной информацией об их функциях и предназначении.')
+    let lore_forbidden_black_library = subSkill(lore_forbidden, 'Чёрная библиотека', 'Тайные познания о Чёрной Библиотеке, её запретном содержимом, странных механизмах и невообразимых бледных, безволосых существах, что непрестанно трудятся внутри её стен.')
+    let lore_forbidden_cults = subSkill(lore_forbidden, 'Культы', 'Знание самых распространённых Имперских Культов, их сект и отколовшихся от них кабалов.')
+    let lore_forbidden_demonology = subSkill(lore_forbidden, "Демонология", 'Жуткое знание о немногих описанных варп-сущностях и различных их манифестациях.')
+    let lore_forbidden_heresy = subSkill(lore_forbidden, 'Ересь', 'Знание богомерзких практик и верований, объявленных в Империуме еретическими.')
+    let lore_forbidden_inquisition = subSkill(lore_forbidden, 'Инквизиция', 'Общая информация (часто основанная лишь на слухах) о самой ужасной и самой загадочной из организаций человечества – Инквизиции.')
+    let lore_forbidden_mutants = subSkill(lore_forbidden, 'Мутанты', 'Информация о стабильных и нестабильных мутациях, а также об их наиболее печально известных последствиях.')
+    let lore_forbidden_omnissiah = subSkill(lore_forbidden, "Адептус Механикус", 'Понимание философской базы убеждений и верований различных организаций и сект последователей Бога-Машины.')
+    let lore_forbidden_psy = subSkill(lore_forbidden, 'Псайкеры', 'Умение распознавать признаки псайкеров, результаты применения их способностей и пределы доступных им сил.')
+    let lore_forbidden_warp = subSkill(lore_forbidden, 'Варп', 'Понимание путей варпа, последствий его взаимодействия с реальным космосом, и влияния его пертурбаций на межзвёздные путешествия.')
+    let lore_forbidden_xenos = subSkill(lore_forbidden, 'Ксеносы', 'Знание о наиболее распространённых видах ксеносов.')
+    // let lore_forbidden_orda = subSkill(lore_forbidden, 'Ордосы', 'Охватывает более специализированную информацию об одном из Великих Ордосов Инквизиции: Маллеус, Еретикус или Ксенос.') // TODO: split?
 
     let lore_scholastic = new Skill(
         'Учёное знание',
@@ -1006,6 +1046,7 @@ let skills = function () {
         'silent_move': silent_move,
         'swim': swim,
         'survival': survival,
+        'techuse': techuse,
         'track': track,
         'drive_land': drive_land,
         'drive_hover': drive_hover,
@@ -1016,13 +1057,30 @@ let skills = function () {
         'language_gothic_low': language_gothic_low,
         'language_tribal': language_tribal,
         'language_local_dusk': language_local_dusk,
+        'language_secret_techno': language_secret_techno,
+        'lore_forbidden_archeotech': lore_forbidden_archeotech,
+        'lore_forbidden_black_library': lore_forbidden_black_library,
+        'lore_forbidden_cults': lore_forbidden_cults,
         'lore_forbidden_demonology': lore_forbidden_demonology,
+        'lore_forbidden_heresy': lore_forbidden_heresy,
+        'lore_forbidden_inquisition': lore_forbidden_inquisition,
+        'lore_forbidden_mutants': lore_forbidden_mutants,
+        'lore_forbidden_omnissiah': lore_forbidden_omnissiah,
+        'lore_forbidden_psy': lore_forbidden_psy,
+        'lore_forbidden_warp': lore_forbidden_warp,
+        'lore_forbidden_xenos': lore_forbidden_xenos,
         'lore_scholastic_occult': lore_scholastic_occult,
-        'lore_common_dusk': lore_common_dusk,
         'lore_common_imperium': lore_common_imperium,
+        'lore_common_adeptus_arbitres': lore_common_adeptus_arbitres,
+        'lore_common_administratum': lore_common_administratum,
         'lore_common_crime': lore_common_crime,
+        'lore_common_dusk': lore_common_dusk,
+        'lore_common_ecclesiarchy': lore_common_ecclesiarchy,
+        'lore_common_imperial_credo': lore_common_imperial_credo,
+        'lore_common_imperial_guard': lore_common_imperial_guard,
         'lore_common_mechanicus': lore_common_mechanicus,
         'lore_common_technology': lore_common_technology,
+        'lore_common_war': lore_common_war,
         'lore_scholastic_legends': lore_scholastic_legends,
         'trade_cook': trade_cook,
         'trade_copyist': trade_copyist,
@@ -1048,6 +1106,10 @@ let ambidexter = new Talent(
     "Амбидекстрия", 
     "Ты можешь пользоваться одинаковохорошо обеими руками. Ты не получаешь обычного штрафа -20 за атаку неосновной рукой. Если ты обладаешь Талантом Две Руки, штраф за атаку с двух рук падает до -10.",
     new Requirement(new Stats().copy({ dex: 30 })),
+)
+let chem_geld = new Talent(
+    'Химическое оскопление',
+    'Некоторые химические и хирургические процедуры сделали тебя глухим к искушениям плоти.',
 )
 
 let talents = function () {
@@ -1086,17 +1148,35 @@ let talents = function () {
             'Чуждый Культу',
             'Персонаж получает штраф -10 на все Тесты, включающие знание Имперского Кредо и штраф -5 на Тесты Товарищества при взаимодействии с членами Экклезиархии в формальной обстановке.',
         ),
+        // tech priest
+        electrowire: new Talent(
+            'Электропривой',
+            'Способность использовать электрический привой для доступа к портам данных и общения с духами машин.',
+        ),
 
         // normal
+        binary_chatter: new Talent(
+            'Бинарный диалог',
+            'Ты получаешь бонус +10 на все попытки инструктировать, программировать или добывать информацию из сервиторов.',
+        ),
         catfall: new Talent(
             'Мягкое падение',
             'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
             new Requirement(new Stats().copy({ dex: 30 })),
         ),
+        feedback_screech: new Talent(
+            'Акустический резонанс',
+            'Пробормотав себе под нос алогичную формулу, ты способен вызвать возмущение в контурах своего вокс-синтезатора. Динамики отзываются на этот протест взрывом резкого скрипящего воя, в равной степени шокирующего и отвлекающего окружающих.',
+            new Requirement(new Stats(), [], new Set(['Техножрец'])),
+        ),
         light_sleeper: new Talent(
             'Чуткий сон',
             'У тебя очень чуткий сон, и ты остаёшься настороже, даже когда крепко спишь – с точки зрения Внезапности, Тестов Бдительности или при поспешном пробуждении, считается, что ты бодрствуешь.',
             new Requirement(new Stats().copy({ per: 30 })),
+        ),
+        rapid_reload: new Talent(
+            'Быстрая перезарядка',
+            'Ты провел много времени, упражняясь с оружием, и теперь можешь перезаряжать его практически мгновенно.',
         ),
         sprint: new Talent(
             'Спринт',
@@ -1131,6 +1211,7 @@ let talents = function () {
         // special
         'sound_constitution': sound_constitution,
         'ambidexter': ambidexter,
+        'chem_geld': chem_geld,
     }
 }()
 
@@ -1394,7 +1475,73 @@ let profs = {
             )
         ]
     ),
-    tech: new Prof('Техножрец'),
+    tech: new Prof(
+        'Техножрец',
+        new StatUpgrades(
+            sud.med,
+            sud.med,
+            sud.hard,
+            sud.fast,
+            sud.hard,
+            sud.fast,
+            sud.med,
+            sud.fast,
+            sud.no,
+        ),
+        [
+            skills.language_gothic_low,
+            skills.techuse,
+            skills.literacy,
+            skills.language_secret_techno,
+            [skills.trade_scrimshawer, skills.trade_copyist],
+        ],
+        [
+            talents.weapon_cqc_prim,
+            talents.weapon_hand_laz,
+            talents.weapon_main_laz,
+            talents.electrowire,
+        ],
+        [
+            new Rank(
+                'Технограф',
+                0,
+                [
+                    new UpS(skills.lore_common_mechanicus, 1, 100),
+                    new UpS(skills.lore_common_technology, 1, 100),
+                    new UpS(skills.lore_forbidden_omnissiah, 1, 100),
+                    new UpS(skills.language_secret_techno, 1, 100),
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.pilot_civil, 1, 100),
+                    new UpS(skills.evaluate, 1, 100),
+                    new UpS(skills.logic, 1, 100),
+                    new UpS(skills.literacy, 1, 100),
+                    new UpS(skills.literacy, 2, 100),
+                    new UpS(skills.techuse, 1, 100),
+                    new UpS(skills.trade_copyist, 1, 100),
+                    new UpS(skills.trade_scrimshawer, 1, 100),
+                ],
+                [
+                    new UpT(talents.weapon_main_laz, 100),
+                    new UpT(talents.weapon_main_prim, 100),
+                    new UpT(talents.weapon_main_stub, 100),
+                    new UpT(talents.binary_chatter, 100),
+                    new UpT(talents.chem_geld, 100),
+                    new UpT(talents.feedback_screech, 100),
+                    new UpT(talents.rapid_reload, 100),
+                    new UpT(talents.electrowire, 100),
+                    new UpT(talents.light_sleeper, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.technical_knock, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.weapon_throw_prim, 300)
+                ],
+            ),
+        ],
+    ),
 }
 
 /* Самая дичь тут — родной мир
@@ -1734,23 +1881,59 @@ function render() {
                 let curCSU = character.statUpgrades[s]
                 let curTSU = (i + 1) * 5
                 let cost = upTable[s][i]
-                cell.innerText = String(cost)
-                if (curCSU >= curTSU) {
-                    cell.className = 'taken'
-                    usedExp += cost
+                if (Number.isFinite(cost)) {
+                    cell.innerText = String(cost)
+                    if (curCSU >= curTSU) {
+                        cell.className = 'taken'
+                        usedExp += cost
+                    } else {
+                        cell.className = ''
+                    }
+                    if (curTSU === curCSU) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] -= 5
+                            render()
+                        }
+                    } else if (curTSU === curCSU - 5) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] -= 10
+                            render()
+                        }
+                    } else if (curTSU === curCSU - 10) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] -= 15
+                            render()
+                        }
+                    } else if (curTSU === curCSU -15) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] -= 20
+                            render()
+                        }
+                    } else if (curCSU + 5 === curTSU) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] += 5
+                            render()
+                        }
+                    } else if (curCSU + 10 === curTSU) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] += 10
+                            render()
+                        }
+                    } else if (curCSU + 15 === curTSU) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] += 15
+                            render()
+                        }
+                    } else if (curCSU + 20 === curTSU) {
+                        cell.onclick = function () {
+                            character.statUpgrades[s] += 20
+                            render()
+                        }
+                    }
                 } else {
+                    cell.innerText = '–'
                     cell.className = ''
-                }
-                if (curTSU === curCSU) {
-                    cell.onclick = function () {
-                        character.statUpgrades[s] -= 5
-                        render()
-                    }
-                } else if (curCSU + 5 === curTSU) {
-                    cell.onclick = function () {
-                        character.statUpgrades[s] += 5
-                        render()
-                    }
+                    cell.onclick = undefined
                 }
                 r.append(cell)
             }
@@ -2132,7 +2315,11 @@ let rolls = {
         character.corrupt = combine(character.origin?.secondaryMods?.corrupt, character.bio?.secondaryMods?.corrupt)(0)
     },
     madness: function () {
-        character.madness = combine(character.origin?.secondaryMods?.madness, character.bio?.secondaryMods?.madness)(0)
+        var baseMadness = 0
+        if (character.talents !== undefined) {
+            if (character.talents.find(t => t.talent.name === chem_geld.name) !== undefined) baseMadness += 1
+        }
+        character.madness = combine(character.origin?.secondaryMods?.madness, character.bio?.secondaryMods?.madness)(baseMadness)
     },
     sex: function () {
         let r = d10()
@@ -2415,12 +2602,16 @@ function bind() {
                 noBio.text = '-= НЕТ =-'
                 vm.bioSelect.append(noBio)
                 vm.bioSelect.value = 'none'
+                let specialOriginIx = character.origin.name.search(' \\(')
+                let shortOriginName = specialOriginIx == -1 ? character.origin.name : character.origin.name.substring(0, specialOriginIx)
+                let test = specialOriginIx == -1 ? (ao) => ao.has(character.origin.name) : (ao) => ao.has(shortOriginName) || ao.has(character.origin.name)
                 for (let b of character.prof.backgrounds) {
-                    if (b.allowedOrigin.values().find(ao => character.origin.name.substring(0, ao.name.length) == ao.name) === undefined) continue
-                    let bo = document.createElement('option')
-                    bo.value = b.name
-                    bo.text = b.name
-                    vm.bioSelect.append(bo)
+                    if (test(b.allowedOrigin)) {
+                        let bo = document.createElement('option')
+                        bo.value = b.name
+                        bo.text = b.name
+                        vm.bioSelect.append(bo)
+                    }
                 }
                 vm.bioSelect.onchange()
                 character.skills = new Map()
