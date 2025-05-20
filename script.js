@@ -1675,7 +1675,8 @@ let origins = function () {
             [skills.lore_common_mechanicus, skills.lore_common_technology],
         ],
         [
-            [talents.cult_outsider, talents.technical_knock]
+            talents.cult_outsider, 
+            talents.technical_knock,
         ],
         new SecondaryMods(),
         7,
