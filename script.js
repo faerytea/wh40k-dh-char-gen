@@ -118,7 +118,7 @@ function Talent(
 function subTalent(talent, specName, specDescr, specReq) {
     let res = new Talent(
         talent.name + ' (' + specName + ')',
-        talent.description.replaceAll('$$', specDescr),
+        talent.description.replaceAll('$$', specDescr === undefined ? specName : specDescr),
         specReq === undefined ? talent.specReq : specReq,
     )
     res.parent = talent
@@ -343,7 +343,7 @@ function Background(
     skills = [],
     talents = [],
     statMod = new Stats(),
-    secondaryMod = new SecondaryMods(),
+    secondaryMods = new SecondaryMods(),
 ) {
     this.name = name
     this.cost = cost
@@ -352,7 +352,27 @@ function Background(
     this.skills = skills
     this.talents = talents
     this.statMod = statMod
-    this.secondaryMod = secondaryMod
+    this.secondaryMods = secondaryMods
+}
+
+function PsyMod(
+    stats = new Stats(),
+    secondaryMods = new SecondaryMods(idf, idf, idf, idf),
+    talents = [],
+) {
+    this.stats = stats
+    this.secondaryMods = secondaryMods
+    this.talents = talents
+}
+
+function SanctionationSideEffect(
+    name,
+    description,
+    mod = new PsyMod(),
+) {
+    this.name = name
+    this.description = description
+    this.mod = mod
 }
 
 let statNames = {
@@ -883,6 +903,11 @@ let skills = function () {
         'str',
         'Тест на Запугивание пригодится, когда тебе придет в голову вселить страх в отдельного человека или небольшую группу людей. Тебе не нужно проходить Тест Запугивания каждый раз, когда ты угрожаешь кому-либо.',
     )
+    let invocation = new Skill(
+        'Инвокация',
+        'wil',
+        'Тест на Инвокацию позволяет усилить твой следующий Психотест на число, равное твоему Бонусу Силы Воли. Во время этого Действия ты очищаешь свой разум при помощи различных ментальных техник – медитаций, чтения мантр, прикосновений к психофокусу и т.п.',
+    )
     let literacy = new Skill(
         'Грамотность',
         'int',
@@ -892,6 +917,11 @@ let skills = function () {
         'Логика',
         'int',
         'Это умение отражает твою способность делать выводы и заключения, а также решать математические задачи.'
+    )
+    let psyniscience = new Skill(
+        'Психической чутьё',
+        'per',
+        'При помощи этого умения ты можешь настраивать свое восприятие на пертурбации потоков имматериума.',
     )
     let security = new Skill(
         'Безопасность',
@@ -1004,10 +1034,20 @@ let skills = function () {
         'int',
         'Переписчик в 41-м Тысячелетии – гораздо больше, нежели бездумный писарь, скребущий электропером по дата пергаменту. Способный, конечно же, выполнять и такую работу, мастерпереписчик может создавать прекрасные иллюстрированные манускрипты на любую тему, от разлапистых генеалогических древ до эпических баллад.',
     )
+    let trade_merchant = new Skill(
+        'Ремесло (Купец)',
+        'cha',
+        'В то время как Бартер – это умение совершать непосредственные, прямые сделки, Ремесло (Купец) представляет собой собрание навыков ведения стратегических операций, заключения долговременных договоров, необходимых не только для того, чтобы завершить эту сделку, но в первую очередь обеспечить наличие следующей сделки.',
+    )
     let trade_scrimshawer = new Skill(
         'Ремесло (Резчик)',
         'dex',
         'Мастера этого ремесла обладают умением наносить изображения и текст на кость при помощи иглы и чернил, способом, напоминающим татуировку. Тем не менее, это Ремесло имеет более широкое применение, позволяющее наносить перманентные изображения почти на любой материал при помощи чернил и кислот, подходящих для выбранных поверхностей.',
+    )
+    let trade_soothsayer = new Skill(
+        'Ремесло (Предсказатель)',
+        'cha',
+        'Гадатели – наблюдательные и проницательные профессионалы, способные совместить мельчайшие крохи информации о человеке и составить, исходя из них, в точности то, что желает услышать клиент.',
     )
     let trade_valet = new Skill(
         'Ремесло (Лакей)',
@@ -1038,8 +1078,10 @@ let skills = function () {
         'gamble': gamble,
         'inquiry': inquiry,
         'intimidate': intimidate,
+        'invocation': invocation,
         'literacy': literacy,
         'logic': logic,
+        'psyniscience': psyniscience,
         'security': security,
         'scrutiny': scrutiny,
         'search': search,
@@ -1084,6 +1126,8 @@ let skills = function () {
         'lore_scholastic_legends': lore_scholastic_legends,
         'trade_cook': trade_cook,
         'trade_copyist': trade_copyist,
+        'trade_merchant': trade_merchant,
+        'trade_soothsayer': trade_soothsayer,
         'trade_scrimshawer': trade_scrimshawer,
         'trade_valet': trade_valet,
     }
@@ -1112,7 +1156,25 @@ let chem_geld = new Talent(
     'Некоторые химические и хирургические процедуры сделали тебя глухим к искушениям плоти.',
 )
 
+let psy_talents = function () {
+    let minor_psy_power = new Talent(
+        'Малая психосила',
+    )
+    let psy_rank_1 = new Talent(
+        'Пси-рейтинг 1',
+        'Ты раскрыл свой дар обращения с Психосилами.',
+    )
+    return {
+        'minor_psy_power': minor_psy_power,
+        'psy_rank_1': psy_rank_1,
+    }
+}()
+
 let talents = function () {
+    let hatred = new Talent(
+        'Ненависть',
+        'У тебя есть повод ненавидеть $$, и твоя злость делает тебя сильнее. Сражаясь против $$ ты получаешь бонус +10 ко всем Тестам Ближнего Боя.'
+    )
     let heightened_senses = new Talent(
         'Обострённые чувства',
         'У тебя $$ значительно лучше среднего. Теперь ты будешь получать бонус +10 к любому Тесту, включающему $$.',
@@ -1164,15 +1226,35 @@ let talents = function () {
             'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
             new Requirement(new Stats().copy({ dex: 30 })),
         ),
+        dark_soul: new Talent(
+            'Тёмная душа',
+            'Твоя душа запятнана тьмой, поглощающей часть эффектов Порчи. Каждый раз, когда ты проходишь Тест на Осквернение, обычные штрафы на этот Тест уменьшаются вдвое.',
+        ),
         feedback_screech: new Talent(
             'Акустический резонанс',
             'Пробормотав себе под нос алогичную формулу, ты способен вызвать возмущение в контурах своего вокс-синтезатора. Динамики отзываются на этот протест взрывом резкого скрипящего воя, в равной степени шокирующего и отвлекающего окружающих.',
             new Requirement(new Stats(), [], new Set(['Техножрец'])),
         ),
+        flagellant: new Talent(
+            'Флагеллант',
+            'Ты поставил свою боль на службу Императору. Каждый день ты обязан проводить 20 минут в молитвах и умерщвлении плоти, в процессе нанося самому себе 1 очко Урона. Ты не должен ни лечить этот Урон, ни позволять кому бы то ни было лечить его.',
+        ),
+        insanely_faithful: new Talent(
+            'Исступлённая вера',
+            'В своём безумии ты находишь тихую гавань. При определении эффектов Шока ты можешь кинуть кости дважды и выбрать лучший результат.',
+        ),
         light_sleeper: new Talent(
             'Чуткий сон',
             'У тебя очень чуткий сон, и ты остаёшься настороже, даже когда крепко спишь – с точки зрения Внезапности, Тестов Бдительности или при поспешном пробуждении, считается, что ты бодрствуешь.',
             new Requirement(new Stats().copy({ per: 30 })),
+        ),
+        meditation: new Talent(
+            'Медитация',
+            'Умиротворив свое сознание и войдя в транс, ты можешь излечивать немощь своего тела.',
+        ),
+        quick_draw: new Talent(
+            'Быстрое выхватывание',
+            'Ты столь быстр, что готовое к бою оружие в твоей руке способно появиться буквально в мгновение ока.',
         ),
         rapid_reload: new Talent(
             'Быстрая перезарядка',
@@ -1190,6 +1272,9 @@ let talents = function () {
         unremarcable: new Talent("Непримечательный"),
 
         // groups
+        hatred_demons: subTalent(hatred, 'Демоны', 'демонов'),
+        hatred_witches: subTalent(hatred, 'Ведьмы', 'ведьм'),
+
         heightened_senses_eyes: subTalent(heightened_senses, 'Зрение', 'зрение'),
         heightened_senses_hear: subTalent(heightened_senses, 'Слух', 'слух'),
         heightened_senses_smell: subTalent(heightened_senses, 'Обоняние', 'нюх'),
@@ -1197,6 +1282,7 @@ let talents = function () {
         heightened_senses_skin: subTalent(heightened_senses, 'Осязание', 'осязание'),
 
         resistance_cold: subTalent(resistance, 'Холод', 'холод'),
+        resistance_psy: subTalent(resistance, 'Психосилы', 'пси воздействие'),
 
         // weapon
         weapon_throw_prim: subTalent(weapon_throw, 'прим'),
@@ -1212,6 +1298,9 @@ let talents = function () {
         'sound_constitution': sound_constitution,
         'ambidexter': ambidexter,
         'chem_geld': chem_geld,
+
+        // psy
+        ...psy_talents,
     }
 }()
 
@@ -1236,6 +1325,107 @@ let baseSkills = [
     skills.search,
     skills.silent_move,
     skills.swim,
+]
+
+let sanctionationSideEffects = [
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Реконструированный череп',
+            'Какая-то часть твоих испытаний расколола тебе череп. Твой череп скреплён металлическими пластинами, некоторые из которых отчётливо видны.',
+            new PsyMod(new Stats().copy({ int: -3 })),
+        ),
+        1, 8,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Загнанный',
+            'Видения, навещавшие тебя во время санкционирования, развили у тебя лёгкую паранойю. Ты убежден, что некие части твоей души, отсеченные во время испытаний, обрели разум и теперь пытаются выследить тебя. Хотя ты и сам понимаешь, что это, по меньшей мере, глупо, ты, тем не менее, отказываешься садиться спиной к двери, просто на всякий случай.',
+            new PsyMod(new Stats(), new SecondaryMods(idf, idf, x => x + d10())),
+        ),
+        9, 14,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Неприятные воспоминания',
+            'Твое становление было таким, что ты непроизвольно вздрагиваешь и кривишься, когда кто-нибудь упоминает Святую Терру.',
+            new PsyMod(new Stats(), new SecondaryMods(idf, idf, x => x + d5())),
+        ),
+        15, 25,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Ужас, ужас',
+            'Твои волосы поседели, ты иногда бормочешь себе под нос, а каждая ночь встречает тебя очередным кошмарным сновидением.',
+            new PsyMod(new Stats(), new SecondaryMods(idf, idf, x => x + d5())),
+        ),
+        26, 35,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Боль нервной индукции',
+            'Кожа на тыльной стороне твоей правой кисти обезображена шрамами. Ты чувствуешь дискомфорт, находясь рядом с лысыми женщинами в робах.',
+        ),
+        36, 42,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Стоматологическое Зондирование',
+            'У тебя во рту больше нет зубов. У тебя есть полный набор резных протезов, выполненных из зубов почивших пилигримов.',
+        ),
+        43, 49,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Оптический обрыв',
+            'Твои ритуалы становления оказали разрушительный эффект на твои глаза. Они были удалены и заменены кибернетическими сенсорами Обычного качества.',
+        ),
+        50, 57,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Благочестивые вопли',
+            'Твои разрушенные голосовые связки были заменены вокс-индуктором. Этот имплантат размером с большой палец чуть выступает из плоти твоего горла.',
+        ),
+        58, 63,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Облучение',
+            'Ты узрел истинную силу Золотого Трона. На всей поверхности твоего тела нет ни единого волоска.',
+        ),
+        64, 70,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Скованный язык',
+            'Твои губы, десны и нёбо татуированы гексаграмматическими печатями. Ты должен пройти Тяжёлый (-20) Тест Силы Воли чтобы суметь произнести имена Губителей (Кхорна, Тзинча, Слаанеш и Нургла). Плюс, ты жутко заикаешься, если говоришь о демонах.',
+        ),
+        71, 75,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Обручение с Троном',
+            'Ты хранишь верность лишь Императору. Ты получаешь Химическое Оскопление и кольцо из чатталиума, которое стоит около 100 Тронов.',
+            new PsyMod(new Stats(), new SecondaryMods(), [talents.chem_geld]),
+        ),
+        76, 88,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Ведьмины колючки',
+            'Твое тело покрыто тысячами мелких шрамов. У тебя стойкая неприязнь к иголкам.',
+            new PsyMod(new Stats().copy({ con: +3 })),
+        ),
+        89, 94,
+    ),
+    new RollableOption(
+        new SanctionationSideEffect(
+            'Гипнотическое наставление',
+            'Могучее внушение заставляет тебя шёпотом бормотать Литанию Защиты, даже когда ты спишь или находишься без сознания.',
+            new PsyMod(new Stats().copy({ wil: +3 })),
+        ),
+        95, 100,
+    ),
 ]
 
 /* Профы состоят из
@@ -1305,7 +1495,9 @@ let profs = {
             ),
         ]
     ),
-    judge: new Prof('Арбитр'),
+    judge: new Prof(
+        'Арбитр',
+    ),
     killer: new Prof(
         'Убийца', // название
         new StatUpgrades(
@@ -1365,7 +1557,9 @@ let profs = {
             )
         ],
     ),
-    cleric: new Prof('Клирик'),
+    cleric: new Prof(
+        'Клирик',
+    ),
     guard: new Prof(
         'Гвардеец',
         new StatUpgrades(
@@ -1415,7 +1609,68 @@ let profs = {
             )
         ],
     ),
-    psy: new Prof('Псайкер'),
+    psy: new Prof(
+        'Псайкер',
+        new StatUpgrades(
+            sud.hard,
+            sud.med,
+            sud.med,
+            sud.med,
+            sud.hard,
+            sud.fast,
+            sud.fast,
+            sud.fast,
+            sud.hard,
+        ),
+        [
+            skills.language_gothic_low,
+            skills.psyniscience,
+            skills.invocation,
+            [skills.trade_merchant, skills.trade_soothsayer],
+            skills.literacy,
+        ],
+        [
+            talents.weapon_cqc_prim,
+            [talents.weapon_hand_stub, talents.weapon_hand_laz],
+            talents.psy_rank_1,
+        ],
+        [
+            new Rank(
+                'Санкционат',
+                0,
+                [
+                    new UpS(skills.awareness, 1, 100),
+                    new UpS(skills.invocation, 1, 100),
+                    new UpS(skills.literacy, 1, 100),
+                    new UpS(skills.psyniscience, 1, 100),
+                    new UpS(skills.lore_common_imperial_credo, 1, 100),
+                    new UpS(skills.lore_common_imperium, 1, 100),
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.lore_forbidden_warp, 1, 100),
+                    new UpS(skills.lore_scholastic_occult, 1, 100),
+                    new UpS(skills.swim, 1, 100),
+                    new UpS(skills.trade_merchant, 1, 100), 
+                    new UpS(skills.trade_soothsayer, 1, 100), 
+                ],
+                [
+                    new UpT(talents.chem_geld, 100),
+                    new UpT(talents.flagellant, 100),
+                    new UpT(talents.hatred_demons, 100),
+                    new UpT(talents.meditation, 100),
+                    new UpT(talents.minor_psy_power, 100, true), 
+                    new UpT(talents.psy_rank_1, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.quick_draw, 100), 
+                    new UpT(talents.unremarcable, 100),
+                    new UpT(talents.weapon_throw_prim, 100),
+                    new UpT(talents.sound_constitution, 200, true),
+                ],
+            )
+        ],
+    ),
     scum: new Prof(
         'Подонок',
         new StatUpgrades(
@@ -1742,7 +1997,8 @@ let rollableOrigins = [
  * Добавление предысторий к профессиям
  */
 ;(function () {
-    let anyOrigin = new Set(Object.keys(origins).map(o => origins[o]))
+    let anyOrigin = new Set(Object.keys(origins).map(o => origins[o].name))
+    console.log('anyOrigin in backgrounds: ' + [...anyOrigin].map(o => o.name))
     profs.killer.backgrounds = [
         new Background(
             "Сыны Диспатера",
@@ -1757,6 +2013,59 @@ let rollableOrigins = [
                     skills.security,
                 ],
             ],
+        )
+    ]
+    profs.psy.backgrounds = [
+        new Background(
+            'Тень на твоей душе',
+            200,
+            '',
+            anyOrigin,
+            [
+                [],
+                [
+                    skills.lore_forbidden_demonology,
+                ],
+            ],
+            [
+                talents.dark_soul,
+            ],
+            new Stats(),
+            new SecondaryMods(
+                idf,
+                x => x + d5(),
+                x => x + d5(),
+                idf,
+            ),
+        ),
+        new Background(
+            'Путеводный свет Бога-Императора',
+            100,
+            '',
+            anyOrigin,
+            [],
+            [
+                talents.hatred_witches,
+                talents.insanely_faithful,
+            ],
+            new Stats().copy({ str: -5 }),
+        ),
+        new Background(
+            'Кошмар наяву',
+            300,
+            'Непроницаемый Разум: Содержимое твоего разума нельзя прочитать психическими и любыми иными способами, а любая попытка проделать подобное обнаружит лишь непроницаемую и тёмную пустоту.',
+            anyOrigin,
+            [],
+            [
+                talents.resistance_psy,
+            ],
+            new Stats().copy({ wil: +5 }),
+            new SecondaryMods(
+                idf,
+                idf,
+                x => x + d10(),
+                idf,
+            ),
         )
     ]
 })()
@@ -1858,11 +2167,12 @@ let getSpecialStatUp = (stat) => {
 let vm = {}
 
 function render() {
+    let psyMod = character?.sanctionating?.mod ?? new PsyMod()
     let finalStats = new Stats()
     if (character.rolledStats !== undefined && character.origin != undefined) {
         let bioSM = character.bio === undefined ? new Stats() : character.bio.statMod
         Object.keys(vm.stats).forEach(s => {
-            let statValue = character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s] + bioSM[s] + getSpecialStatUp(s)
+            let statValue = character.rolledStats[s] + character.origin.stats[s] + character.statUpgrades[s] + bioSM[s] + getSpecialStatUp(s) + psyMod.stats[s]
             finalStats[s] = statValue
             vm.stats[s].innerText = String(statValue)
         })
@@ -2122,7 +2432,8 @@ function render() {
     var soundConstBonus = 0
     let renderTalents = vm.renderTalents
     if (renderTalents !== undefined && character.talents !== undefined) {
-        renderTalents(character.talents)
+        let toRender = character.talents.concat(psyMod.talents.map(t => new RenderedTalent(t, { from: 'psy' })))
+        renderTalents(toRender)
         for (let t of character.talents) {
             let o = t.talentOrigin
             if (o.from == 'buy') {
@@ -2194,6 +2505,14 @@ function render() {
         vm.hair.innerText = character.appearence.hair
         vm.eyes.innerText = character.appearence.eyes
         vm.skin.innerText = character.appearence.skin
+    }
+    if (character.sanctionating !== undefined) {
+        let ss = character.sanctionating
+        vm.sanctionatingField.className = 'base'
+        vm.sanctionatingSpan.innerText = ss.name + ': ' + ss.description
+    } else {
+        vm.sanctionatingField.className = 'off'
+        vm.sanctionatingSpan.innerText = ''
     }
     if (character.marks !== undefined) {
         vm.marksSpan.innerHTML = ''
@@ -2299,7 +2618,11 @@ let rolls = {
     wound: function () {
         if (character.origin !== undefined) {
             let w = character.origin.baseWounds
-            character.wounds = combine(character.origin?.secondaryMods?.wounds, character.bio?.secondaryMods?.wounds)(w + d5())
+            character.wounds = combine(
+                character.origin?.secondaryMods?.wounds, 
+                character.bio?.secondaryMods?.wounds,
+                character.sanctionating?.mod?.secondaryMods?.wounds,
+            )(w + d5())
         } else {
             character.wounds = 0
         }
@@ -2307,20 +2630,34 @@ let rolls = {
     fate: function () {
         if (character.origin !== undefined) {
             let f = rollOption(character.origin.fateChances, d10)
-            character.fate = combine(character.origin?.secondaryMods?.fate, character.bio?.secondaryMods?.fate)(f)
+            character.fate = combine(
+                character.origin?.secondaryMods?.fate, 
+                character.bio?.secondaryMods?.fate,
+                character.sanctionating?.mod?.secondaryMods?.fate,
+            )(f)
         } else {
             character.fate = 0
         }
     },
     corrupt: function () { // todo character.bio.secondaryMods
-        character.corrupt = combine(character.origin?.secondaryMods?.corrupt, character.bio?.secondaryMods?.corrupt)(0)
+        character.corrupt = combine(
+            character.origin?.secondaryMods?.corrupt, 
+            character.bio?.secondaryMods?.corrupt,
+            character.sanctionating?.mod?.secondaryMods?.corrupt,
+        )(0)
     },
     madness: function () {
         var baseMadness = 0
         if (character.talents !== undefined) {
-            if (character.talents.find(t => t.talent.name === chem_geld.name) !== undefined) baseMadness += 1
+            if (character.talents.find(t => t.talent.name === chem_geld.name) !== undefined 
+             || character.sanctionating?.mod?.talents.find(t => t.name === chem_geld.name) !== undefined) 
+               baseMadness += 1
         }
-        character.madness = combine(character.origin?.secondaryMods?.madness, character.bio?.secondaryMods?.madness)(baseMadness)
+        character.madness = combine(
+            character.origin?.secondaryMods?.madness, 
+            character.bio?.secondaryMods?.madness,
+            character.sanctionating?.mod?.secondaryMods?.madness,
+        )(baseMadness)
     },
     sex: function () {
         let r = d10()
@@ -2336,7 +2673,9 @@ let rolls = {
     age: function () {
         let ageType = rollOption(character.origin.ages)
         character.age = {
-            n: ageType.roll(),
+            n: character.prof == profs.psy
+                ? ageType.roll() + d10() + d10() + d10()
+                : ageType.roll(),
             d: ageType.description,
         }
     },
@@ -2378,6 +2717,13 @@ let rolls = {
         }
         character.rolledStats = rs
     },
+    sanctionating: function () {
+        if (character.prof == profs.psy) {
+            character.sanctionating = rollOption(sanctionationSideEffects)
+        } else {
+            character.sanctionating = undefined
+        }
+    }
 }
 
 function selectOrigin(origin) {
@@ -2523,6 +2869,15 @@ function bind() {
         }
     }
 
+    vm.sanctionatingField = document.getElementById('sanctionatingField')
+    vm.sanctionatingSpan = document.getElementById('sanctionating')
+    document.getElementById('sanctionatingRoll').onclick = function () {
+        if (character.prof == profs.psy) {
+            rolls.sanctionating()
+            render()
+        }
+    }
+
     vm.marksSpan = document.getElementById('marks')
     document.getElementById('clearAllMarks').onclick = function () {
         character.marks = []
@@ -2605,9 +2960,13 @@ function bind() {
                 vm.bioSelect.value = 'none'
                 let specialOriginIx = character.origin.name.search(' \\(')
                 let shortOriginName = specialOriginIx == -1 ? character.origin.name : character.origin.name.substring(0, specialOriginIx)
+                console.log('bio for: ' + shortOriginName)
                 let test = specialOriginIx == -1 ? (ao) => ao.has(character.origin.name) : (ao) => ao.has(shortOriginName) || ao.has(character.origin.name)
                 for (let b of character.prof.backgrounds) {
+                    console.log('bio: ' + b.name)
+                    console.log('allowed origins: ' + [ ...b.allowedOrigin ].map(o => o.name))
                     if (test(b.allowedOrigin)) {
+                        console.log('allowed')
                         let bo = document.createElement('option')
                         bo.value = b.name
                         bo.text = b.name
@@ -2618,6 +2977,7 @@ function bind() {
                 character.skills = new Map()
                 character.talents = []
                 buildCharacter()
+                rolls.sanctionating()
                 render()
             }
         }
@@ -2739,6 +3099,8 @@ function bind() {
                 }
             } else if (o.from == 'bio') {
                 sOrigin.innerText = 'Прошлое'
+            } else if (o.from == 'psy') {
+                sOrigin.innerText = 'Терра'
             }
             row.append(sName, sOrigin)
             vm.talents.append(row)
@@ -2870,6 +3232,13 @@ function bind() {
             }
             if (character.specialTrait !== undefined) {
                 charData.talents.push(character.specialTrait)
+            }
+            if (character.sanctionating !== undefined) {
+                let s = character.sanctionating
+                charData.talents.push(s.name + ': ' + s.description)
+            }
+            if (character.bio?.specialNote !== undefined) {
+                charData.talents.push(character.bio.specialNote)
             }
             charData.talents.push(...(Array.from(tgs.keys()).sort().map((tg) => tg + ' (' + tgs.get(tg).sort().join(', ') + ')').sort()))
             charData.talents.push(...(sts.sort()))
