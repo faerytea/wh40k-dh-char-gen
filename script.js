@@ -961,6 +961,12 @@ let skills = function () {
     let drive_hover = subSkill(drive, 'Ховер', 'техника на воздушной подушке, парящая над бренным миром.')
     let drive_legs = subSkill(drive, 'Шагатель', 'с ногами, для особо сложной местности.')
 
+    let performer = new Skill('Исполнитель', 'cha', 'Используй это Умение, чтобы развлекать и покорять жаждущую зрелищ толпу.')
+    let performer_signer = subSkill(performer, 'Певец')
+    let performer_dancer = subSkill(performer, 'Танцор')
+    let performer_musician = subSkill(performer, 'Музыкант')
+    let performer_storyteller = subSkill(performer, 'Сказитель')
+
     let pilot = new Skill('Пилотирование', 'dex', 'Пилотирование корабля в обычных условиях не требует Прохождения Тестов, но они могут понадобиться при полётах в сложных условиях – при штормовом ветре, на предельной скорости и для выполнения иных опасных маневров.')
     let pilot_civil = subSkill(pilot, 'Гражданские суда', 'челноки')
     let pilot_military = subSkill(pilot, 'Гражданские суда', 'авиация Астра Милитарум')
@@ -1093,6 +1099,10 @@ let skills = function () {
         'drive_land': drive_land,
         'drive_hover': drive_hover,
         'drive_legs': drive_legs,
+        'performer_signer': performer_signer,
+        'performer_dancer': performer_dancer,
+        'performer_musician': performer_musician,
+        'performer_storyteller': performer_storyteller,
         'pilot_civil': pilot_civil,
         'pilot_military': pilot_military,
         'pilot_space': pilot_space,
@@ -1282,6 +1292,7 @@ let talents = function () {
         heightened_senses_skin: subTalent(heightened_senses, 'Осязание', 'осязание'),
 
         resistance_cold: subTalent(resistance, 'Холод', 'холод'),
+        resistance_heat: subTalent(resistance, 'Жара', 'жару'),
         resistance_psy: subTalent(resistance, 'Психосилы', 'пси воздействие'),
 
         // weapon
@@ -1497,6 +1508,62 @@ let profs = {
     ),
     judge: new Prof(
         'Арбитр',
+        new StatUpgrades(
+            sud.med,
+            sud.fast,
+            sud.hard,
+            sud.main,
+            sud.hard,
+            sud.fast,
+            sud.med,
+            sud.med,
+            sud.med,
+        ),
+        [
+            skills.language_gothic_low,
+            skills.literacy,
+            skills.lore_common_adeptus_arbitres,
+            skills.lore_common_imperium,
+            skills.inquiry,
+        ],
+        [
+            talents.weapon_main_stub,
+            talents.weapon_cqc_prim,
+            [talents.quick_draw, talents.rapid_reload],
+        ],
+        [
+            new Rank(
+                "Патрульный",
+                0,
+                [
+                    new UpS(skills.awareness, 0, 100),
+                    new UpS(skills.lore_common_adeptus_arbitres, 0, 100),
+                    new UpS(skills.lore_common_adeptus_arbitres, 1, 100),
+                    new UpS(skills.lore_common_imperium, 0, 100),
+                    new UpS(skills.drive_land, 0, 100),
+                    new UpS(skills.drive_hover, 0, 100),
+                    new UpS(skills.inquiry, 0, 100),
+                    new UpS(skills.inquiry, 1, 100),
+                    new UpS(skills.scrutiny, 0, 100),
+                    new UpS(skills.swim, 0, 100),
+                    new UpS(skills.literacy, 0, 100),
+                ],
+                [
+                    new UpT(talents.weapon_main_prim, 100),
+                    new UpT(talents.weapon_main_stub, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.weapon_throw_prim, 100),
+                    new UpT(talents.quick_draw, 100),
+                    new UpT(talents.rapid_reload, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                ],
+            ),
+        ],
     ),
     killer: new Prof(
         'Убийца', // название
@@ -1554,11 +1621,66 @@ let profs = {
                     new UpT(talents.unremarcable, 100),
                     new UpT(talents.heightened_senses_eyes, 100),
                 ],
-            )
+            ),
         ],
     ),
     cleric: new Prof(
         'Клирик',
+        new StatUpgrades(
+            sud.med,
+            sud.fast,
+            sud.med,
+            sud.med,
+            sud.med,
+            sud.med,
+            sud.med,
+            sud.fast,
+            sud.fast,
+        ),
+        [
+            skills.language_gothic_low,
+            skills.lore_common_imperial_credo,
+            skills.literacy,
+            [skills.performer_signer, skills.trade_copyist],
+            [skills.trade_cook, skills.trade_valet],
+        ],
+        [
+            talents.weapon_cqc_prim,
+            talents.weapon_hand_stub,
+            [talents.weapon_main_prim, talents.weapon_throw_prim],
+        ],
+        [
+            new Rank(
+                'Неофит',
+                0,
+                [
+                    new UpS(skills.awareness, 0, 100),
+                    new UpS(skills.lore_common_imperial_credo, 0, 100),
+                    new UpS(skills.literacy, 0, 100),
+                    new UpS(skills.drive_land, 0, 100),
+                    new UpS(skills.inquiry, 0, 100),
+                    new UpS(skills.pilot_civil, 0, 100),
+                    new UpS(skills.swim, 0, 100),
+                    new UpS(skills.trade_cook, 0, 100),
+                    new UpS(skills.trade_copyist, 0, 100),
+                    new UpS(skills.trade_valet, 0, 100),
+                    new UpT(skills.performer_signer, 200),
+                ],
+                [
+                    new UpT(talents.weapon_main_prim, 100),
+                    new UpT(talents.weapon_hand_laz, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.weapon_cqc_prim, 100),
+                    new UpT(talents.resistance_cold, 100),
+                    new UpT(talents.resistance_heat, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.weapon_throw_prim, 200),
+                ]
+            )
+        ]
     ),
     guard: new Prof(
         'Гвардеец',
