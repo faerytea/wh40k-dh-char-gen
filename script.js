@@ -982,6 +982,8 @@ let skills = function () {
     let language_ship = subSkill(language, "корабельный арго", 'Коды, сленг и идиоматика, уникальные для каждого отдельного судна.')
     let language_tribal = subSkill(language, "племенной диалект", 'Грубый и простой язык, на котором говорят дикари примитивных миров.')
     let language_local_dusk = subSkill(language, "диалект Даска", '')
+    let language_local_gunmetal = subSkill(language, "диалект города Ганметал", '')
+    let language_local_volg = subSkill(language, "диалект Вольга", '')
 
     let language_secret = new Skill(
         'Тайный язык',
@@ -1115,6 +1117,8 @@ let skills = function () {
         'language_ship': language_ship,
         'language_tribal': language_tribal,
         'language_local_dusk': language_local_dusk,
+        'language_local_gunmetal': language_local_gunmetal,
+        'language_local_volg': language_local_volg,
         'language_secret_techno': language_secret_techno,
         'lore_forbidden_archeotech': lore_forbidden_archeotech,
         'lore_forbidden_black_library': lore_forbidden_black_library,
@@ -1235,9 +1239,17 @@ let talents = function () {
             'Повязанный с ульем',
             'Находясь в «неправильном месте» (т.е. месте, лишенном благ промышленного производства, крепких потолков и электроэнергии), уроженцы ульев получают штраф -10 ко всем тестам на Выживание (Инт) и штраф -5 к тестам на Интеллект.',
         ),
-        caotious: new Talent(
+        caoutious: new Talent(
             'Осторожный',
             'Жители ульев постоянно настороже, и всегда готовы отреагировать на первые признаки неприятностей. Все уроженцы ульев получают +1 к Инициативе.',
+        ),
+        iron_loaded: new Talent(
+            'Упакован железом',
+            'Если ты по какой-либо причине остался без рабочего оружия, неважно, разоружили тебя, застали врасплох или у тебя просто кончились патроны, ты получаешь штраф -5 на все Тесты.',
+        ),
+        path_of_weapon: new Talent(
+            'Путь оружия',
+            'Ты получаешь бонус +5 к Тестам на Технологию, когда дело касается пулевого оружия.',
         ),
         // tech priest
         electrowire: new Talent(
@@ -1271,6 +1283,11 @@ let talents = function () {
         insanely_faithful: new Talent(
             'Исступлённая вера',
             'В своём безумии ты находишь тихую гавань. При определении эффектов Шока ты можешь кинуть кости дважды и выбрать лучший результат.',
+        ),
+        jaded: new Talent(
+            'Пресыщенный',
+            'Ты видел худшее из того, на что способна галактика, и, так сказать, акклиматизировался к худшим кошмарам этого безумного мира.',
+            new Requirement(new Stats().copy({ wil: 30 }))
         ),
         light_sleeper: new Talent(
             'Чуткий сон',
@@ -2144,7 +2161,7 @@ let origins = function () {
         [
             talents.crowd_ok,
             talents.hive_addict,
-            talents.caotious,
+            talents.caoutious,
         ],
         new SecondaryMods(),
         8,
@@ -2199,11 +2216,61 @@ let origins = function () {
             new RollableOption('Слуга Аристократов: Твоя семья служила непосредственно привилегированным верхам шпилей, разделяя с ними роскошь жизни, непредставимую для прочих жителей улья. У тебя было практически всё: простор, личная жизнь, солнечный свет и бремя обязанностей. Ты ценишь чувство собственного достоинства, знание своего дела, и умение быть полезным для тех, кто стоит выше тебя.', 91, 100),
         ],
     )
+    let hive_gunmetal = new Origin(
+        'Мир-улей (город Ганметал)',
+        hive.stats.copy({ 'rc': +5 }),
+        hive.profs,
+        [
+            hive.skills[0],
+            [skills.language_local_gunmetal],
+        ],
+        [
+            talents.caoutious,
+            talents.hive_addict,
+            talents.iron_loaded,
+            talents.weapon_hand_stub,
+            talents.path_of_weapon,
+        ],
+        hive.secondaryMods,
+        hive.baseWounds,
+        hive.fateChances,
+        hive.constitutions,
+        hive.ages,
+        hive.appearences,
+        hive.marks,
+        hive.specialTrait,
+    )
+    let hive_volg = new Origin(
+        'Мир-улей (Вольг)',
+        new Stats(20, 20, 20, 25, 20, 20, 20, 20, 15),
+        hive.profs,
+        [
+            hive.skills[0],
+            [skills.language_local_volg, skills.intimidate]
+        ],
+        [
+            talents.crowd_ok,
+            talents.hive_addict,
+            talents.light_sleeper,
+            talents.weapon_cqc_prim,
+            talents.jaded,
+        ],
+        new SecondaryMods(idf, idf, x => x + d10(), idf),
+        hive.baseWounds,
+        hive.fateChances,
+        hive.constitutions,
+        hive.ages,
+        hive.appearences,
+        hive.marks,
+        hive.specialTrait,
+    )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
         'forge': forge,
         'hive': hive,
+        'hive_gunmetal': hive_gunmetal,
+        'hive_volg': hive_volg,
     }
 }()
 
