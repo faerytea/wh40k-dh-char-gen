@@ -1208,6 +1208,10 @@ let talents = function () {
         'Сопротивляемость',
         'В силу привычки ли, интенсивных ли методик закаливания, или просто благодаря удачному стечению генетических обстоятельств, но ты легче переносишь $$. Ты получаешь бонус +10 при попытках избежать любых неблагоприятных эффектов',
     )
+    let talented = new Talent(
+        'Одарённый',
+        'Ты получаешь бонус +10 к Тестам умения $$.'
+    )
     let weapon_hand = new Talent(
         'Пистолеты',
         'Ты прошел курс подготовки в обращении с $$пистолетами и теперь можешь пользоваться ими без штрафов.',
@@ -1359,6 +1363,7 @@ let talents = function () {
         // groups
         hatred_demons: subTalent(hatred, 'Демоны', 'демонов'),
         hatred_witches: subTalent(hatred, 'Ведьмы', 'ведьм'),
+        hatred_tech_heresy: subTalent(hatred, 'Техноересь', 'техноересь'),
 
         heightened_senses_eyes: subTalent(heightened_senses, 'Зрение', 'зрение'),
         heightened_senses_hear: subTalent(heightened_senses, 'Слух', 'слух'),
@@ -1369,6 +1374,14 @@ let talents = function () {
         resistance_cold: subTalent(resistance, 'Холод', 'холод'),
         resistance_heat: subTalent(resistance, 'Жара', 'жару'),
         resistance_psy: subTalent(resistance, 'Психосилы', 'пси воздействие'),
+
+        ...(function () {
+            let res = {}
+            for (let s of Object.keys(skills)) {
+                res[s] = subTalent(talented, s, s)
+            }
+            return res
+        }()),
 
         // weapon
         weapon_throw_prim: subTalent(weapon_throw, 'прим'),
@@ -2559,6 +2572,44 @@ let rollableOrigins = [
 ;(function () {
     let anyOrigin = new Set(Object.keys(origins).map(o => origins[o].name))
     console.log('anyOrigin in backgrounds: ' + [...anyOrigin].map(o => o.name))
+    profs.judge.backgrounds = [
+        new Background(
+            "Каликсианский серийный убийца",
+            200,
+            '',
+            anyOrigin,
+            [],
+            [
+                talents.talented_inquiry,
+            ],
+            new Stats().copy({ int: +5, per: +5 }),
+        ),
+        new Background(
+            'Пустые люди с Синофии Магна',
+            100,
+            '',
+            anyOrigin,
+            [],
+            [
+                talents.hatred_tech_heresy,
+                talents.paranoia,
+            ],
+            new Stats(),
+            new SecondaryMods(idf, idf, x => x + d5(), idf),
+        ),
+        new Background(
+            'Красные склепы Луггнума',
+            100,
+            '',
+            anyOrigin,
+            [],
+            [
+                talents.jaded,
+            ],
+            new Stats().copy({ wil: +3 }),
+            new SecondaryMods(idf, idf, x => x + d5(), idf),
+        ),
+    ]
     profs.killer.backgrounds = [
         new Background(
             "Сыны Диспатера",
