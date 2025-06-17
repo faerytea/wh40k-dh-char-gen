@@ -1256,6 +1256,10 @@ let talents = function () {
             'Блаженное неведение',
             'Твоя мудрая слепота накладывает штраф -5 на все Тесты Запретного Знания.',
         ),
+        desert_world: new Talent(
+            'Пустынный мир',
+            'Ты получаешь штраф -5 на все Тесты Восприятия, связанные со зрением',
+        ),
         // tech priest
         electrowire: new Talent(
             'Электропривой',
@@ -1302,6 +1306,10 @@ let talents = function () {
         meditation: new Talent(
             'Медитация',
             'Умиротворив свое сознание и войдя в транс, ты можешь излечивать немощь своего тела.',
+        ),
+        paranoia: new Talent(
+            'Паранойя',
+            'Ты всегда настороже, всегда в поисках сокрытых опасностей и точно знаешь, что вся галактика тайно ополчилась на тебя. Ты получаешь +2 к броскам Инициативы.',
         ),
         quick_draw: new Talent(
             'Быстрое выхватывание',
@@ -2347,6 +2355,51 @@ let origins = function () {
             new RollableOption('Твой родной мир – одна из редких и желанных райских планет, где лето бесконечно, а жизнь беззаботна. Помимо того, что вы являетесь объектами зависти и презрения со стороны всего остального Империума, тебя и твой народ зачастую поражает жестокая природа вселенной, ведь ты встречаешь её с наивным оптимизмом, который прочие принимают за обыкновенную глупость.', 91, 100),
         ],
     )
+    let imperial_maccabeus = new Origin(
+        'Имперский мир (Маккабеус Квинтус)',
+        new Stats(20, 20, 20, 17, 20, 20, 20, 20, 20),
+        imperial.profs,
+        imperial.skills,
+        [
+            talents.desert_world,
+            talents.resistance_cold,
+            ...imperial.talents,
+        ],
+        new SecondaryMods(idf, idf, idf, x => x + 1),
+        imperial.baseWounds,
+        imperial.fateChances,
+        imperial.constitutions,
+        imperial.ages,
+        imperial.appearences,
+        imperial.marks,
+    )
+    let imperial_sinophia = new Origin(
+        'Имперский мир (Синофия)',
+        new Stats(20, 20, 20, 20, 20, 20, 25, 17, 17),
+        imperial.profs,
+        [
+            [
+                skills.literacy,
+                skills.language_gothic_high,
+                skills.lore_common_crime,
+                skills.lore_forbidden_cults,
+                skills.lore_forbidden_heresy,
+            ],
+            [
+                skills.deceive,
+            ]
+        ],
+        [
+            talents.paranoia,
+        ],
+        imperial.secondaryMods,
+        imperial.baseWounds,
+        imperial.fateChances,
+        imperial.constitutions,
+        imperial.ages,
+        imperial.appearences,
+        imperial.marks,
+    )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
@@ -2355,6 +2408,8 @@ let origins = function () {
         'hive_gunmetal': hive_gunmetal,
         'hive_volg': hive_volg,
         'imperial': imperial,
+        'imperial_maccabeus': imperial_maccabeus,
+        'imperial_sinophia': imperial_sinophia,
     }
 }()
 
