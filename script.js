@@ -806,8 +806,6 @@ let nameTable = function () {
  */
 
 let skills = function () {
-    let navigation_land = new Skill("Навигация (наземная)", 'int')
-
     let awareness = new Skill(
         "Блидтельность", 
         'per',
@@ -961,6 +959,10 @@ let skills = function () {
     let drive_hover = subSkill(drive, 'Ховер', 'техника на воздушной подушке, парящая над бренным миром.')
     let drive_legs = subSkill(drive, 'Шагатель', 'с ногами, для особо сложной местности.')
 
+    let navigation = new Skill('Навигация', 'int', 'Навигация вступает в дело, когда ты хочешь воспользоваться картами, техническими данными, словесными описаниями или ориентирами на местности, чтобы проложить курс и не заблудиться.')
+    let navigation_land = subSkill(navigation, 'Наземная', 'ориентирование на поверхности планет при помощи логи-компасов, карт и познаний в географии.')
+    let navigation_space = subSkill(navigation, 'Космическая', 'направить корабль от планеты к планете при помощи звёздных атласов и картомантических ритуалов.')
+
     let performer = new Skill('Исполнитель', 'cha', 'Используй это Умение, чтобы развлекать и покорять жаждущую зрелищ толпу.')
     let performer_signer = subSkill(performer, 'Певец')
     let performer_dancer = subSkill(performer, 'Танцор')
@@ -984,6 +986,7 @@ let skills = function () {
     let language_local_dusk = subSkill(language, "диалект Даска", '')
     let language_local_gunmetal = subSkill(language, "диалект города Ганметал", '')
     let language_local_volg = subSkill(language, "диалект Вольга", '')
+    let language_local_fleet = subSkill(language, "флотский арго", 'Коды, сленг и идиоматика линейного флота.')
 
     let language_secret = new Skill(
         'Тайный язык',
@@ -1066,7 +1069,6 @@ let skills = function () {
         'Ты обладаешь даром предугадывать хозяйственные и личные потребности других людей, а также умением управлять удовлетворением этих нужд. Людей, изучивших это ремесло, называют мажордомами или камердинерами.',
     )
     return {
-        'navigation_land': navigation_land,
         'awareness': awareness,
         'barter': barter,
         'blather': blather,
@@ -1104,6 +1106,8 @@ let skills = function () {
         'drive_land': drive_land,
         'drive_hover': drive_hover,
         'drive_legs': drive_legs,
+        'navigation_land': navigation_land,
+        'navigation_space': navigation_space,
         'performer_signer': performer_signer,
         'performer_dancer': performer_dancer,
         'performer_musician': performer_musician,
@@ -1119,6 +1123,7 @@ let skills = function () {
         'language_local_dusk': language_local_dusk,
         'language_local_gunmetal': language_local_gunmetal,
         'language_local_volg': language_local_volg,
+        'language_local_fleet': language_local_fleet,
         'language_secret_techno': language_secret_techno,
         'lore_forbidden_archeotech': lore_forbidden_archeotech,
         'lore_forbidden_black_library': lore_forbidden_black_library,
@@ -1259,6 +1264,27 @@ let talents = function () {
         desert_world: new Talent(
             'Пустынный мир',
             'Ты получаешь штраф -5 на все Тесты Восприятия, связанные со зрением',
+        ),
+        // voidborn talents
+        lucky: new Talent(
+            'Заговорённый',
+            'Каждый раз, когда ты тратишь (но не сжигаешь) Очко Судьбы, брось 1d10. Если выпадает 9, это Очко тут же возвращается к тебе.',
+        ),
+        evil_eye: new Talent(
+            'Дурной глаз',
+            'Ты получаешь штраф -5 на все Тесты Товарищества с участием людей не из числа пустотников.',
+        ),
+        space_ok: new Talent(
+            'Привычка к Пустоте',
+            'Ты получаешь иммунитет к «космической болезни», а нулевая или пониженная гравитация не является для тебя Сложным Ландшафтом.',
+        ),
+        boarder: new Talent(
+            'Абордажник',
+            'Если ты сражаешься, стоя спиной к стене, или в тесном пространстве, ты получаешь бонус +5 на все Тесты Ближнего Боя. Однако сражения «на грязи» тебе непривычны, так что ты получаешь -1 к Инициативе, сражаясь на открытой местности на поверхности планеты. Вдобавок ты получаешь дополнительный штраф -10 к Тестам на Баллистик, если стреляешь из дистанционного оружия на Дальнюю Дистанцию или дальше.',
+        ),
+        officer: new Talent(
+            'Офицер на палубе',
+            'Ты получаешь +10 к Тестам Командования, пребывая на борту космического корабля. Кроме того, все Тесты Товарищества при общении с другими пустотниками получают бонус +5.',
         ),
         // tech priest
         electrowire: new Talent(
@@ -2400,6 +2426,109 @@ let origins = function () {
         imperial.appearences,
         imperial.marks,
     )
+    let space = new Origin(
+        'Роджённые в Пустоте',
+        new Stats(20, 20, 15, 20, 20, 20, 20, 25, 20),
+        [
+            new RollableOption(profs.adept, 1, 10),
+            new RollableOption(profs.judge, 11, 20),
+            new RollableOption(profs.killer, 21, 25),
+            new RollableOption(profs.cleric, 26, 35),
+            new RollableOption(profs.psy, 36, 75),
+            new RollableOption(profs.scum, 76, 85),
+            new RollableOption(profs.tech, 86, 100),
+        ],
+        [
+            [
+                skills.navigation_space,
+                skills.pilot_space,
+            ],
+            [
+                skills.language_ship,
+            ]
+        ],
+        [
+            talents.lucky,
+            talents.evil_eye,
+            talents.space_ok,
+        ],
+        new SecondaryMods(),
+        6,
+        [
+            new RollableOption(2, 1, 4),
+            new RollableOption(3, 5, 10),
+        ],
+        mkConstVariants(
+            "скелет", 175, 55, "скелет", 170, 50,
+            "чахлый", 165, 55, "чахлая", 155, 45,
+            "костлявый", 180, 60, "костлявая", 175, 60,
+            "сухопарый", 200, 80, "сухопарая", 185, 70,
+            "долговязый", 210, 75, "долговязая", 195, 70,
+        ),
+        [
+            new RollableOption(new Age('Отрок', 15), 1, 40),
+            new RollableOption(new Age('Взрослый', 20), 41, 70),
+            new RollableOption(new Age('Старец', 50), 71, 100),
+        ],
+        mkAppearences(
+            'фарфоровая', 'рыжеватые', 'светло-голубые',
+            'светлая', 'светлые', 'серые',
+            'голубоватая', 'медные', 'чёрные',
+            'сероватая', 'чёрные', 'зеленые',
+            'молочная', 'золотистые', 'фиолетовые',
+        ),
+        mkMarks(
+            'бледный',
+            'лысый',
+            'длинные пальцы',
+            'крохотные уши',
+            'худые конечности',
+            'желтые ногти',
+            'мелкие зубы',
+            'широко расставленные глаза',
+            'большая голова',
+            'искривленный позвоночник',
+            'безволосый',
+            'элегантные руки',
+            'волнистые волосы',
+            'альбинос',
+            'прихрамывающая походка',
+            'сутулый',
+        ),
+        [
+            new RollableOption('Космический Скиталец: Ты был рождён на скоплении обломков, лишь с натяжкой способном называться космическим кораблем. Ты вырос в мире подтекающих воздушных шлюзов, тёмных коридоров, заброшенных палуб и знания о том, что «нечто» тоже живет здесь, просто оно прячется. Ты, скорее всего, осторожен, суеверен и всегда готов спустить курок.', 1, 25),
+            new RollableOption('Ты родился на огромной и древней космической станции, кружащей по орбите какой-нибудь звезды, луны или планеты. Ты рос в мире рутины и бесконечного повторения, бесконечных орбитальных циклов, уставных ритуалов и зубрежки правил эксплуатации. Ты методичен, но в душе таишь мятежный дух и стремление потворствовать своим желаниям.', 26, 50),
+            new RollableOption('Чартист: Ты родился на одном из величайших кораблей древности. Ты вырос в мрачных трюмах, набитых экзотическими богатствами, которые никогда не будут твоими. Вас со страхом пускают во все порты, но ни в одном не приветствуют – ты материалист, твой глаз намётан на прибыль, а взгляд на природу людей преисполнен цинизма.', 51, 75),
+            new RollableOption('Вольный Торговец: Ты родился на необычном судне, члены экипажа которого никогда не знали иной власти, кроме слова Вольного Торговца. Ты вырос в хаотичном мире разведки, битв, полётов и переговоров со всеми и всяческими силами, ксеносами и народами. По натуре ты бунтарь и не любишь дисциплину, а рутина чужда твоему характеру.', 76, 100),
+        ],
+    )
+    let space_line_fleet = new Origin(
+        'Рождённый в Пустоте (Линейный флот Каликсис)',
+        space.stats.copy({ 'str': +5 }),
+        space.profs,
+        [
+            [
+                skills.techuse,
+                ...space.skills[0],
+            ],
+            [
+                skills.language_local_fleet,
+            ]
+        ],
+        [
+            talents.space_ok,
+            talents.weapon_main_stub,
+            talents.boarder,
+            talents.officer,
+        ],
+        space.secondaryMods,
+        space.baseWounds,
+        space.fateChances,
+        space.constitutions,
+        space.ages,
+        space.appearences,
+        space.marks,
+    )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
@@ -2410,6 +2539,8 @@ let origins = function () {
         'imperial': imperial,
         'imperial_maccabeus': imperial_maccabeus,
         'imperial_sinophia': imperial_sinophia,
+        'space': space,
+        'space_line_fleet': space_line_fleet,
     }
 }()
 
@@ -2418,6 +2549,7 @@ let rollableOrigins = [
     new RollableOption(origins.wild, 1, 15), // 00-15: Дикий мир
     new RollableOption(origins.hive, 16, 35),
     new RollableOption(origins.imperial, 36, 55),
+    new RollableOption(origins.space, 56, 65),
     new RollableOption(origins.forge, 66, 75), // 66-75: Мир-кузница
 ]
 
