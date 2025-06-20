@@ -1290,6 +1290,19 @@ let talents = function () {
             'Офицер на палубе',
             'Ты получаешь +10 к Тестам Командования, пребывая на борту космического корабля. Кроме того, все Тесты Товарищества при общении с другими пустотниками получают бонус +5.',
         ),
+        // purified talents
+        fuse: new Talent(
+            'Предохранитель',
+            'Всем Очищенным агентам Инквизиции имплантируют в мозг предохранительный триггер. Триггер работает в точности как использование психосилы Доминирование.',
+        ),
+        imperial_training: new Talent(
+            'Имперская подготовка',
+            'Ты получаешь бонус +10 к Тестам Силы Воли, сделанным при сопротивлении Страху и попыткам взять твой разум под контроль.',
+        ),
+        through_dark_mirror: new Talent(
+            'Сквозь тёмное зеркало',
+            'Определённые редкие события, люди или даже фразы, образы и запахи могут запустить «подавленные» воспоминания.',
+        ),
         // tech priest
         electrowire: new Talent(
             'Электропривой',
@@ -2542,6 +2555,80 @@ let origins = function () {
         space.appearences,
         space.marks,
     )
+    let weights = [3/13, 4/13, 4/13, 2/13]
+    let patchedCV = [
+        ...wild.constitutions.map(ro => new RollableOption(ro.id, ro.low * 3/13, ro.high * 3/13)),
+        ...hive.constitutions.map(ro => new RollableOption(ro.id, ro.low * 4/13 + 300/13, ro.high * 4/13 + 300/13)),
+        ...imperial.constitutions.map(ro => new RollableOption(ro.id, ro.low * 4/13 + 700/13, ro.high * 4/13 + 700/13)),
+        ...space.constitutions.map(ro => new RollableOption(ro.id, ro.low * 2/13 + 1100/13, ro.high * 2/13 + 1100/13)),
+    ]
+    let patchedAppearences = [
+        ...wild.appearences.map(ro => new RollableOption(ro.id, ro.low * 3/13, ro.high * 3/13)),
+        ...hive.appearences.map(ro => new RollableOption(ro.id, ro.low * 4/13 + 300/13, ro.high * 4/13 + 300/13)),
+        ...imperial.appearences.map(ro => new RollableOption(ro.id, ro.low * 4/13 + 700/13, ro.high * 4/13 + 700/13)),
+        ...space.appearences.map(ro => new RollableOption(ro.id, ro.low * 2/13 + 1100/13, ro.high * 2/13 + 1100/13)),
+    ]
+    let purified = new Origin(
+        'Очищеный разум',
+        new Stats(20, 20, 20, 20, 20, 20, 20, 25, 15),
+        [
+            new RollableOption(profs.judge, 1, 15),
+            new RollableOption(profs.killer, 16, 50),
+            new RollableOption(profs.cleric, 51, 60),
+            new RollableOption(profs.guard, 61, 80),
+            new RollableOption(profs.psy, 81, 90),
+            new RollableOption(profs.tech, 91, 100),
+        ],
+        [
+            [
+                skills.lore_common_technology,
+                skills.survival,
+            ],
+            [
+                skills.intimidate,
+                skills.deceive,
+            ],
+        ],
+        [
+            talents.weapon_hand_laz,
+            talents.weapon_hand_stub,
+            talents.fuse,
+            talents.imperial_training,
+            talents.through_dark_mirror,
+        ],
+        new SecondaryMods(idf, idf, x => x + 2 + d5(), idf),
+        8,
+        [
+            new RollableOption(2, 1, 3),
+            new RollableOption(3, 4, 9),
+            new RollableOption(4, 10, 10),
+        ],
+        patchedCV,
+        [
+            new RollableOption(new Age('Дитя', 15), 1, 10),
+            new RollableOption(new Age('Взрослый', 25), 11, 50),
+            new RollableOption(new Age('Ветеран', 35), 51, 100),
+        ],
+        patchedAppearences,
+        mkMarks(
+            'сведённая татуировка',
+            "электротатуировка",
+            "хлыстовые шрамы",
+            "хромота",
+            "восстановленная конечность",
+            "оспины",
+            "шрам от молнии",
+            "бегающие глаза",
+            "рваные уши",
+            "следы кандалов",
+            "выступающие вены",
+            "сломанный нос",
+            "гетерохромия",
+            "идеальные зубы",
+            "скарификация",
+            "разрезанный язык",
+        ),
+    )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
@@ -2554,6 +2641,7 @@ let origins = function () {
         'imperial_sinophia': imperial_sinophia,
         'space': space,
         'space_line_fleet': space_line_fleet,
+        'purified': purified,
     }
 }()
 
@@ -2564,6 +2652,7 @@ let rollableOrigins = [
     new RollableOption(origins.imperial, 36, 55),
     new RollableOption(origins.space, 56, 65),
     new RollableOption(origins.forge, 66, 75), // 66-75: Мир-кузница
+    new RollableOption(origins.purified, 96, 100),
 ]
 
 /**
