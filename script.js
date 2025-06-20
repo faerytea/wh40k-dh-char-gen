@@ -1204,6 +1204,11 @@ let talents = function () {
         'Обострённые чувства',
         'У тебя $$ значительно лучше среднего. Теперь ты будешь получать бонус +10 к любому Тесту, включающему $$.',
     )
+    let peer = new Talent(
+        'Равный',
+        'Ты знаешь, как вести себя с $$. Ты получаешь бонус +10 ко всем Тестам Товарищества при взаимодействии с ними.',
+        new Requirement(new Stats().copy({ cha: 30 })),
+    )
     let resistance = new Talent(
         'Сопротивляемость',
         'В силу привычки ли, интенсивных ли методик закаливания, или просто благодаря удачному стечению генетических обстоятельств, но ты легче переносишь $$. Ты получаешь бонус +10 при попытках избежать любых неблагоприятных эффектов',
@@ -1303,6 +1308,16 @@ let talents = function () {
             'Сквозь тёмное зеркало',
             'Определённые редкие события, люди или даже фразы, образы и запахи могут запустить «подавленные» воспоминания.',
         ),
+        // noble
+        peer_noble_special: subTalent(peer, '          ', 'теми, на ком зиждется могущество твоей семьи.'),
+        etiquette: new Talent(
+            'Этикет',
+            'Ты получаешь бонус +10 к Тестам на Обольщение, Обман и Проницательность в формальных ситуациях и при взаимодействии с представителями правящих сословий.',
+        ),
+        vendetta: new Talent(
+            'Вендетта',
+            'У тебя есть враги: возможно, благородный дом или иная могущественная группа.',
+        ),
         // tech priest
         electrowire: new Talent(
             'Электропривой',
@@ -1383,6 +1398,24 @@ let talents = function () {
         heightened_senses_smell: subTalent(heightened_senses, 'Обоняние', 'нюх'),
         heightened_senses_taste: subTalent(heightened_senses, 'Вкус', 'вкусовые рецепторы'),
         heightened_senses_skin: subTalent(heightened_senses, 'Осязание', 'осязание'),
+
+        peer_academia: subTalent(peer, 'Академики', 'академиками'),
+        peer_adeptus_arbitres: subTalent(peer, 'Адептус Арбитрес', 'арбитрами'),
+        peer_tech: subTalent(peer, 'Адептус Механикус', 'техножрецами'),
+        peer_administratum: subTalent(peer, 'Администратум', 'чиновниками'),
+        peer_astropath: subTalent(peer, 'Астропаты', 'астропатами'),
+        peer_ecclisearchy: subTalent(peer, 'Экклезиархия', 'священством'),
+        peer_wild: subTalent(peer, 'Дикари', 'дикарями'),
+        peer_government: subTalent(peer, 'Правительство', 'управляющими'),
+        peer_hive_locals: subTalent(peer, 'Жители ульев', 'жителями ульев'),
+        peer_inquisition: subTalent(peer, 'Инквизиция', 'инквизиторами (и не только)'),
+        peer_middle_class: subTalent(peer, 'Средний класс', 'средним классом'),
+        peer_military: subTalent(peer, 'Военные', 'военными'),
+        peer_noble: subTalent(peer, 'Нобилитет', 'благородными'),
+        peer_mad: subTalent(peer, 'Безумцы', 'безумцами'),
+        peer_criminal: subTalent(peer, 'Преступники', 'криминалом'),
+        peer_voidborn: subTalent(peer, 'Пустотники', 'пестотниками'),
+        peer_workers: subTalent(peer, 'Рабочие', 'трудягами'),
 
         resistance_cold: subTalent(resistance, 'Холод', 'холод'),
         resistance_heat: subTalent(resistance, 'Жара', 'жару'),
@@ -2629,6 +2662,75 @@ let origins = function () {
             "разрезанный язык",
         ),
     )
+    let noble = new Origin(
+        'Аристократ',
+        new Stats(20, 20, 20, 20, 20, 20, 20, 15, 25),
+        [
+            new RollableOption(profs.adept, 1, 18),
+            new RollableOption(profs.judge, 19, 30),
+            new RollableOption(profs.killer, 31, 40),
+            new RollableOption(profs.cleric, 41, 56),
+            new RollableOption(profs.guard, 57, 75),
+            new RollableOption(profs.psy, 76, 85),
+            new RollableOption(profs.scum, 86, 100),
+        ],
+        [
+            [],
+            [
+                skills.literacy,
+                skills.language_gothic_high,
+                skills.language_gothic_low,
+            ],
+        ],
+        [
+            talents.etiquette,
+            talents.peer_noble,
+            talents.peer_noble_special,
+            talents.vendetta,
+        ],
+        new SecondaryMods(),
+        8,
+        [
+            new RollableOption(1, 1, 3),
+            new RollableOption(2, 4, 9),
+            new RollableOption(3, 10, 10),
+        ],
+        patchedCV,
+        [
+            new RollableOption(new Age('Виконт', 15), 1, 30),
+            new RollableOption(new Age('Сэр', 30), 31, 77),
+            new RollableOption(new Age('Владыка', 49), 78, 100),
+        ],
+        patchedAppearences,
+        mkMarks(
+            "орлиный нос",
+            "надменный взгляд",
+            "маленькие стопы",
+            "тонкие пальцы",
+            "пухлые щёки",
+            "гербовое тату",
+            "длинные ногти",
+            "идеальные зубы",
+            "бритые руки и ноги",
+            "горб",
+            "нервный тик",
+            "тонкий голос",
+            "дуэльный шрам",
+            "кровосмесительное уродство",
+            "макияж",
+            "стойкий перегар",
+        ),
+        [
+            new RollableOption('Торговые Магнаты: Твоя семья контролирует обширные коммерческие операции по всему сектору и за его пределами.', 1, 15),
+            new RollableOption('Военные Традиции: Твой дом выстроен на крови предков, которые были героями войн прошлого.', 16, 30),
+            new RollableOption('Властители Человечества: Твоя семья происходит из наследных правителей своего родного мира и твой род – один из самых могущественных, богатейших и надёжных из всех тамошних благородных фамилий.', 31, 45),
+            new RollableOption('Поставщик Империума: Твоему дому принадлежат обширнейшие владения, основным продуктом которых является жизненно важное для Империума сырьё.', 46, 60),
+            new RollableOption('Дом Железных Шпилей: Ты происходишь из благородных семей мира-улья.', 61, 75),
+            new RollableOption('Кровь Величия: Один из твоих предков был легендарным героем Империума.', 76, 85),
+            new RollableOption('Удача Бродяги: Твоя семья владеет древней хартией Вольного Торговца, и её состояние было выковано в холодной тьме меж далеких звёзд.', 86, 95),
+            new RollableOption('Оскверненная Кровь: Твоя семья – не то, чем кажется. Некогда твои предки были опозорены, обесчещены или претерпели бедствие, призрак которого до сих пор довлеет над твоей благородной фамилией, из-за чего она обладает лишь тенью своей былой славы.', 96, 100),
+        ],
+    )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
@@ -2642,6 +2744,7 @@ let origins = function () {
         'space': space,
         'space_line_fleet': space_line_fleet,
         'purified': purified,
+        'noble': noble,
     }
 }()
 
@@ -2652,6 +2755,7 @@ let rollableOrigins = [
     new RollableOption(origins.imperial, 36, 55),
     new RollableOption(origins.space, 56, 65),
     new RollableOption(origins.forge, 66, 75), // 66-75: Мир-кузница
+    new RollableOption(origins.noble, 86, 95),
     new RollableOption(origins.purified, 96, 100),
 ]
 
