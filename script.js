@@ -898,6 +898,11 @@ let skills = function () {
         'cha',
         'Это умение собирать слухи, секреты и тайную информацию, задавая вопросы, угощая напитками и просто приглядываясь и прислушиваясь ко всему, что может всплыть в случайном разговоре.',
     )
+    let interrogation = new Skill(
+        'Допрос',
+        'wil',
+        'Ключевой инструмент в арсенале Инквизиции есть допрос – умение вытаскивать качественную информацию из нежелающего этому поспособствовать объекта.',
+    )
     let intimidate = new Skill(
         'Запугивание',
         'str',
@@ -937,6 +942,11 @@ let skills = function () {
         'Поиск',
         'per',
         'Используй этот навык каждый раз, когда хочешь изучить то или иное место напредмет спрятанных вещей, улик и вообще всего, что можно спрятать. Поиск отличается от Бдительности тем, что Бдительность работает пассивно, срабатывая, когда имеют место быть скрытые опасности или крохотные детали, которые можно случайно заметить, проходя мимо. Поиск, с другой стороны, это активный процесс, непосредственная и явная попытка тщательного обыска.',
+    )
+    let shadowing = new Skill(
+        'Слежка',
+        'dex',
+        'Это умение позволяет следовать за другим существом или транспортным средством, оставаясь при этом незамеченным.',
     )
     let silent_move = new Skill(
         'Бесшумный шаг',
@@ -1099,6 +1109,7 @@ let skills = function () {
         'evaluate': evaluate,
         'gamble': gamble,
         'inquiry': inquiry,
+        'interrogation': interrogation,
         'intimidate': intimidate,
         'invocation': invocation,
         'literacy': literacy,
@@ -1108,6 +1119,7 @@ let skills = function () {
         'scrutiny': scrutiny,
         'search': search,
         'silent_move': silent_move,
+        'shadowing': shadowing,
         'swim': swim,
         'survival': survival,
         'techuse': techuse,
@@ -1400,7 +1412,14 @@ let talents = function () {
             'Ты способен снять заклинивание с любого оружия в качестве Частичного Действия. Для совершения ритуала ты должен прикасаться к этому оружию.',
             new Requirement(new Stats().copy({ int: 30 }))
         ),
-        unremarcable: new Talent("Непримечательный"),
+        unremarcable: new Talent(
+            "Непримечательный",
+            'Твое лицо не задерживается в памяти, что помогает тебе слиться с толпой.',
+        ),
+        unshakeable_faith: new Talent(
+            'Неколебимая вера',
+            'Вера в Императора столь сильна в тебе, что ты не боишься ступить навстречу любой опасности.',
+        ),
 
         // groups
         hatred_demons: subTalent(hatred, 'Демоны', 'демонов'),
@@ -1446,12 +1465,14 @@ let talents = function () {
         // weapon
         weapon_throw_prim: subTalent(weapon_throw, 'прим'),
         weapon_cqc_prim: subTalent(weapon_melee, 'прим'),
+        weapon_cqc_chain: subTalent(weapon_melee, 'цеп'),
         weapon_hand_prim: subTalent(weapon_hand, 'прим'),
         weapon_hand_laz: subTalent(weapon_hand, 'лаз'),
         weapon_hand_stub: subTalent(weapon_hand, 'стаб'),
         weapon_main_prim: subTalent(weapon_main, 'прим'),
         weapon_main_laz: subTalent(weapon_main, 'лаз'),
         weapon_main_stub: subTalent(weapon_main, 'стаб'),
+        weapon_main_fire: subTalent(weapon_main, 'огонь'),
 
         // special
         'sound_constitution': sound_constitution,
@@ -2927,13 +2948,73 @@ let rollableOrigins = [
                 [],
                 [
                     skills.climb,
-                    skills.track,
+                    skills.shadowing,
                     skills.silent_move,
                     skills.language_secret_moritat,
                 ],
             ],
             [
                 talents.jaded,
+            ],
+            new Stats(),
+            new SecondaryMods(idf, idf, x => x + d5(), idf),
+        ),
+    ]
+    profs.cleric.backgrounds = [
+        new Background(
+            'Великие Приделы Тарсуса',
+            200,
+            '',
+            new Set([
+                origins.noble,
+                origins.imperial,
+                origins.hive,
+            ]),
+            [
+                [],
+                [
+                    skills.charm,
+                    skills.lore_common_ecclesiarchy,
+                    skills.scrutiny,
+                    skills.language_gothic_high,
+                ],
+            ],
+            [
+                talents.peer_ecclisearchy,
+            ],
+            new Stats(-5, -5, -5, 0, 0, +5, 0, 0, +5),
+        ),
+        new Background(
+            'Нищенствующий проповедник',
+            100,
+            '',
+            anyOrigin,
+            [
+                [],
+                [
+                    skills.lore_common_imperium,
+                    skills.lore_scholastic_legends,
+                    skills.navigation_land,
+                    skills.survival,
+                ],
+            ],
+        ),
+        new Background(
+            'Разжигатель Искупления',
+            200,
+            '',
+            anyOrigin,
+            [
+                [],
+                [
+                    skills.interrogation,
+                    skills.intimidate,
+                ],
+            ],
+            [
+                talents.weapon_cqc_chain,
+                talents.weapon_main_fire,
+                talents.unshakeable_faith,
             ],
             new Stats(),
             new SecondaryMods(idf, idf, x => x + d5(), idf),
