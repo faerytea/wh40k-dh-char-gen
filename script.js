@@ -1344,6 +1344,15 @@ let talents = function () {
             'Вендетта',
             'У тебя есть враги: возможно, благородный дом или иная могущественная группа.',
         ),
+        // schola
+        hardened_will: new Talent(
+            'Закалённая воля',
+            'Когда ты проходишь Очень Тяжёлый (-30) Тест на Силу Воли вместо стандартного штрафа ты получаешь всего -20.',
+        ),
+        scholast: new Talent(
+            'Воспитание в отрешении',
+            'Ты получаешь штраф -10 на все Тесты Обольщения, Командования, Обмана и Проницательности, когда имеешь дело с худшими представителями общества.',
+        ),
         // tech priest
         electrowire: new Talent(
             'Электропривой',
@@ -2817,6 +2826,78 @@ let origins = function () {
             new RollableOption('Оскверненная Кровь: Твоя семья – не то, чем кажется. Некогда твои предки были опозорены, обесчещены или претерпели бедствие, призрак которого до сих пор довлеет над твоей благородной фамилией, из-за чего она обладает лишь тенью своей былой славы.', 96, 100),
         ],
     )
+    let progena = new Origin(
+        'Схола Прогениум',
+        new Stats(20, 20, 20, 20, 20, 20, 20, 20, 20),
+        [
+            new RollableOption(profs.adept, 1, 20),
+            new RollableOption(profs.judge, 21, 40),
+            new RollableOption(profs.cleric, 41, 60),
+            new RollableOption(profs.guard, 61, 80),
+            new RollableOption(profs.sororita, 81, 100),
+        ],
+        [
+            [
+                skills.lore_common_administratum,
+                skills.lore_common_ecclesiarchy,
+                skills.lore_common_imperial_credo,
+                skills.lore_common_imperium,
+                skills.lore_common_war,
+            ],
+            [
+                skills.language_gothic_high,
+                skills.language_gothic_low,
+                skills.literacy,
+            ],
+        ],
+        [
+            talents.weapon_cqc_prim,
+            [talents.weapon_hand_stub, talents.weapon_hand_laz],
+            [talents.weapon_main_stub, talents.weapon_main_laz],
+            talents.hardened_will,
+            talents.scholast,
+        ],
+        new SecondaryMods(),
+        8,
+        [
+            new RollableOption(1, 1, 2),
+            new RollableOption(2, 3, 7),
+            new RollableOption(3, 8, 10),
+        ],
+        patchedCV,
+        [
+            new RollableOption(new Age('Выпускник', 20), 1, 70),
+            new RollableOption(new Age('Ветеран', 30), 71, 100),
+        ],
+        patchedAppearences,
+        mkMarks(
+            "большой лоб",
+            "сутулый",
+            "горб",
+            "нервный тик",
+            "широко расставленные глаза",
+            "лысый",
+            "бледный",
+            "элегантные руки",
+            "молитвенный шрам",
+            "орлиный нос",
+            "жуткий чирей",
+            "бородавки",
+            "ладони-лопаты",
+            "татуировка с Аквилой",
+            "маленькие зубы",
+            "массивная челюсть",
+        ),
+        [
+            new RollableOption('Мученики Войны: Твои родители состояли в Имперской Гвардии и пали от руки врагов человечества.', 1, 25),
+            new RollableOption('Жертвы Мятежа: Твои родители были лоялистами Империума, попавшими в руки бунтовщиков.', 26, 45),
+            new RollableOption('Отдаленный Форпост: Твои родители были отправлены на удаленный и уединенный форпост, столь далекий, что ты успеешь умереть до того, как с ним наладится хоть какое-то сообщение.', 46, 65),
+            new RollableOption('Затерянные в Пустоте: Твои родители были верными слугами Адептус Терра, и пропали без вести вместе с кораблем, на котором они путешествовали.', 66, 75),
+            new RollableOption('Без Следа: Нет никаких записей о том, что случилось с твоими родителями, хотя ты прекрасно знаешь, кем они были, все записи о них с какого-то определённого момента просто исчезли из всех архивов.', 76, 85),
+            new RollableOption('Без Возврата: Твои родители были приписаны к Имперскому крестовому походу или экспедиции Вольного Торговца, которые отправлялись далеко за пределы Имперского космоса и так и не вернулись.', 86, 95),
+            new RollableOption('Ореол Молчания: Никто не говорит с тобой о твоих родителях или твоей семье. Ты понятия не имеешь, кем они были и как погибли; все запросы о них разбиваются о каменную стену молчания.', 96, 100),
+        ],
+    )
     return { // ОБЯЗАТЕЛЬНО ВНЕСТИ СЮДА
         'wild': wild,
         'wild_dusk': wild_dusk,
@@ -2831,6 +2912,7 @@ let origins = function () {
         'space_line_fleet': space_line_fleet,
         'purified': purified,
         'noble': noble,
+        'progena': progena,
     }
 }()
 
@@ -2841,6 +2923,7 @@ let rollableOrigins = [
     new RollableOption(origins.imperial, 36, 55),
     new RollableOption(origins.space, 56, 65),
     new RollableOption(origins.forge, 66, 75), // 66-75: Мир-кузница
+    new RollableOption(origins.progena, 76, 85),
     new RollableOption(origins.noble, 86, 95),
     new RollableOption(origins.purified, 96, 100),
 ]
