@@ -846,6 +846,7 @@ let skills = function () {
     let ciphers_secret_society = subSkill(ciphers, 'Тайное общество', 'Используются членами тайных обществ и культов для идентификации себе подобных и передачи простых сообщений.')
     let ciphers_occult = subSkill(ciphers, 'Оккультные', 'Мистические жесты, используемые для концентрации разума во время ритуалов, идентификации собратьев по знанию, а также для того, чтобы умиротворять или бичевать Демонов.')
     let ciphers_criminal = subSkill(ciphers, 'Преступный мир', 'Изощренная система жестов, стилей одежды, знаков, татуировок и прочей подобной мишуры, используемой криминальными сообществами для обмена ключевой информацией.')
+    let ciphers_secret_society_hetairea = subSkill(ciphers, 'Тайное общество — Хетаирея', 'Используется академиками Хетаиреи для идентификации себе подобных и передачи простых сообщений.')
     let climb = new Skill(
         'Лазание',
         'str',
@@ -994,6 +995,7 @@ let skills = function () {
         'Тайный Язык – особый язык, знают и понимают который лишь люди определённой профессии, представители какой-либо одной организации, рода занятий или общественного класса.',
     )
     let language_secret_techno = subSkill(language_secret, 'Техно', 'сплав жаргонизмов, бинарного кода и, в некоторых случаях, высоко- или низкочастотных звуковых каденций.')
+    let language_secret_any = subSkill(language_secret, '          ', 'некий тайный язык некой совсем не тайной организации.')
 
     let lore_common = new Skill(
         'Обыденное знание',
@@ -1011,6 +1013,7 @@ let skills = function () {
     let lore_common_mechanicus = subSkill(lore_common, 'Культ Машины', 'Общее понимание символики и практик Механикума, включая знание ступеней их иерархии и характерных для них формальных приветствий.')
     let lore_common_technology = subSkill(lore_common, 'Технология', 'Знание простейших литаний и ритуалов пробуждения и умиротворения духов машин.')
     let lore_common_war = subSkill(lore_common, 'Война', 'Знания о великих битвах, славных (и бесславных) военачальниках и героях, а также знаменитых стратегмах.')
+    let lore_common_commerce = subSkill(lore_common, 'Коммерция', '')
 
     let lore_forbidden = new Skill(
         'Запретное знание',
@@ -1029,6 +1032,7 @@ let skills = function () {
     let lore_forbidden_warp = subSkill(lore_forbidden, 'Варп', 'Понимание путей варпа, последствий его взаимодействия с реальным космосом, и влияния его пертурбаций на межзвёздные путешествия.')
     let lore_forbidden_xenos = subSkill(lore_forbidden, 'Ксеносы', 'Знание о наиболее распространённых видах ксеносов.')
     // let lore_forbidden_orda = subSkill(lore_forbidden, 'Ордосы', 'Охватывает более специализированную информацию об одном из Великих Ордосов Инквизиции: Маллеус, Еретикус или Ксенос.') // TODO: split?
+    let lore_forbidden_any = subSkill(lore_forbidden, '          ', 'Любое запретное знание на любой извращённый вкус.')
 
     let lore_scholastic = new Skill(
         'Учёное знание',
@@ -1037,6 +1041,7 @@ let skills = function () {
     )
     let lore_scholastic_legends = subSkill(lore_scholastic, 'Легенды', 'Знание величайших историй прошлого, таких как жуткая Ересь Хоруса или Тёмная Эра Технологии.')
     let lore_scholastic_occult = subSkill(lore_scholastic, 'Оккультизм', 'Понимание оккультных ритуалов, теорий и суеверий, а также знание о применении и мистическом значении оккультных атрибутов.')
+    let lore_scholastic_any = subSkill(lore_scholastic, '          ', 'Любое учёное знание на любой пытливый ум.')
 
     let trade_cook = new Skill(
         'Ремесло (Повар)',
@@ -1080,6 +1085,7 @@ let skills = function () {
         'ciphers_secret_society': ciphers_secret_society,
         'ciphers_occult': ciphers_occult,
         'ciphers_criminal': ciphers_criminal,
+        'ciphers_secret_society_hetairea': ciphers_secret_society_hetairea,
         'climb': climb,
         'command': command,
         'concealment': concealment,
@@ -1124,6 +1130,7 @@ let skills = function () {
         'language_local_gunmetal': language_local_gunmetal,
         'language_local_volg': language_local_volg,
         'language_local_fleet': language_local_fleet,
+        'language_secret_any': language_secret_any,
         'language_secret_techno': language_secret_techno,
         'lore_forbidden_archeotech': lore_forbidden_archeotech,
         'lore_forbidden_black_library': lore_forbidden_black_library,
@@ -1136,7 +1143,10 @@ let skills = function () {
         'lore_forbidden_psy': lore_forbidden_psy,
         'lore_forbidden_warp': lore_forbidden_warp,
         'lore_forbidden_xenos': lore_forbidden_xenos,
+        'lore_forbidden_any': lore_forbidden_any,
         'lore_scholastic_occult': lore_scholastic_occult,
+        'lore_scholastic_legends': lore_scholastic_legends,
+        'lore_scholastic_any': lore_scholastic_any,
         'lore_common_imperium': lore_common_imperium,
         'lore_common_adeptus_arbitres': lore_common_adeptus_arbitres,
         'lore_common_administratum': lore_common_administratum,
@@ -1147,8 +1157,8 @@ let skills = function () {
         'lore_common_imperial_guard': lore_common_imperial_guard,
         'lore_common_mechanicus': lore_common_mechanicus,
         'lore_common_technology': lore_common_technology,
+        'lore_common_commerce': lore_common_commerce,
         'lore_common_war': lore_common_war,
-        'lore_scholastic_legends': lore_scholastic_legends,
         'trade_cook': trade_cook,
         'trade_copyist': trade_copyist,
         'trade_merchant': trade_merchant,
@@ -2765,6 +2775,69 @@ let rollableOrigins = [
 ;(function () {
     let anyOrigin = new Set(Object.keys(origins).map(o => origins[o].name))
     console.log('anyOrigin in backgrounds: ' + [...anyOrigin].map(o => o.name))
+    profs.adept.backgrounds = [
+        new Background(
+            'Квестор Муниторума',
+            100,
+            '',
+            anyOrigin,
+            [
+                [],
+                [
+                    skills.command,
+                    skills.lore_common_imperial_guard,
+                    skills.inquiry,
+                    skills.search,
+                    skills.security,
+                ],
+            ],
+            [
+                talents.paranoia,
+            ],
+            new Stats().copy({ wil: -5, cha: -5 }),
+        ),
+        new Background(
+            'Учёный Коллегии Хетаирея Лексис',
+            100,
+            '',
+            new Set([
+                origins.imperial,
+                origins.noble,
+            ]),
+            [
+                [],
+                [
+                    skills.ciphers_secret_society_hetairea,
+                    skills.lore_scholastic_any,
+                    skills.lore_forbidden_any,
+                ],
+            ],
+            [
+                talents.peer_academia,
+            ],
+            new Stats().copy({ cqc: -5, str: -5, int: +3 }),
+        ),
+        new Background(
+            'Спатиум Коммерциа',
+            200,
+            '',
+            new Set([origins.space]),
+            [
+                [],
+                [
+                    skills.barter,
+                    skills.charm,
+                    skills.lore_common_imperium,
+                    skills.lore_common_commerce,
+                    skills.evaluate,
+                    skills.scrutiny,
+                    skills.language_secret_any,
+                ]
+            ],
+            [],
+            new Stats().copy({ cqc: -5, con: -5 }),
+        )
+    ]
     profs.judge.backgrounds = [
         new Background(
             "Каликсианский серийный убийца",
