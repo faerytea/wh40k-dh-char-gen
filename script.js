@@ -847,6 +847,7 @@ let skills = function () {
     let ciphers_occult = subSkill(ciphers, 'Оккультные', 'Мистические жесты, используемые для концентрации разума во время ритуалов, идентификации собратьев по знанию, а также для того, чтобы умиротворять или бичевать Демонов.')
     let ciphers_criminal = subSkill(ciphers, 'Преступный мир', 'Изощренная система жестов, стилей одежды, знаков, татуировок и прочей подобной мишуры, используемой криминальными сообществами для обмена ключевой информацией.')
     let ciphers_secret_society_hetairea = subSkill(ciphers, 'Тайное общество — Хетаирея', 'Используется академиками Хетаиреи для идентификации себе подобных и передачи простых сообщений.')
+    let ciphers_blades = subSkill(ciphers, 'Клинки Звёзд', '')
     let climb = new Skill(
         'Лазание',
         'str',
@@ -995,6 +996,7 @@ let skills = function () {
         'Тайный Язык – особый язык, знают и понимают который лишь люди определённой профессии, представители какой-либо одной организации, рода занятий или общественного класса.',
     )
     let language_secret_techno = subSkill(language_secret, 'Техно', 'сплав жаргонизмов, бинарного кода и, в некоторых случаях, высоко- или низкочастотных звуковых каденций.')
+    let language_secret_moritat = subSkill(language_secret, 'Моритат', '')
     let language_secret_any = subSkill(language_secret, '          ', 'некий тайный язык некой совсем не тайной организации.')
 
     let lore_common = new Skill(
@@ -1086,6 +1088,7 @@ let skills = function () {
         'ciphers_occult': ciphers_occult,
         'ciphers_criminal': ciphers_criminal,
         'ciphers_secret_society_hetairea': ciphers_secret_society_hetairea,
+        'ciphers_blades': ciphers_blades,
         'climb': climb,
         'command': command,
         'concealment': concealment,
@@ -1131,6 +1134,7 @@ let skills = function () {
         'language_local_volg': language_local_volg,
         'language_local_fleet': language_local_fleet,
         'language_secret_any': language_secret_any,
+        'language_secret_moritat': language_secret_moritat,
         'language_secret_techno': language_secret_techno,
         'lore_forbidden_archeotech': lore_forbidden_archeotech,
         'lore_forbidden_black_library': lore_forbidden_black_library,
@@ -2878,6 +2882,25 @@ let rollableOrigins = [
     ]
     profs.killer.backgrounds = [
         new Background(
+            'Клинки Звёзд',
+            200,
+            'Клинки Звёзд – члены запретного тайного общества. Если членство Аколита в нем всплывет на поверхность, он рискует испытать на себе гнев Арбитров, охотников на ведьм, а также Инквизиторов, значительно менее «понимающих», нежели их господин.',
+            new Set([origins.space]),
+            [
+                [
+                    skills.lore_forbidden_warp,
+                    skills.tech,
+                ],
+                [
+                    skills.ciphers_blades,
+                    skills.deceive,
+                ],
+            ],
+            [],
+            new Stats(),
+            new SecondaryMods(idf, x => x + d5(), idf, idf),
+        ),
+        new Background(
             "Сыны Диспатера",
             100,
             'Любой из Сынов Диспатера, нарушивший контракт – даже во благо Инквизиции – и давший информации об этом утечь, получает чёрную метку, обладатель которой становится желанной добычей для каждого из его бывших коллег.',
@@ -2890,7 +2913,31 @@ let rollableOrigins = [
                     skills.security,
                 ],
             ],
-        )
+        ),
+        new Background(
+            'Моритат',
+            300,
+            'Кровавое Лезвие: Моритат презирают современное оружие, считая его грубым и бездушным, предпочитая священную сталь клинка. Они должны пройти Тяжёлый (-20) Тест Силы Воли, чтобы использовать в бою любое оружие, не имеющее «лезвия», кроме случаев, когда «правильное» оружие явно не сможет нанести врагу никакого вреда. Однако в обращении с клинками Моритат настолько искусны, что в их руках они считаются Разрывными.',
+            new Set([
+                origins.wild, 
+                origins.imperial,
+                origins.hive,
+            ]),
+            [
+                [],
+                [
+                    skills.climb,
+                    skills.track,
+                    skills.silent_move,
+                    skills.language_secret_moritat,
+                ],
+            ],
+            [
+                talents.jaded,
+            ],
+            new Stats(),
+            new SecondaryMods(idf, idf, x => x + d5(), idf),
+        ),
     ]
     profs.psy.backgrounds = [
         new Background(
