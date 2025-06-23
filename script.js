@@ -4307,6 +4307,11 @@ function bind() {
             vm.professions.onchange()
         }
     }
+    document.getElementById('worldRoll').onclick = function () {
+        let newOrigin = rollOption(rollableOrigins)
+        vm.world.value = Object.keys(origins).find(k => origins[k].name == newOrigin.name)
+        vm.world.onchange()
+    }
     vm.bioSelect = document.getElementById('bio')
     vm.bioSelect.onchange = function () {
         if (character.prof !== undefined) {
