@@ -1423,6 +1423,7 @@ let talents = function () {
 
         // groups
         hatred_demons: subTalent(hatred, 'Демоны', 'демонов'),
+        hatred_mutants: subTalent(hatred, 'Мутанты', 'мутантов'),
         hatred_witches: subTalent(hatred, 'Ведьмы', 'ведьм'),
         hatred_tech_heresy: subTalent(hatred, 'Техноересь', 'техноересь'),
 
@@ -3015,6 +3016,55 @@ let rollableOrigins = [
                 talents.weapon_cqc_chain,
                 talents.weapon_main_fire,
                 talents.unshakeable_faith,
+            ],
+            new Stats(),
+            new SecondaryMods(idf, idf, x => x + d5(), idf),
+        ),
+    ]
+    profs.guard.backgrounds = [
+        new Background(
+            'Резня при Высадке на Маре',
+            200,
+            '',
+            anyOrigin,
+            [],
+            [
+                talents.resistance_psy,
+            ],
+            new Stats().copy({ 'wil': +5 }),
+            new SecondaryMods(idf, x => x + d5(), x => x + d10(), x => x + 1),
+        ),
+        new Background(
+            'Солдат Пограничного Крестового Похода',
+            200,
+            '',
+            anyOrigin,
+            [
+                [],
+                [
+                    skills.awareness,
+                    skills.survival,
+                ],
+            ],
+            [
+                talents.unshakeable_faith,
+            ],
+            new Stats().copy({ 'con': -3 }),
+        ),
+        new Background(
+            'Ветеран Войны на Тренче',
+            100,
+            '',
+            anyOrigin,
+            [
+                [],
+                [
+                    skills.search,
+                ],
+            ],
+            [
+                talents.hatred_mutants,
+                talents.light_sleeper,
             ],
             new Stats(),
             new SecondaryMods(idf, idf, x => x + d5(), idf),
