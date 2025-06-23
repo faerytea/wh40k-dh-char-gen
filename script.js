@@ -2089,6 +2089,56 @@ let profs = {
             ),
         ],
     ),
+    sororita: new Prof(
+        'Сороритас',
+        new StatUpgrades(
+            sud.med,
+            sud.fast,
+            sud.med,
+            sud.med,
+            sud.med,
+            sud.med,
+            sud.fast,
+            sud.fast,
+            sud.med,
+        ),
+        [
+            skills.lore_common_imperial_credo,
+            skills.literacy,
+            skills.performer_signer,
+            skills.language_gothic_low,
+            skills.trade_copyist,
+        ],
+        [
+            talents.weapon_main_prim,
+            talents.weapon_cqc_prim,
+            talents.weapon_hand_laz,
+        ],
+        [
+            new Rank(
+                'Неофтика',
+                0,
+                [
+                    new UpS(skills.awareness, 1, 100),
+                    new UpS(skills.lore_common_ecclesiarchy, 1, 100),
+                    new UpS(skills.dodge, 1, 100),
+                    new UpS(skills.drive_land, 1, 100),
+                    new UpS(skills.lore_forbidden_warp, 1, 100),
+                    new UpS(skills.performer_signer, 2, 100),
+                    new UpS(skills.swim, 1, 100),
+                    new UpS(skills.trade_copyist, 2, 100),
+                ],
+                [
+                    new UpT(talents.weapon_main_laz, 100),
+                    new UpT(talents.weapon_main_stub, 100),
+                    new UpT(talents.weapon_hand_prim, 100),
+                    new UpT(talents.weapon_hand_stub, 100),
+                    new UpT(talents.sound_constitution, 100, true),
+                    new UpT(talents.sound_constitution, 100, true),
+                ],
+            ),
+        ],
+    )
 }
 
 /* Самая дичь тут — родной мир
