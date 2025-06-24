@@ -3920,8 +3920,12 @@ let rolls = {
         )(baseMadness)
     },
     sex: function () {
-        let r = d10()
-        character.sex = r % 2 == 0 ? 'male' : 'female'
+        if (character.prof.name === profs.sororita.name) {
+            character.sex = 'female'
+        } else {
+            let r = d10()
+            character.sex = r % 2 == 0 ? 'male' : 'female'
+        }
     },
     hand: function () {
         let r = d10()
