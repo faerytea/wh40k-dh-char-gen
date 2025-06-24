@@ -1051,8 +1051,11 @@ let skills = function () {
         'int',
         'Система знаний в определенной научной сфере. Учёное Знание достаётся ценой самоотверженного изучения предмета, а в вопросах объема и системности находится далеко за пределами сфер, очерченных рамками Обыденного Знания.',
     )
+    let lore_scholastic_beasts = subSkill(lore_scholastic, 'Звери', 'Понимание классификации животных и знакомство с особенностями множества неразумных созданий.')
     let lore_scholastic_legends = subSkill(lore_scholastic, 'Легенды', 'Знание величайших историй прошлого, таких как жуткая Ересь Хоруса или Тёмная Эра Технологии.')
+    let lore_scholastic_numerology = subSkill(lore_scholastic, 'Нумерология', 'Понимание мистических свойств чисел – от Теории Катастроф до Садлейрианской литании.')
     let lore_scholastic_occult = subSkill(lore_scholastic, 'Оккультизм', 'Понимание оккультных ритуалов, теорий и суеверий, а также знание о применении и мистическом значении оккультных атрибутов.')
+    let lore_scholastic_tactics = subSkill(lore_scholastic, 'Тактика Империалис', 'Обучение основам Тактики Империалис, а также иным военным теориям, способам размещения войск и боевым стратегмам.')
     let lore_scholastic_any = subSkill(lore_scholastic, '          ', 'Любое учёное знание на любой пытливый ум.')
 
     let trade_cook = new Skill(
@@ -1160,8 +1163,11 @@ let skills = function () {
         'lore_forbidden_warp': lore_forbidden_warp,
         'lore_forbidden_xenos': lore_forbidden_xenos,
         'lore_forbidden_any': lore_forbidden_any,
-        'lore_scholastic_occult': lore_scholastic_occult,
+        'lore_scholastic_beasts': lore_scholastic_beasts,
         'lore_scholastic_legends': lore_scholastic_legends,
+        'lore_scholastic_numerology': lore_scholastic_numerology,
+        'lore_scholastic_occult': lore_scholastic_occult,
+        'lore_scholastic_tactics': lore_scholastic_tactics,
         'lore_scholastic_any': lore_scholastic_any,
         'lore_common_imperium': lore_common_imperium,
         'lore_common_adeptus_arbitres': lore_common_adeptus_arbitres,
@@ -1369,6 +1375,10 @@ let talents = function () {
             'Ты проворен и гибок словно кот, и способен без вреда для себя падать и прыгать с гораздо большей высоты, чем прочие люди.',
             new Requirement(new Stats().copy({ dex: 30 })),
         ),
+        concealed_cavity: new Talent(
+            'Скрытая полость',
+            'В твоём теле есть небольшая потайная полость. В этой полости ты можешь хранить один небольшой предмет размером не более ладони.',
+        ),
         dark_soul: new Talent(
             'Тёмная душа',
             'Твоя душа запятнана тьмой, поглощающей часть эффектов Порчи. Каждый раз, когда ты проходишь Тест на Осквернение, обычные штрафы на этот Тест уменьшаются вдвое.',
@@ -1429,6 +1439,10 @@ let talents = function () {
             'Неколебимая вера',
             'Вера в Императора столь сильна в тебе, что ты не боишься ступить навстречу любой опасности.',
         ),
+        street_fighter: new Talent(
+            'Уличный боец',
+            'Ты мастер грязных приёмов, вроде ударов ниже пояса или ножом в брюхо. При нанесении Критического Урона при помощи ножей или безоружной атаки ты получаешь +2 к Урону.',
+        ),
 
         // groups
         hatred_demons: subTalent(hatred, 'Демоны', 'демонов'),
@@ -1476,6 +1490,7 @@ let talents = function () {
         weapon_throw_prim: subTalent(weapon_throw, 'прим'),
         weapon_cqc_prim: subTalent(weapon_melee, 'прим'),
         weapon_cqc_chain: subTalent(weapon_melee, 'цеп'),
+        weapon_cqc_shock: subTalent(weapon_melee, 'шок'),
         weapon_hand_prim: subTalent(weapon_hand, 'прим'),
         weapon_hand_laz: subTalent(weapon_hand, 'лаз'),
         weapon_hand_stub: subTalent(weapon_hand, 'стаб'),
@@ -3255,6 +3270,63 @@ let rollableOrigins = [
                 idf,
             ),
         )
+    ]
+    let hunterOrigins = new Set([
+        origins.wild,
+        origins.imperial,
+        origins.hive,
+    ])
+    let hunterTalents = [
+        talents.peer_criminal,
+        talents.weapon_cqc_shock,
+    ]
+    let hunterSM = new SecondaryMods(idf, x => x + d5(), idf, idf)
+    let mkHunter = (s, ss) => new Background(
+        'Зверолов ' + ss,
+        100,
+        '',
+        hunterOrigins,
+        [
+            [],
+            [
+                s,
+            ]
+        ],
+        hunterTalents,
+        new Stats(),
+        hunterSM,
+    )
+    profs.scum.backgrounds = [
+        mkHunter(skills.lore_forbidden_mutants, '(мутанты)'),
+        mkHunter(skills.lore_scholastic_beasts, '(звери)'),
+        new Background(
+            'Курьер Холодной Гильдии',
+            100,
+            '',
+            new Set([origins.space]),
+            [],
+            [
+                talents.peer_voidborn,
+                talents.concealed_cavity,
+                talents.talented_concealment,
+            ],
+            new Stats().copy({ per: +5, con: -5 }),
+        ),
+        new Background(
+            'Братство Толлоса',
+            200,
+            '',
+            new Set([origins.hive, origins.imperial]),
+            [],
+            [
+                talents.peer_criminal,
+                talents.street_fighter,
+            ],
+            new Stats().copy({ cqc: +3, con: +3, cha: -5 }),
+        ),
+    ]
+    profs.tech.backgrounds = [
+
     ]
 })()
 
