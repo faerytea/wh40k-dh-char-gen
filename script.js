@@ -3946,6 +3946,24 @@ function buildCharacter() {
             }
         }
     }
+    if (p !== undefined && o !== undefined) {
+        let specialOriginIx = character.origin.name.search(' \\(')
+        let shortOriginName = specialOriginIx == -1 ? character.origin.name : character.origin.name.substring(0, specialOriginIx)
+        console.log('bio for: ' + shortOriginName)
+        let test = specialOriginIx == -1 ? (ao) => ao.has(character.origin.name) : (ao) => ao.has(shortOriginName) || ao.has(character.origin.name)
+        for (let b of character.prof.backgrounds) {
+            console.log('bio: ' + b.name)
+            console.log('allowed origins: ' + [ ...b.allowedOrigin ])
+            if (test(b.allowedOrigin)) {
+                console.log('allowed')
+                let bo = document.createElement('option')
+                bo.value = b.name
+                bo.text = b.name
+                vm.bioSelect.append(bo)
+            }
+        }
+        vm.bioSelect.onchange()
+    }
     let res = new Map()
     for (let rs of character.skills) {
         var rsl = res.get(rs.skill.name)
@@ -4105,7 +4123,7 @@ function selectOrigin(origin) {
 
 function randomCharacter(origin, prof) {
     if (origin === undefined) {
-        selectOrigin(origins.wild) // todo: roll
+        selectOrigin(rollOption(rollableOrigins))
     } else {
         selectOrigin(origin)
     }
@@ -4311,22 +4329,6 @@ function bind() {
                 noBio.text = '-= НЕТ =-'
                 vm.bioSelect.append(noBio)
                 vm.bioSelect.value = 'none'
-                let specialOriginIx = character.origin.name.search(' \\(')
-                let shortOriginName = specialOriginIx == -1 ? character.origin.name : character.origin.name.substring(0, specialOriginIx)
-                console.log('bio for: ' + shortOriginName)
-                let test = specialOriginIx == -1 ? (ao) => ao.has(character.origin.name) : (ao) => ao.has(shortOriginName) || ao.has(character.origin.name)
-                for (let b of character.prof.backgrounds) {
-                    console.log('bio: ' + b.name)
-                    console.log('allowed origins: ' + [ ...b.allowedOrigin ])
-                    if (test(b.allowedOrigin)) {
-                        console.log('allowed')
-                        let bo = document.createElement('option')
-                        bo.value = b.name
-                        bo.text = b.name
-                        vm.bioSelect.append(bo)
-                    }
-                }
-                vm.bioSelect.onchange()
                 character.skills = new Map()
                 character.talents = []
                 buildCharacter()
@@ -4474,8 +4476,9 @@ function bind() {
     }
     document.getElementById('worldRoll').onclick = function () {
         let newOrigin = rollOption(rollableOrigins)
-        vm.world.value = Object.keys(origins).find(k => origins[k].name == newOrigin.name)
-        vm.world.onchange()
+        world.value = Object.keys(origins).find(k => origins[k].name == newOrigin.name)
+        selectOrigin(newOrigin)
+        render()
     }
     vm.bioSelect = document.getElementById('bio')
     vm.bioSelect.onchange = function () {
