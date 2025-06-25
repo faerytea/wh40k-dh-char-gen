@@ -4591,14 +4591,14 @@ function bind() {
             if (soundConstCount > 0) {
                 sts.push(sound_constitution.name + ' (' + soundConstCount + ')')
             }
-            if (character.specialTrait !== undefined) {
+            if (character.specialTrait !== undefined && character.specialTrait !== '') {
                 charData.talents.push(character.specialTrait)
             }
-            if (character.sanctionating !== undefined) {
+            if (character.sanctionating !== undefined && character.sanctionating !== '') {
                 let s = character.sanctionating
                 charData.talents.push(s.name + ': ' + s.description)
             }
-            if (character.bio?.specialNote !== undefined) {
+            if (character.bio?.specialNote !== undefined && character.bio.specialNote !== '') {
                 charData.talents.push(character.bio.specialNote)
             }
             charData.talents.push(...(Array.from(tgs.keys()).sort().map((tg) => tg + ' (' + tgs.get(tg).sort().join(', ') + ')').sort()))
