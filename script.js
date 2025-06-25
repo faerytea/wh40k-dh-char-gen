@@ -3962,7 +3962,6 @@ function buildCharacter() {
                 vm.bioSelect.append(bo)
             }
         }
-        vm.bioSelect.onchange()
     }
     let res = new Map()
     for (let rs of character.skills) {
@@ -4332,6 +4331,7 @@ function bind() {
                 character.skills = new Map()
                 character.talents = []
                 buildCharacter()
+                vm.bioSelect.onchange()
                 rolls.sanctionating()
                 render()
             }
