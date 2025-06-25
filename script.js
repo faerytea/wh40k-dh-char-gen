@@ -847,7 +847,9 @@ let skills = function () {
     let ciphers_occult = subSkill(ciphers, 'Оккультные', 'Мистические жесты, используемые для концентрации разума во время ритуалов, идентификации собратьев по знанию, а также для того, чтобы умиротворять или бичевать Демонов.')
     let ciphers_criminal = subSkill(ciphers, 'Преступный мир', 'Изощренная система жестов, стилей одежды, знаков, татуировок и прочей подобной мишуры, используемой криминальными сообществами для обмена ключевой информацией.')
     let ciphers_secret_society_hetairea = subSkill(ciphers, 'Тайное общество — Хетаирея', 'Используется академиками Хетаиреи для идентификации себе подобных и передачи простых сообщений.')
+    let ciphers_secret_society_sollex = subSkill(ciphers, 'Тайное общество — Соллекс', 'Используется культистами Соллекса для идентификации себе подобных и передачи простых сообщений.')
     let ciphers_blades = subSkill(ciphers, 'Клинки Звёзд', '')
+    let ciphers_maligris = subSkill(ciphers, 'Кодекс Малигрс', '')
     let climb = new Skill(
         'Лазание',
         'str',
@@ -872,6 +874,11 @@ let skills = function () {
         'Обман',
         'cha',
         'Это умение позволяет обманывать и дурачить других. Тест на Обман нужен в том случае, если ты хочешь убедить других в чем-то, что совсем не обязательноявляется правдой, обвести вокруг пальца, обдурить или направить по ложному пути.',
+    )
+    let demolition = new Skill(
+        'Взрывотехника',
+        'int',
+        'Используй это умение, чтобы взрывать нужные цели и не подрываться при этом самому!',
     )
     let disguise = new Skill(
         'Маскировка',
@@ -1052,6 +1059,7 @@ let skills = function () {
         'Система знаний в определенной научной сфере. Учёное Знание достаётся ценой самоотверженного изучения предмета, а в вопросах объема и системности находится далеко за пределами сфер, очерченных рамками Обыденного Знания.',
     )
     let lore_scholastic_beasts = subSkill(lore_scholastic, 'Звери', 'Понимание классификации животных и знакомство с особенностями множества неразумных созданий.')
+    let lore_scholastic_crypto = subSkill(lore_scholastic, 'Криптология', 'Понимание механизма действия кодов, шифров, тайных языков и цифровых ключей.')
     let lore_scholastic_legends = subSkill(lore_scholastic, 'Легенды', 'Знание величайших историй прошлого, таких как жуткая Ересь Хоруса или Тёмная Эра Технологии.')
     let lore_scholastic_numerology = subSkill(lore_scholastic, 'Нумерология', 'Понимание мистических свойств чисел – от Теории Катастроф до Садлейрианской литании.')
     let lore_scholastic_occult = subSkill(lore_scholastic, 'Оккультизм', 'Понимание оккультных ритуалов, теорий и суеверий, а также знание о применении и мистическом значении оккультных атрибутов.')
@@ -1101,12 +1109,15 @@ let skills = function () {
         'ciphers_occult': ciphers_occult,
         'ciphers_criminal': ciphers_criminal,
         'ciphers_secret_society_hetairea': ciphers_secret_society_hetairea,
+        'ciphers_secret_society_sollex': ciphers_secret_society_sollex,
         'ciphers_blades': ciphers_blades,
+        'ciphers_maligris': ciphers_maligris,
         'climb': climb,
         'command': command,
         'concealment': concealment,
         'contortionist': contortionist,
         'deceive': deceive,
+        'demolition': demolition,
         'disguise': disguise,
         'dodge': dodge,
         'evaluate': evaluate,
@@ -1164,6 +1175,7 @@ let skills = function () {
         'lore_forbidden_xenos': lore_forbidden_xenos,
         'lore_forbidden_any': lore_forbidden_any,
         'lore_scholastic_beasts': lore_scholastic_beasts,
+        'lore_scholastic_crypto': lore_scholastic_crypto,
         'lore_scholastic_legends': lore_scholastic_legends,
         'lore_scholastic_numerology': lore_scholastic_numerology,
         'lore_scholastic_occult': lore_scholastic_occult,
@@ -1363,6 +1375,11 @@ let talents = function () {
         electrowire: new Talent(
             'Электропривой',
             'Способность использовать электрический привой для доступа к портам данных и общения с духами машин.',
+        ),
+        // sollex
+        divine_light: new Talent(
+            'Божественный Свет',
+            '+10 к Тестам Технологии при работе с лазерными или голографическими устройствами.',
         ),
 
         // normal
@@ -3326,7 +3343,67 @@ let rollableOrigins = [
         ),
     ]
     profs.tech.backgrounds = [
-
+        new Background(
+            'Апостолы Туле',
+            100,
+            '',
+            new Set([origins.forge, origins.space]),
+            [
+                skills.lore_common_mechanicus,
+                skills.evaluate,
+                skills.lore_forbidden_archeotech,
+                skills.logic,
+                skills.lore_scholastic_crypto,
+            ],
+            [],
+            new Stats().copy({ cqc: -5, per: -5 }),
+        ),
+        new Background(
+            'Божественный Свет Соллекса',
+            300,
+            '',
+            new Set([
+                origins.forge,
+            ]),
+            [
+                [],
+                [
+                    skills.ciphers_secret_society_sollex,
+                    skills.lore_common_mechanicus,
+                    skills.demolition,
+                    skills.lore_scholastic_tactics,
+                ],
+            ],
+            [
+                talents.divine_light,
+                talents.hatred_tech_heresy,
+                talents.unshakeable_faith,
+            ],
+            new Stats().copy({ cha: -5 }),
+            new SecondaryMods(idf, idf, x => x + d5(), idf),
+        ),
+        new Background(
+            'Малигрисианская техноересь',
+            200,
+            'Учения Малигриса: Впитав это знание, ты рискнул больше чем своей жизнью. Если источник твоей осведомленности каким-либо образом будет доказан, ты немедленно попадешь в чёрный список Культа Механикус.',
+            new Set([
+                origins.space,
+                origins.forge,
+            ]),
+            [
+                [],
+                [
+                    skills.ciphers_maligris,
+                    skills.lore_forbidden_warp,
+                    skills.lore_forbidden_xenos,
+                    skills.lore_scholastic_legends,
+                    skills.lore_scholastic_numerology,
+                ],
+            ],
+            [],
+            new Stats(),
+            new SecondaryMods(idf, x => x + d5(), x => x + d5(), idf),
+        ),
     ]
 })()
 
