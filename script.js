@@ -4582,10 +4582,10 @@ function bind() {
                     let tpn = t.parent.name
                     var subs = tgs.get(tpn)
                     if (subs === undefined) {
-                        subs = []
+                        subs = new Set()
                         tgs.set(tpn, subs)
                     }
-                    subs.push(t.specName)
+                    subs.add(t.specName)
                 }
             }
             if (soundConstCount > 0) {
@@ -4601,7 +4601,7 @@ function bind() {
             if (character.bio?.specialNote !== undefined && character.bio.specialNote !== '') {
                 charData.talents.push(character.bio.specialNote)
             }
-            charData.talents.push(...(Array.from(tgs.keys()).sort().map((tg) => tg + ' (' + tgs.get(tg).sort().join(', ') + ')').sort()))
+            charData.talents.push(...(Array.from(tgs.keys()).sort().map((tg) => tg + ' (' + [ ...tgs.get(tg) ].sort().join(', ') + ')').sort()))
             charData.talents.push(...(sts.sort()))
             let cd = JSON.stringify(charData, null, 2)
             handle.addEventListener('load', () => {
