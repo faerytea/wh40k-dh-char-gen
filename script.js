@@ -2992,8 +2992,8 @@ let rollableOrigins = [
             100,
             '',
             new Set([
-                origins.imperial,
-                origins.noble,
+                origins.imperial.name,
+                origins.noble.name,
             ]),
             [
                 [],
@@ -3012,7 +3012,9 @@ let rollableOrigins = [
             'Спатиум Коммерциа',
             200,
             '',
-            new Set([origins.space]),
+            new Set([
+                origins.space.name,
+            ]),
             [
                 [],
                 [
@@ -3072,7 +3074,9 @@ let rollableOrigins = [
             'Клинки Звёзд',
             200,
             'Клинки Звёзд – члены запретного тайного общества. Если членство Аколита в нем всплывет на поверхность, он рискует испытать на себе гнев Арбитров, охотников на ведьм, а также Инквизиторов, значительно менее «понимающих», нежели их господин.',
-            new Set([origins.space]),
+            new Set([
+                origins.space.name,
+            ]),
             [
                 [
                     skills.lore_forbidden_warp,
@@ -3106,9 +3110,9 @@ let rollableOrigins = [
             300,
             'Кровавое Лезвие: Моритат презирают современное оружие, считая его грубым и бездушным, предпочитая священную сталь клинка. Они должны пройти Тяжёлый (-20) Тест Силы Воли, чтобы использовать в бою любое оружие, не имеющее «лезвия», кроме случаев, когда «правильное» оружие явно не сможет нанести врагу никакого вреда. Однако в обращении с клинками Моритат настолько искусны, что в их руках они считаются Разрывными.',
             new Set([
-                origins.wild, 
-                origins.imperial,
-                origins.hive,
+                origins.wild.name, 
+                origins.imperial.name,
+                origins.hive.name,
             ]),
             [
                 [],
@@ -3132,9 +3136,9 @@ let rollableOrigins = [
             200,
             '',
             new Set([
-                origins.noble,
-                origins.imperial,
-                origins.hive,
+                origins.noble.name,
+                origins.imperial.name,
+                origins.hive.name,
             ]),
             [
                 [],
@@ -3289,9 +3293,9 @@ let rollableOrigins = [
         )
     ]
     let hunterOrigins = new Set([
-        origins.wild,
-        origins.imperial,
-        origins.hive,
+        origins.wild.name,
+        origins.imperial.name,
+        origins.hive.name,
     ])
     let hunterTalents = [
         talents.peer_criminal,
@@ -3320,7 +3324,9 @@ let rollableOrigins = [
             'Курьер Холодной Гильдии',
             100,
             '',
-            new Set([origins.space]),
+            new Set([
+                origins.space.name,
+            ]),
             [],
             [
                 talents.peer_voidborn,
@@ -3333,7 +3339,10 @@ let rollableOrigins = [
             'Братство Толлоса',
             200,
             '',
-            new Set([origins.hive, origins.imperial]),
+            new Set([
+                origins.hive.name, 
+                origins.imperial.name,
+            ]),
             [],
             [
                 talents.peer_criminal,
@@ -3347,7 +3356,10 @@ let rollableOrigins = [
             'Апостолы Туле',
             100,
             '',
-            new Set([origins.forge, origins.space]),
+            new Set([
+                origins.forge.name, 
+                origins.space.name,
+            ]),
             [
                 skills.lore_common_mechanicus,
                 skills.evaluate,
@@ -3363,7 +3375,7 @@ let rollableOrigins = [
             300,
             '',
             new Set([
-                origins.forge,
+                origins.forge.name,
             ]),
             [
                 [],
@@ -3387,8 +3399,8 @@ let rollableOrigins = [
             200,
             'Учения Малигриса: Впитав это знание, ты рискнул больше чем своей жизнью. Если источник твоей осведомленности каким-либо образом будет доказан, ты немедленно попадешь в чёрный список Культа Механикус.',
             new Set([
-                origins.space,
-                origins.forge,
+                origins.space.name,
+                origins.forge.name,
             ]),
             [
                 [],
@@ -4305,7 +4317,7 @@ function bind() {
                 let test = specialOriginIx == -1 ? (ao) => ao.has(character.origin.name) : (ao) => ao.has(shortOriginName) || ao.has(character.origin.name)
                 for (let b of character.prof.backgrounds) {
                     console.log('bio: ' + b.name)
-                    console.log('allowed origins: ' + [ ...b.allowedOrigin ].map(o => o.name))
+                    console.log('allowed origins: ' + [ ...b.allowedOrigin ])
                     if (test(b.allowedOrigin)) {
                         console.log('allowed')
                         let bo = document.createElement('option')
