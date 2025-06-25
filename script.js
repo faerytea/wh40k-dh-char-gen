@@ -3080,7 +3080,7 @@ let rollableOrigins = [
             [
                 [
                     skills.lore_forbidden_warp,
-                    skills.tech,
+                    skills.techuse,
                 ],
                 [
                     skills.ciphers_blades,
