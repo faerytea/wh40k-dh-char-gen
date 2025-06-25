@@ -114,6 +114,9 @@ function fillSkillColumn(lines, skills) {
         console.log(i + ': ' + JSON.stringify(skills[i]))
         fillSkill(lines[i], skills[i].name, skills[i].level)
     }
+    for (; i < lines.length; ++i) {
+        fillSkill(lines[i], '')
+    }
     return (i == lines.length) ? skills.slice(i) : []
 }
 
@@ -178,6 +181,10 @@ function exportToSvg(bound, charData) {
             } while (tl.getClientRects()[0].width > maxW)
             revTalents.push(unfeed.trimEnd())
         }
+        ++tli
+    }
+    while (tli < bound.talents.length) {
+        bound.talents[tli].innerHTML = ''
         ++tli
     }
 }
