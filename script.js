@@ -3946,6 +3946,12 @@ function buildCharacter() {
             }
         }
     }
+    vm.bioSelect.innerHTML = ''
+    let noBio = document.createElement('option')
+    noBio.value = 'none'
+    noBio.text = '-= НЕТ =-'
+    vm.bioSelect.append(noBio)
+    vm.bioSelect.value = 'none'
     if (p !== undefined && o !== undefined) {
         let specialOriginIx = character.origin.name.search(' \\(')
         let shortOriginName = specialOriginIx == -1 ? character.origin.name : character.origin.name.substring(0, specialOriginIx)
@@ -4109,7 +4115,7 @@ function selectOrigin(origin) {
             vm.professions.append(option)
         }
         if (character.prof !== undefined) {
-            character.prof = character.origin.profs.find(p => character.prof.name == p.id.name).id
+            character.prof = character.origin.profs.find(p => character.prof.name == p.id.name)?.id
         }
         buildCharacter()
         // if (np === undefined) {
@@ -4322,12 +4328,6 @@ function bind() {
             character.prof = character.origin.profs.find(x => x.id.name == vm.professions.value).id
             console.log('found prof: ' + character.prof.name)
             if (oldProf === undefined || (character.prof !== undefined && oldProf.name != character.prof.name)) {
-                vm.bioSelect.innerHTML = ''
-                let noBio = document.createElement('option')
-                noBio.value = 'none'
-                noBio.text = '-= НЕТ =-'
-                vm.bioSelect.append(noBio)
-                vm.bioSelect.value = 'none'
                 character.skills = new Map()
                 character.talents = []
                 buildCharacter()
